@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find My Vibe | Student Accomodation</title>
+    <link rel="icon" type="image/png" href="logo.jpg" style="border-radius: 100%;">
+    <title>Find My Vibe | Student Accomodation</title>
+    <a link rel="stylesheet" href="welcome.css"></a>
+    <style>
+
+        body{
+
+            background-color: #1A5B92;
+        }
+        header{
+
+            background-color:lightgray;
+            padding: 1rem;
+            display: flex;
+            border-radius: 5px;
+            box-shadow: black;
+            align-items: center;
+            justify-content: space-between;
+            text-align: center;
+        }
+        /*
+        header{
+            display: flex;
+            justify-content: space-between; /* This pushes them to the ends */
+            /*align-items: center;           /* Vertically centers everything 
+            padding: 15px 30px;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 0 0 20px 20px;
+        }*/
+        h1{
+            display: none;
+        }
+        button{
+    margin-left: auto;
+}
+       
+
+/*
+      .scroll-img {
+            width: 100%;max-width: 600px;      
+            height: auto;
+            border-radius: 20px;
+            margin: 50px auto;
+            display: block;
+            opacity: 0;
+            transform: scale(0.8) translateY(50px);
+            transition: all 0.8s ease-out; 
+        }
+        .scroll-img.appear {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }*/
+.scroll-img{
+    display: flex;
+    transition: all;
+    opacity: 1;
+    transition: opacity 5s ease-in-out;
+}
+.scroll-img:hover{
+    opacity: 0.5;
+}
+div1{
+    display: flex;
+    padding-right: 1rem;
+    justify-content: space-between;
+}
+.div1.logo{
+    padding: 1.5rem;
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <div1 id="logo-label">
+                <img src="logo.jpg" alt="" width="80" height="80" id="logo" style="border-radius: 100%; object-fit: cover;" id="logo">
+                <h2>Find My Vibe | Student Accomodation </h2>
+        </div1>
+        <div2>
+            <!--<input type="button" value="Log In" style="width:100px; height:40px; background-color:  #f39200;" id="login" >-->
+            <button onclick="window.location.href='html1.html'" id="button">Student</button>
+            <button onclick="window.location.href='html2.html'" id="button">Landlord</button>
+            <!--<input type="button" value="Register" style="width:100px; height:40px; background-color:  #f39200;" id="register">-->
+        </div2>
+    </header> 
+    <img src="advert 1.jpg" alt="Advert 1" class="scroll-img">
+    <img src="advert2.jpg" alt="Advert 2" class="scroll-img">
+    <img src="advert3.jpg" alt="Advert 3" class="scroll-img">
+</body>
+</html>
