@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Find My Vibe — Student Accommodation</title>
+  <link rel="icon" type="image" href="/Images/logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles_login/styles.css">
+  
+</head>
+<body>
+  <!--  Nav-bar -->
+  <nav>
+    <div class="logo">Find<span>My</span>Vibe</div>
+    <ul class="nav-links">
+      <li><a href="#">Browse</a></li>
+      <li><a href="/listings/listings.html">Listings</a></li>
+      <li><a href="#">Map View</a></li>
+    </ul>
+    <div class="nav-cta">
+      <button class="btn-ghost" onclick="window.location.href='/login/login_student.html'">Student</button>
+      <button class="btn-solid" onclick="window.location.href='/login/login_Landlord.html'">Landlord</button>
+    </div>
+  </nav>
+  <!--  hero section -->
+  <section class="hero-strip">
+    <div class="hero-copy">
+      <p class="eyebrow">Student accommodation made simple</p>
+      <h1>Find accommodation that matches your vibe.</h1>
+      <p class="hero-text">Verified listings near your campus. Browse photos, compare prices, and move in with confidence.</p>
+      <div class="search-bar">
+        <input type="text" placeholder="Search accommodation by campus, city or budget…">
+        <button class="search-btn">Search</button>
+      </div>
+    </div>
+    <div class="hero-image" aria-label="Student accommodation slideshow">
+      <div class="slideshow">
+        <div class="slide slide-1"></div>
+        <div class="slide slide-2"></div>
+        <div class="slide slide-3"></div>
+        <div class="slide slide-4"></div>
+      </div>
+    </div>
+  </section>
+  <!--  side-bar -->
+  <div class="main-layout">
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <h3>Monthly Rent</h3>
+        <div class="range-row">
+          <input type="number" placeholder="R 0" value="3500">
+          <span class="range-sep">–</span>
+          <input type="number" placeholder="R Max" value="12000">
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Accommodation Type</h3>
+        <label class="check-item"><input type="checkbox" checked><span class="check-box"></span> Student Residence</label>
+        <label class="check-item"><input type="checkbox"><span class="check-box"></span> Apartment</label>
+        <label class="check-item"><input type="checkbox"><span class="check-box"></span> Shared Accommodation</label>
+        <label class="check-item"><input type="checkbox"><span class="check-box"></span> House</label>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Room Type</h3>
+        <label class="check-item"><input type="checkbox" checked><span class="check-box"></span> Single Room</label>
+        <label class="check-item"><input type="checkbox"><span class="check-box"></span> Double Room</label>
+        <label class="check-item"><input type="checkbox"><span class="check-box"></span> Triple Room</label>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Amenities</h3>
+        <label class="check-item"><input type="checkbox" checked><span class="check-box"></span> Wi-Fi</label>
+        <label class="check-item"><input type="checkbox"><span class="check-box"></span> Laundry</label>
+        <label class="check-item"><input type="checkbox"><span class="check-box"></span> Gym</label>
+        <label class="check-item"><input type="checkbox"><span class="check-box"></span> Security</label>
+      </div>
+    </aside>
+    <!--  listings-section  -->
+    <main class="listings-area">
+      <div class="results-meta">
+        <strong>6</strong>
+        <span>properties found near your campus</span>
+      </div>
+
+      <div class="listings-grid">
+      
+        <article class="card">
+          <div class="card-media">
+            <img src="/Images/kovacs_image1.jpg" alt="Student residence room">
+            <span class="card-badge">Available Now</span>
+          </div>
+          <div class="card-body">
+            <div class="card-price"><span>R 7,000</span><small>/month</small></div>
+            <h4>Single Room — Kovacs Student Village</h4>
+            <div class="card-location">
+                <p ><img src="/Images/location.webp" alt="" height="30px" style="mix-blend-mode: multiply;"></p>
+                <p >on-campus</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-media">
+            <img src="/Images/image 4.jpg" alt="Student apartment">
+            <span class="card-badge">New Listing</span>
+          </div>
+          <div class="card-body">
+            <div class="card-price"><span>R 8,400</span><small>/month</small></div>
+            <h4>Studio Apartment — City Centre</h4>
+            <div class="card-location">
+                <p ><img src="/Images/location.webp" alt="" height="30px" style="mix-blend-mode: multiply;"></p>
+                <p >1.1km from campus</p>
+            </div>
+            
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-media">
+            <img src="/Images/image1.jpg" alt="">
+            <span class="card-badge">New Listing</span>
+          </div>
+          <div class="card-body">
+            <div class="card-price"><span>R7600</span><small>/month</small></div>
+            <h4></h4>
+          </div>
+          <div class="card-location">
+                <p ><img src="/Images/location.webp" alt="" height="30px" style="mix-blend-mode: multiply;"></p>
+                <p >on-campus</p>
+            </div>
+        </article>
+        <article class="card">
+          <div class="card-media">
+            <img src="/Images/image2.jpg" alt="">
+            <span class="card-badge">Available in 2 months</span>
+          </div>
+          <div class="card-body">
+            <div class="card-price"><span>R4800</span><small>/month</small></div>
+            <h4></h4>
+          </div>
+          <div class="card-location">
+                <p ><img src="/Images/location.webp" alt="" height="30px" style="mix-blend-mode: multiply;"></p>
+                <p >2km from campus</p>
+            </div>
+        </article>
+        <article class="card">
+          <div class="card-media">
+            <img src="/Images/images.jpg" alt="">
+            <span class="card-badge">Available now</span>
+          </div>
+          <div class="card-body">
+            <div class="card-price"><span>R5400</span><small>/month</small></div>
+            <h4></h4>
+          </div>
+          <div class="card-location">
+                <p ><img src="/Images/location.webp" alt="" height="30px" style="mix-blend-mode: multiply;"></p>
+                <p >500m from campus</p>
+            </div>
+        </article>
+        
+        <article class="card">
+          <div class="card-media">
+            <img src="/Images/kovacs_image2.jpg" alt="">
+            <span class="card-badge">Available in 6 months</span>
+          </div>
+          <div class="card-body">
+            <div class="card-price"><span>R5000</span><small>/month</small></div>
+            <h4></h4>
+          </div>
+          <div class="card-location">
+                <p ><img src="/Images/location.webp" alt="" height="30px" style="mix-blend-mode: multiply;"></p>
+                <p >4km from campus</p>
+            </div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Find My Vibe. All rights reserved.</p>
+  </footer>
+</body>
+</html>
