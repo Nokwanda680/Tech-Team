@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image" href="Images/logo.jpg">
+        <link rel="stylesheet" href="../styles_login/style_loginstudent.css">
+        <title>Student Accomodation Login</title>
+        <script src="./scripts/script1.js"></script>
+    </head>
+    <body>
+        <!--
+        <header style="justify-content: start;align-items: flex-start;">
+            <nav class="nav-bar">
+                <div class="box1"><img src="/Images/logo.jpg" height="70px" style="mix-blend-mode: multiply;" ></div>
+                <div class="box2"><button onclick="window.location.href='login_Landlord.html'">Landlord</button></div>
+                
+            </nav>
+            <p style="text-align: center;">
+            </p>
+            
+        <hr>
+        </header>
+    -->
+        <div class="div">
+            <main class="container">
+                <p style="text-align: center; border-radius: 50%;"><img src="/Images/loginicon.jpg" height="150"><br>
+                    <h3>Welcome Student!</h3>
+                </p>
+                <form action="" method="post" class="form" >
+                <!--submit action for form-->
+            
+                    <label for="email" class="labels">Email</label>
+                    <input type="email" id="email" class="texts" placeholder="1234567@uwc e.t.c" required><br>
+
+                    <label for="Password"class="labels">Password</label>
+                    <input type="Password" class="texts"id="Password" minlength="10" maxlength="12" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number or one uppercase or lowercase leeter and at least 8 or more characters" required >
+                    <!--<button id="togglePassword">View</button>-->
+                    <br>
+                    <div class="buttons" style="justify-content: space-around;">
+                        <input type="reset" class="button">
+                        <input type="submit" class="button">
+                    </div>
+                    
+                    <p>Dont have an account?<a href="studentsignup.html">Sign Up</a></p>
+
+                </form>
+            </main>
+        </div>
+        <footer class="footer"> 
+            <p>&copy;2026 Tech Team. All Rights Reserved</p>
+        </footer>
+
+    </body>
+</html>

@@ -1,0 +1,149 @@
+:root{
+  --orange: #f39200;
+  --blue: #2196F3;
+  --bg: #0f0f0f;
+  --surface: #141414;
+  --surface-soft: #1d1d1d;
+  --text: #f5f5f5;
+  --muted: #a7a7a7;
+  --border: rgba(255,255,255,0.08);
+}
+
+/* Global reset */
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family: 'DM Sans', sans-serif;
+  background: radial-gradient(circle at top left, rgba(243,146,0,0.12), transparent 24%),
+              radial-gradient(circle at bottom right, rgba(33,150,243,0.08), transparent 20%),
+              var(--bg);
+  color: var(--text);
+  min-height:100vh;
+  line-height:1.45;
+}
+
+header{padding:18px 24px}
+header img{vertical-align:middle;border-radius:12px}
+
+main{padding:28px}
+
+/* Layout containers used by signup pages */
+.div, main.div{display:flex;justify-content:center;padding:20px}
+.container, .div1, .div2{width:100%;max-width:1100px}
+
+.div1{
+    display:block;
+    margin-bottom:18px;
+    height: 4000px;
+    width: auto;
+
+}
+.div1 p img{
+    display: flex;
+    width: 100%;
+    height: auto;
+    align-items: center;
+    border-radius: 50%;
+    
+}
+.div2{background:transparent;padding:0;border-radius:0;border:none}
+
+/* Each signup section becomes its own small card */
+.signup-section{
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+  padding: 18px;
+  margin-bottom: 18px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+
+.signup-section h2{margin:0 0 12px;font-size:1.05rem}
+
+h2{font-family:'Syne',sans-serif;margin:10px 0 14px;color:#fff}
+
+form{display:block;margin-bottom:18px}
+label{display:block;font-size:0.9rem;color:var(--muted);margin-bottom:6px}
+input[type='text'],input[type='email'],input[type='tel'],input[type='number'],input[type='date'],select,textarea{
+  width:100%;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);color:var(--text);margin-bottom:12px;font-size:0.95rem
+}
+textarea{min-height:96px}
+input[type='file']{margin-bottom:12px}
+
+/* Ensure dropdown option text appears black for readability */
+select, .signup-section select, select option, .signup-section option {
+    color: #000;
+}
+
+.checkbox-row{display:flex;gap:8px;align-items:center;margin-bottom:10px}
+
+.controls{display:flex;gap:12px;margin-top:16px}
+.controls button{padding:10px 16px;border-radius:999px;border:none;background:var(--orange);color:var(--bg);font-weight:700;cursor:pointer}
+.controls button:hover{background:#d77c00}
+
+/* small table button fallback */
+table button{padding:10px 14px;border-radius:8px;border:none;background:var(--orange);color:var(--bg);cursor:pointer}
+.button{
+    display: flex;
+    height: 35px;
+}
+.button .buttondiv1{
+    width: 450px;
+    display: flex;
+    align-items: start;
+    align-items: center;
+}
+.button .buttondiv2{
+    width: 450px;
+    display: flex;
+    margin-left: 50vh;
+    align-items: center;
+
+}
+.button .buttondiv1 .previous{
+    width: 18vh;
+    height: 6vh;
+    border-radius: 1rem;
+    background-color: var(--orange);
+}
+.button .buttondiv2 .next{
+    width: 23vh;
+    height: 6vh;
+    border-radius: 1rem;
+    background-color: var(--orange);
+}
+footer{padding:18px;text-align:center;color:var(--muted)}
+
+/* Responsive */
+@media (min-width:900px){
+  .div{padding:40px}
+  .div2{padding:32px}
+  .div1{float:left;width:34%;padding-right:24px}
+  .div2{float:right;width:62%}
+}
+
+.nav-bar{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-bar img {
+    width: 200px;
+    height: auto;
+}
+
+.p1{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: x-large;
+}
+.p2{
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.4rem;
+    color: var(--orange);
+    letter-spacing: -0.4px;
+}
+.p2 span{
+    color: #fff;
+}
