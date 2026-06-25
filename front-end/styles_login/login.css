@@ -1,0 +1,10 @@
+:root{
+  --orange: #f39200;
+  --blue: #2196F3;
+  --bg: #0f0f0f;
+  --surface: #141414;
+  --surface-soft: #1d1d1d;
+  --text: #f5f5f5;
+  --muted: #a7a7a7;
+  --border: rgba(255,255,255,0.08);
+}

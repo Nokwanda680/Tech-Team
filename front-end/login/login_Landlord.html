@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image" href="Images/logo.jpg">
+        <link rel="stylesheet" href="/styles_login/edit.css">
+        <link rel="stylesheet" href="/styles_login/style_loginstudent.css">
+        
+        <title>Student Accomodation Login</title>
+        <style>
+            
+        </style>
+    </head>
+    <body>
+
+        <!--
+        <header>
+            <p style="text-align: center;">
+                <img src="Images/logo.jpg" height="200">
+            </p>
+            <hr>
+            <button onclick="window.location.href='login_student.html'">Student</button>
+        </header>
+        -->
+        <div class="div" >
+            <main class="container">
+                <p style="text-align: center;"><img src="/Images/loginicon.jpg" height="150"><br>
+                    <h3>Welcome Landlord!</h3>
+                </p>
+                <form action="" method="post">
+                    <label for="email" class="labels">Email</label>
+                    <input type="email" class="texts" id="email" placeholder="1234567@gmail.com" required><br>
+                    <label for="Password" class="labels">Password</label>
+                    <input type="Password" class="texts"id="Password" minlength="10" maxlength="12" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number or one uppercase or lowercase leeter, and at least 8 or more characters" required ><br>
+                    <div class="buttons">
+                        <input type="reset" class="button">
+                        <input type="submit" class="button">
+                    </div>
+                    <p>Dont have an account?<a href="landlordsignup.html">Sign Up</a></p>
+                </form>
+            </main>
+        </div>
+    </body>
+    <footer> 
+        <p>&copy;2026 Tech Team. All Rights Reserved</p>
+    </footer>
+</html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lan="en">
+     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image" href="Images/logo.jpg">
+        <link rel="stylesheet" href="../styles_login/signup.css">
+        <title>Student SignUp</title>
+    </head>
+    <script src="save.js"></script>
+    <script src="script1.js"></script>
+    <nav class="nav-bar">
+         <!--add progress bar under and decorate "start your journey"-->
+        <img src="/Images/logo-removebg-preview.png" height="200">
+        <p class="p1">Start Your Journey Here at</p> 
+        <p class="p2">Find <span>My </span>Vibe</p>
+    </nav><br>
+    <hr>
+    <main class="div">
+        <div class="div1">
+            <p style="text-align: center;"><img src="/Images/student.jpg" height="200"></p>
+        </div>
+        <div class="div2">
+            <form action="" method="post" enctype="multipart/form-data">
+                <section class="signup-section" id="section1">
+                    <h2>Personal Information</h2>
+                    <form>
+                        <label for="pfp">Profile Photo</label><br>
+                        <input id="pfp" type="file" name="picture" accept="image/*"><br>
+                        <label for="name">Full Name</label><br>
+                        <input id="name" type="text"><br>
+                        <label for="surname">Surname</label><br>
+                        <input id="surname" type="text"><br>
+                        <label for="bday">Date of Birth</label><br>
+                        <input id="bday" type="date"><br>
+                        <label for="Gender">Gender</label><br>
+                        <select>
+                            <option></option>
+                            <option>Male</option>
+                            <option>Female</option>
+                        </select><br>
+                        <label for="Stunumb">Student Number</label><br>
+                        <input id="Stunumb" type="text" minlength="7" maxlength="10"><br><br>
+                        <div class="button">
+                            <div class="buttondiv1">
+                                <button class="previous" id="prev1">Previous</button>
+                            </div>
+                            <div class="buttondiv2">
+                                <button class="next" id="save1">Save And Continue</button>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+                <section class="signup-section" id="section2">
+                    <h2>Contact Details</h2>
+                    <form>
+                        <label for="email">Email</label><br>
+                        <input type="email" id="email" placeholder="1234567@gmail,com" required><br>
+                        <label for="phone">Phone Number</label><br>
+                        <input type="tel" id="phone" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required><br>
+                        <label for="altphone">Alternate Phone Number</label><br>
+                        <input type="tel" id="altphone" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required><br>
+                        <label for="address">Home Address</label><br>
+                        <textarea id="address" name="address" rows="4" cols="40" placeholder="Enter your home address"></textarea><br>
+                        <label for="city">City</label><br>
+                        <input type="text" id="city"  placeholder="Enter your city"><br>
+                        <label for="postal-code">Postal Code</label><br>
+                        <input type="text" id="postal-code" placeholder="Enter postal code"><br><br>
+                        <div class="button">
+                            <div class="buttondiv1">
+                                <button class="previous" id="prev2">Previous</button>
+                            </div>
+                            <div class="buttondiv2">
+                                <button class="next" id="save2">Save And Continue</button>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+                <section class="signup-section">
+                    <h2>Emergency Contact Details</h2>
+                    <form>
+                        <label for="name2">Full Name</label><br>
+                        <input id="name2" type="text"><br>
+                        <label for="surname2">Surname</label><br>
+                        <input id="surname2" type="text"><br>
+                        <label for="bday2">Date of Birth</label><br>
+                        <input id="bday2" type="date"><br>
+                        <label for="Gender2">Gender</label><br>
+                        <select>
+                            <option></option>
+                            <option>Male</option>
+                            <option>Female</option>
+                        </select><br>
+                        <label for="relationship">Relationship</label><br>
+                        <select>
+                            <option></option>
+                            <option>Mother</option>
+                            <option>Father</option>
+                            <option>Sister</option>
+                            <option>Brother</option>
+                            <option>Guardian</option>
+                        </select><br>
+                        <label for="email2">Email</label><br>
+                        <input type="email" id="email2" placeholder="1234567@gmail,com" required><br>
+                        <label for="phone2">Phone Number</label><br>
+                        <input type="tel" id="phone2" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required><br>
+                        <label for="altphone2">Alternate Phone Number</label><br>
+                        <input type="tel" id="altphone2" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required><br>
+                        <label for="address2">Home Address</label><br>
+                        <textarea id="address2" name="address" rows="4" cols="40" placeholder="Enter your home address"></textarea><br>
+                        <label for="city2">City</label><br>
+                        <input type="text" id="city2"  placeholder="Enter your city"><br>
+                        <label for="postal-code2">Postal Code</label><br>
+                        <input type="text" id="postal-code2" placeholder="Enter postal code"><br><br>
+                        <div class="button">
+                            <div class="buttondiv1">
+                                <button class="previous">Previous</button>
+                            </div>
+                            <div class="buttondiv2">
+                                <button class="next">Save And Continue</button>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+                <section class="signup-section">
+                    <h2>Academic Information</h2>
+                    <form>
+                        <label>Select Univesity/college</label><br> 
+                        <select>
+                            <option value="#select">Select Univesity</option>
+                            <option value="#uwc">UWC-University Of the Western Cape </option>
+                            <option value="#cput">CPUT-Cape Peninsula University of Technology</option>
+                            <option value="#uct">UCT-University Of Cape Town</option>
+                            <option value="#su">SU-Stellenborsch University</option>
+                        </select><br>
+                        <label for="faculty">Faculty</label><br>
+                        <input type="text" id="faculty"><br>  
+                        <label for="course">Course</label><br>
+                        <input type="text" id="course"><br>
+                        <label for="Yearofstudy">Year of Study</label><br>
+                        <input type="number" id="Yearofstudy" minlength="4"><br>
+                        <label for="Stustatus">Student Status</label><br>
+                        <select>
+                            <option>Select</option>
+                            <option>Fulltime</option>
+                            <option>Part-time</option>
+                        </select><br>
+                        <label for="Graduation">Expected Year of Graduation</label><br>
+                        <input type="text" id="Graduation" minlength="4"><br><br>
+                        <div class="button">
+                            <div class="buttondiv1">
+                                <button class="previous">Previous</button>
+                            </div>
+                            <div class="buttondiv2">
+                                <button class="next">Save And Continue</button>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+                <section class="signup-section">
+                    <form>
+                        <label for="Roomtype">Room Type</label><br>
+                        <select>
+                            <option>Select</option>
+                            <option>Single Room</option>
+                            <option>Shared Room</option>
+                        </select><br>
+                        <label for="move">Preffered Move-in Date</label><br>
+                        <input type="date" id="move"><br>
+                        <label for="length">Length of stay</label><br>
+                        <select>
+                            <option>Select</option>
+                            <option>Semester 1</option>
+                            <option>Semester 2</option>
+                            <option>Full Academic Year</option>
+                        </select><br>
+                        <label for="SpecialAcc">Special Accommodation Requests</label><br>
+                        <textarea id="SpecialAcc" rows="4" cols="40" placeholder="Enter Request"></textarea><br><br>
+                        <div class="button">
+                            <div class="buttondiv1">
+                                <button class="previous">Previous</button>
+                            </div>
+                            <div class="buttondiv2">
+                                <button class="next">Save And Continue</button>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+                <section class="signup-section">
+                    <h2>Financial Information</h2>
+                    <form>
+                        <label for="Spontype">Sponsorship Type</label><br>
+                        <select>
+                            <option>Select type</option>
+                            <option>NSFAS</option>
+                            <option>Self-funded</option>
+                            <option>Bursary/Sponsor</option>
+                        </select><br>
+                        <label for="Budget">Monthly Budget</label><br>
+                        <input id="Budget" type="number" minlength="5"><br>
+                        <label for="Sponsor">Sponsor Name</label><br>
+                        <input id="Sponsor" type="text"><br>
+                        <label for="connumb">Sponsor Contact Number</label><br>
+                        <input type="tel" id="connumb" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required><br><br>
+                        <div class="button">
+                            <div class="buttondiv1">
+                                <button class="previous">Previous</button>
+                            </div>
+                            <div class="buttondiv2">
+                                <button class="next">Save And Continue</button>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+                <section class="signup-section">
+                    <h2>Medical &amp; Safety Information</h2>
+                    <form>
+                        <label for="allergies">Allergies</label><br>
+                        <input id="allergies" type="text"><br>
+                        <label for="medical">Medical Conditions</label><br>
+                        <input id="medical" type="text"><br>
+                        <label for="Disable">Disabilities</label><br>
+                        <select>
+                            <option>select</option>
+                            <option>Yes</option>
+                            <option>No</option>
+                        </select><br>
+                        <label for="aid">Medical Aid</label><br>
+                        <select>
+                            <option>select</option>
+                            <option>Yes</option>
+                            <option>No</option>
+                        </select><br>
+                        <label for="Provider">Medial Aid Provider</label><br>
+                        <input type="text" id="Provider"><br>
+                        <label for="aidnumb">Mediacal Aid Number</label><br>
+                        <input type="tel" id="aidnumb" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required><br><br>
+                        <div class="button">
+                            <div class="buttondiv1"><button class="previous">Previous</button></div>
+                            <div class="buttondiv2"><button class="next">Save And Continue</button></div>
+                        </div>
+                    </form>
+                </section>
+                <section class="signup-section">
+                    <h2>Account Setup</h2>
+                    <form>
+                        <label for="username2">Username</label><br>
+                        <input type="email" id="username2"><br>
+                        <label for="password2">Password</label><br>
+                        <input id="password2" type="text" minlength="10" maxlength="12"><br>
+                        <label for="Cpassword">Confirm Password</label><br>
+                        <input id="Cpassword" type="text" minlength="10" maxlength="12"><br><br>
+                        <div class="button">
+                            <button class="previous">Previous</button>
+                            <button class="next">Save And Continue</button>
+                        </div>
+                    </form>
+                </section>
+                <section class="signup-section">
+                    <h2>Required Document Upload</h2>
+                    <p>The documents below must be certified by no longer than 6 months </p>
+                    <form>
+                        <label for="ID">Copy of ID or Passport</label><br>
+                        <input type="file" id="ID"><br>
+                        <label for="Stucard">Proof of Registration</label><br>
+                        <input type="file" id="Stucard"><br>
+                       `<!-- <label for="reside">Proof of Residence</label><br>
+                        <input type="file" id="reside"><br>
+                        <label for="funds">Proof of income</label><br>
+                        <input type="file" id="funds"><br><br>   -->
+                        <div class="button">
+                            <div class="buttondiv1">
+                                <button class="previous">Previous</button>
+                            </div>
+                            <div class="buttondiv2">
+                                <button class="next">Save And Continue</button>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+                <section class="signup-section">
+                    <h2>Terms &amp; Conditions</h2>
+                    <p>
+                        <input type="checkbox">I confirm that the information provided is correct.<br>
+                        <input type="checkbox">I agree to the accommodation rules and policies.<br>
+                        <input type="checkbox">I consent to my information being stored securely.<br>
+                    </p><br>
+                    <p>
+                        <table width="1">
+                            <th>
+                                <button style="width: 100px;">Save &amp; Continue</button>
+                            </th>
+                            <th>
+                                <button>Cancel</button>
+                            </th>
+                            <th>
+                                <button>Submit</button>
+                            </th>
+                        </table>
+                    </p>
+                </section>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <p>&copy;2026 Find My Vibe. All Rights Reserved</p>
+    </footer>
+</html>

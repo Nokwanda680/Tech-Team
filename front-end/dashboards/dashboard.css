@@ -1,0 +1,15 @@
+nav{
+    display: flex;
+    flex-direction: row;
+
+}
+.div2{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.div2 ul{
+    display: flex;
+    text-decoration: none;
+    justify-content: space-evenly;
+}

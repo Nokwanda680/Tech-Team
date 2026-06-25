@@ -1,0 +1,40 @@
+{
+    "role":{
+        "Student":{
+            "details":{
+                "fname":"",
+                "lname":"",
+                "Student#":"",
+                "email":""
+            },
+            "permissions":{
+            }
+        }
+
+
+        ,
+        "Land-Lord":{
+            "details":{
+            "fname":"",
+            "lname":"",
+            "email":""
+
+        },
+            "permissions":{
+                
+            }
+        },
+        "admin":{
+            "details":{
+            "fname":"",
+            "lname":"",
+            "email":""
+            
+        },
+            "permissions":{}
+        }
+    
+
+
+    
+}

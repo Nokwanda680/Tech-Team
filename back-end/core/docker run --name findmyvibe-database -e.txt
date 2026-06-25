@@ -1,0 +1,1 @@
+docker run --name findmyvibe-database -e POSTGRES_PASSWORD=findmyvibePassword -p 5435:5432 -d postgres

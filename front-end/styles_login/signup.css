@@ -1,0 +1,568 @@
+:root{
+  --orange: #f39200;
+  --blue: #2196F3;
+  --bg: #0f0f0f;
+  --surface: #141414;
+  --surface-soft: #1d1d1d;
+  --text: #f5f5f5;
+  --muted: #a7a7a7;
+  --border: rgba(255,255,255,0.08);
+}
+
+/* Global reset */
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family: 'DM Sans', sans-serif;
+  background: radial-gradient(circle at top left, rgba(243,146,0,0.12), transparent 24%),
+              radial-gradient(circle at bottom right, rgba(33,150,243,0.08), transparent 20%),
+              var(--bg);
+  color: var(--text);
+  min-height:100vh;
+  line-height:1.45;
+}
+
+header{padding:18px 24px}
+header img{vertical-align:middle;border-radius:12px}
+
+main{padding:28px}
+
+/* Layout containers used by signup pages */
+.div, main.div{display:flex;justify-content:center;padding:20px}
+.container, .div1, .div2{width:100%;max-width:1100px}
+
+.div1{
+    display:block;
+    margin-bottom:18px;
+    height: 100%;
+    max-height: 4000px;
+    width: auto;
+
+}
+.div1 p img{
+    display: flex;
+    width: 100%;
+    height: auto;
+    align-items: center;
+    border-radius: 50%;
+    
+}
+.div2{background:transparent;padding:0;border-radius:0;border:none}
+
+/* Each signup section becomes its own small card */
+.signup-section{
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+  padding: 18px;
+    margin-bottom: 18px;
+    /* reduce width by 14px */
+    width: calc(100% - 14px);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+
+.signup-section h2{margin:0 0 12px;font-size:1.05rem}
+
+h2{font-family:'Syne',sans-serif;margin:10px 0 14px;color:#fff}
+
+form{display:block;margin-bottom:18px}
+label{display:block;font-size:0.9rem;color:var(--muted);margin-bottom:6px}
+input[type='text'],input[type='email'],input[type='tel'],input[type='number'],input[type='date'],select,textarea{
+  width:100%;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);color:var(--text);margin-bottom:12px;font-size:0.95rem
+}
+textarea{min-height:96px}
+input[type='file']{margin-bottom:12px}
+
+/* Ensure dropdown option text appears black for readability */
+select, .signup-section select, select option, .signup-section option {
+    color: #000;
+}
+
+.checkbox-row{display:flex;gap:8px;align-items:center;margin-bottom:10px}
+
+.controls{display:flex;gap:12px;margin-top:16px}
+.controls button{padding:10px 16px;border-radius:999px;border:none;background:var(--orange);color:var(--bg);font-weight:700;cursor:pointer}
+.controls button:hover{background:#d77c00}
+
+/* small table button fallback */
+table button{padding:10px 14px;border-radius:8px;border:none;background:var(--orange);color:var(--bg);cursor:pointer}
+.button{
+    display: flex;
+    height: 100%;
+    max-height: 35px;
+}
+.button .buttondiv1{
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    align-items: start;
+    align-items: center;
+}
+.button .buttondiv2{
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    margin-left: 50vh;
+    align-items: center;
+
+}
+.button .buttondiv1 .previous{
+    width: 100%;
+    max-width: 18vh;
+    height: 100%;
+    max-height: 6vh;
+    border-radius: 1rem;
+    background-color: var(--orange);
+}
+.button .buttondiv2 .next{
+    width: 100%;
+    max-width: 23vh;
+    height: 100%;
+    max-height: 6vh;
+    border-radius: 1rem;
+    background-color: var(--orange);
+}
+footer{padding:18px;text-align:center;color:var(--muted)}
+
+/* Responsive */
+@media (min-width:900px){
+  .div{padding:40px}
+  .div2{padding:32px}
+  .div1{float:left;width:34%;padding-right:24px}
+  .div2{float:right;width:62%}
+}
+
+@media screen and (max-width: 1200px) {
+  .div {
+    padding: 30px;
+  }
+  
+  .div2 {
+    padding: 24px;
+  }
+  
+  .div1 {
+    width: 100%;
+    float: none;
+    margin-bottom: 20px;
+    padding-right: 0;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .div {
+    padding: 20px;
+  }
+  
+  .container, .div1, .div2 {
+    max-width: 100%;
+  }
+  
+  .div1 {
+    width: 100%;
+    float: none;
+    margin-bottom: 16px;
+    padding: 0;
+  }
+  
+  .div2 {
+    width: 100%;
+    float: none;
+    padding: 0;
+  }
+  
+  .signup-section {
+    width: calc(100% - 10px);
+    margin-bottom: 14px;
+    padding: 14px;
+  }
+  
+  .button .buttondiv1,
+  .button .buttondiv2 {
+    width: 100%;
+    margin-left: 0;
+  }
+  
+  .button .buttondiv1 .previous,
+  .button .buttondiv2 .next {
+    width: 100%;
+    height: 100%;
+    max-height: 45px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  main {
+    padding: 16px;
+  }
+  
+  .div {
+    padding: 16px;
+  }
+  
+  .div1 {
+    height: auto;
+    width: 100%;
+  }
+  
+  .div1 p img {
+    max-height: 300px;
+    width: auto;
+  }
+  
+  .div2 {
+    padding: 12px;
+  }
+  
+  .signup-section {
+    padding: 12px;
+    width: calc(100% - 8px);
+    margin-bottom: 12px;
+    border-radius: 8px;
+  }
+  
+  .signup-section h2 {
+    font-size: 0.95rem;
+  }
+  
+  h2 {
+    font-size: 1rem;
+  }
+  
+  label {
+    font-size: 0.85rem;
+  }
+  
+  input[type='text'],
+  input[type='email'],
+  input[type='tel'],
+  input[type='number'],
+  input[type='date'],
+  select,
+  textarea {
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+  }
+  
+  textarea {
+    min-height: 80px;
+  }
+  
+  .controls {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .controls button {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+  
+  .button {
+    height: auto;
+    flex-direction: column;
+  }
+  
+  .button .buttondiv1,
+  .button .buttondiv2 {
+    width: 100%;
+  }
+  
+  .button .buttondiv1 .previous,
+  .button .buttondiv2 .next {
+    width: 100%;
+    height: 100%;
+    max-height: 40px;
+    font-size: 0.9rem;
+  }
+  
+  .nav-bar {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .nav-bar img {
+    width: 100%;
+    max-width: 150px;
+  }
+  
+  .p1 {
+    font-size: 1.3rem;
+  }
+  
+  .p2 {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  body {
+    padding: 0;
+  }
+  
+  main {
+    padding: 12px;
+  }
+  
+  .div {
+    padding: 12px;
+    margin: 0;
+  }
+  
+  .container, .div1, .div2 {
+    width: 100%;
+  }
+  
+  .div1 {
+    margin-bottom: 12px;
+  }
+  
+  .div1 p img {
+    max-height: 250px;
+  }
+  
+  .div2 {
+    padding: 10px;
+  }
+  
+  header {
+    padding: 12px 16px;
+  }
+  
+  header img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .signup-section {
+    padding: 10px;
+    width: calc(100% - 6px);
+    margin-bottom: 10px;
+    border-radius: 6px;
+  }
+  
+  .signup-section h2 {
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+  }
+  
+  h2 {
+    font-size: 0.95rem;
+  }
+  
+  label {
+    font-size: 0.8rem;
+    margin-bottom: 4px;
+  }
+  
+  input[type='text'],
+  input[type='email'],
+  input[type='tel'],
+  input[type='number'],
+  input[type='date'],
+  select,
+  textarea {
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+  }
+  
+  textarea {
+    min-height: 70px;
+  }
+  
+  .checkbox-row {
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+  
+  .controls {
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 10px;
+  }
+  
+  .controls button {
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 0.85rem;
+  }
+  
+  table button {
+    padding: 8px 10px;
+    font-size: 0.85rem;
+  }
+  
+  .button {
+    height: auto;
+    flex-direction: column;
+  }
+  
+  .button .buttondiv1,
+  .button .buttondiv2 {
+    width: 100%;
+    margin: 0;
+  }
+  
+  .button .buttondiv1 .previous,
+  .button .buttondiv2 .next {
+    width: 100%;
+    height: 100%;
+    max-height: 36px;
+    font-size: 0.85rem;
+    border-radius: 0.8rem;
+  }
+  
+  footer {
+    padding: 12px;
+    font-size: 0.85rem;
+  }
+  
+  .nav-bar {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .nav-bar img {
+    width: 100%;
+    max-width: 120px;
+  }
+  
+  .p1 {
+    font-size: 1.1rem;
+  }
+  
+  .p2 {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  body {
+    min-height: auto;
+  }
+  
+  main {
+    padding: 8px;
+  }
+  
+  .div {
+    padding: 8px;
+    min-height: auto;
+  }
+  
+  .div1 {
+    margin-bottom: 8px;
+    height: auto;
+  }
+  
+  .div1 p img {
+    max-height: 200px;
+  }
+  
+  .div2 {
+    padding: 8px;
+  }
+  
+  header {
+    padding: 10px 12px;
+    flex-direction: column;
+  }
+  
+  .signup-section {
+    padding: 8px;
+    width: calc(100% - 4px);
+    margin-bottom: 8px;
+  }
+  
+  .signup-section h2 {
+    font-size: 0.85rem;
+  }
+  
+  h2 {
+    font-size: 0.9rem;
+  }
+  
+  label {
+    font-size: 0.75rem;
+  }
+  
+  input[type='text'],
+  input[type='email'],
+  input[type='tel'],
+  input[type='number'],
+  input[type='date'],
+  select,
+  textarea {
+    padding: 6px 8px;
+    font-size: 0.8rem;
+  }
+  
+  textarea {
+    min-height: 60px;
+  }
+  
+  .controls {
+    gap: 4px;
+  }
+  
+  .controls button {
+    padding: 6px 8px;
+    font-size: 0.8rem;
+  }
+  
+  .button .buttondiv1 .previous,
+  .button .buttondiv2 .next {
+    height: 100%;
+    max-height: 32px;
+    font-size: 0.8rem;
+  }
+  
+  footer {
+    padding: 8px;
+    font-size: 0.8rem;
+  }
+  
+  .nav-bar img {
+    width: 100%;
+    max-width: 100px;
+  }
+  
+  .p1 {
+    font-size: 1rem;
+  }
+  
+  .p2 {
+    font-size: 0.9rem;
+  }
+}
+
+.nav-bar{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-bar img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+}
+
+.p1{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: x-large;
+}
+.p2{
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.4rem;
+    color: var(--orange);
+    letter-spacing: -0.4px;
+}
+.p2 span{
+    color: #fff;
+}

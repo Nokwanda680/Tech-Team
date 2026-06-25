@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lan="en">
+     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image" href="/Images/logo.jpg">
+        <link rel="stylesheet" href="../styles_login/signup.css">
+        <title>Landlord SignUp</title>
+    </head>
+    <script src="script1.js"></script>
+    <nav class="nav-bar">
+         <!--add progress bar under and decorate "start your journey"-->
+        <img src="/Images/logo-removebg-preview.png" height="200">
+        <p class="p1">Start Your Journey Here at</p> 
+        <p class="p2">Find <span>My </span>Vibe</p>  
+    
+    
+    </nav><br>
+    <hr>
+    <main class="div">
+        <div class="div1"><p style="text-align: center;"><img src="/Images/student.jpg" height="200"></p></div>
+        <div class="div2">
+            <form action="" method="post" enctype="multipart/form-data" id="landlord_sign_up_form">
+                <section class="signup-section">
+                    <h2>Personal Information</h2>
+                    <form action="" > 
+                        <!--make all section required-->
+                        <!--add name tags-->
+                        <label for="pfp" >Profile Photo</label><br>
+                        <input id="pfp" type="file" name="picture" accept="image/*" id="pfp"><br>
+                        <label for="name">Full Name</label><br>
+                        <input id="name" type="text" ><br><label for="surname">Surname</label><br>
+                        <input id="surname" type="text"><br>
+                        <label for="compname">Company Name</label><br>
+                        <select id="compname">
+                            <option>Select</option>
+                            <option>Property Owner</option>
+                            <option>Property Manager</option>
+                            <option>Agent</option>
+                        </select><br>
+                        <label for="IDNum">ID number</label><br>
+                        <input id="bday" type="text" minlength="13" maxlength="13"><br>
+                        <label for="Gender">Gender</label><br>
+                        <select id="gender">
+                            <option>Select </option>
+                            <option>Male</option>
+                            <option>Female</option>
+                        </select><br><br>
+                        <div class="button">
+                            <div class="buttondiv1">
+                                <button class="previous">Previous</button>
+                            </div>
+                            <div class="buttondiv2">
+                                <button class="next">Save And Continue</button>
+                            </div>
+                        </div>
+                    </form >
+                </section>
+                <section class="signup-section">
+                    <h2>Contact Details</h2>
+                    <form method="post">
+                        <label for="email">Email</label><br>
+                        <input type="email" id="email" placeholder="1234567@gmail,com" required><br>
+                        <label for="phone">Phone Number</label><br>
+                        <input type="tel" id="phone" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required><br>
+                        <label for="altphone">Alternate Phone Number</label><br>
+                        <input type="tel" id="altphone" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required><br>
+                        <label for="address">Home Address</label><br>
+                        <textarea id="address" name="address" rows="4" cols="40" placeholder="Enter your home address"></textarea><br>
+                        <label for="city">City</label><br>
+                        <input type="text" id="city"  placeholder="Enter your city"><br>
+                        <label for="postal-code">Postal Code</label><br>
+                        <input type="text" id="postal-code" placeholder="Enter postal code"><br><br>
+                        <div class="button">
+                            <div class="buttondiv1"><button class="previous">Previous</button></div>
+                            <div class="buttondiv2"><button class="next">Save And Continue</button></div>
+                        </div>
+                    </form>
+                </section>
+                <!--
+                <section class="signup-section">
+                    <h2>Emergency Contact Details</h2>
+                    <form>
+                        <label for="name2">Full Name</label><br>
+                        <input id="name2" type="text"><br>
+                        <label for="surname2">Surname</label><br>
+                        <input id="surname2" type="text"><br>
+                        <label for="bday2">Date of Birth</label><br>
+                        <input id="bday2" type="date"><br>
+                        <label for="Gender2">Gender</label><br>
+                        <select>
+                            <option></option>
+                            <option>Male</option>
+                            <option>Female</option>
+                        </select><br>
+                        <label for="relationship">Relationship</label><br>
+                        <select id="guardian">
+                            <option></option>
+                            <option>Mother</option>
+        
+                            <option>Father</option>
+                            <option>Sister</option>
+                            <option>Brother</option>
+                            <option>Guardian</option>
+                            <option>Other</option>
+                        </select><br>
+                        <label for="email2">Email</label><br>
+                        <input type="email" id="email2" placeholder="1234567@gmail,com" required><br>
+                        <label for="phone2">Phone Number</label><br><input type="tel" id="phone2" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required><br>
+                        <label for="altphone2">Alternate Phone Number</label><br>
+                        <input type="tel" id="altphone2" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required><br>
+                        <label for="address2">Home Address</label><br>
+                        <textarea id="address2" name="address" rows="4" cols="40" placeholder="Enter your home address"></textarea><br>
+                        <label for="city2">City</label><br>
+                        <input type="text" id="city2"  placeholder="Enter your city"><br>
+                        <label for="postal-code2">Postal Code</label><br>
+                        <input type="text" id="postal-code2" placeholder="Enter postal code"><br><br>
+                        <div class="button">
+                            <div class="buttondiv1">
+                                <button class="previous">Previous</button>
+                            </div>
+                            <div class="buttondiv2">
+                                <button class="next">Save And Continue</button>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+                <section class="signup-section">
+                    <h2>Property Information</h2>
+                    <form>
+                        <label for="propname">Property Name</label><br>
+                        <input typ="text" id="propname"><br>
+                        <label for="proptype">Property Type</label><br>
+                        <select>
+                            <option>Select</option>
+                            <option>Student Residence</option>
+                            <option>Apartment</option>
+                            <option>House</option>
+                            <option>Shared Accommodation</option>
+                        </select><br>
+                        <label for="propadd">Property Address</label><br>
+                        <textarea input="text" id="propadd" rows="4" cols="40" placeholder="Enter your property address"></textarea><br>
+                        <label for="roomnumb">Number of rooms available</label><br>
+                        <input type="text" id="roomnumb"><br>
+                        <label for="maxcap">Maximum Student Capacity</label><br>
+                        <input type="text" id="maxcap"><br><label for="distanc">Distance from Campus</label><br>
+                        <input type="text" id="distanc"><br>
+                        <label for="propdescript">Property Description</label><br>
+                        <textarea input="text" id="propadd" rows="8"cols="60" placeholder="Please Enter as much information about your property as possible!"></textarea><br><br>
+                        <div class="button">
+                            <div class="buttondiv1">
+                                <button class="previous">Previous</button>
+                            </div>
+                            <div class="buttondiv2">
+                                <button class="next">Save And Continue</button>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+                <section class="signup-section">
+                    <h2>Room & Pricing Details</h2>
+                    <form>
+                        <label for="MRP">Monthly Rent Price</label><br>
+                        <input type="number" id="MRP"><br>
+                        <label for="ARP">Annual Rent Price</label><br>
+                        <input type="number" id="ARP"><br>
+                        <label for="Deposit">Deposit Price</label><br>
+                        <input type="number" id="Deposit"><br>
+                        <label for="utilities">Utilities</label>
+                        <input type="checkbox"><label>Water</label>
+                        <input type="checkbox"><label>Electricity</label>
+                        <input type="checkbox"><label>Wi-Fi</label>
+                        <input type="checkbox"><label>Laundry</label>
+                        <label for="Lease">Lease Duration</label>
+                        <select>
+                            <option>Select</option>
+                            <option>Per Semester</option>
+                            <option>Full Academic Year</option>
+                        </select>
+                        <br><br>
+                        <div class="button">
+                            <div class="buttondiv1">
+                                <button class="previous">Previous</button>
+                            </div>
+                            <div class="buttondiv2">
+                                <button class="next">Save And Continue</button>
+                            </div>
+                        </div>
+                        
+                    </form>
+                </section>
+                <section class="signup-section">
+                    <h2>Property Features & Amenities</h2>
+                    <form>
+                        <input type="checkbox"><label>Wi-Fi</label><br>
+                        <input type="checkbox"><label>Furniture</label><br>
+                        <input type="checkbox"><label>Study Area</label><br>
+                        <input type="checkbox"><label>Parking</label><br>
+                        <input type="checkbox"><label>Security</label><br>
+                        <input type="checkbox"><label>Laundry</label><br>
+                        <input type="checkbox"><label>Gym</label><br>
+                        <input type="checkbox"><label>Swimming Pool</label><br>
+                        <input type="checkbox"><label>Shuttle Service</label><br>
+                        <input type="checkbox"><label>Backup Power</label><br>
+                        <input type="checkbox"><label>Cleaning Service</label><br><br>
+                        <div class="button">
+                            <div class="buttondiv1">
+                                <button class="previous">Previous</button>
+                            </div>
+                            <div class="buttondiv2">
+                                <button class="next">Save And Continue</button>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+                <section class="signup-section">
+                    <h2>Uploads</h2>
+                    <form>
+                        <label for="PropertyImage">Property Images</label><br>
+                        <input type="file" id="PropertyImage"><br>
+                        <label for="PoO">Proof of Ownership</label><br>
+                        <input type="file" id="PoO"><br>
+                        <label for="busreg">Business Registration Documents</label><br>
+                        <input type="file" id="busreg"><br>
+                        <label for="safetycert">Safety Certificates</label><br><input type="file" id="safetycert"><br>
+                        <label for="leaseagree">Lease Agreement Template</label><br>
+                        <input type="file" id="leaseagree"><br>
+                        <label for="rules">Rules and Regulations For Accomodation</label><br>
+                        <input type="file" id="rules"><br>
+
+                        <div class="button">
+                            <div class="buttondiv1">
+                                <button class="previous">Previous</button>
+                            </div>
+                            <div class="buttondiv2">
+                                <button class="next">Save And Continue</button>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            -->
+                <section class="signup-section">
+                    <h2>Banking & Payment Information</h2>
+                    <form>
+                        <label for="bankname">Bank Name</label><br>
+                        <input type="text" id="bankname"><br>
+                        <label for="Acchold">Account Holder Name</label><br>
+                        <input type="text" id="Acchold"><br>
+                        <label for="Accnumb">Account Number</label><br>
+                        <input type="number" id="Accnumb"><br>
+                        <label for="branch">Branch Code</label><br>
+                        <input type="text" id="branch"><br>
+                        <label for="forpay">Payment Method Reference</label><br>
+                        <input type="text" id="forpay">
+                        <div class="button">
+                            <div class="buttondiv1">
+                                <button class="previous">Previous</button>
+                            </div>
+                            <div class="buttondiv2">
+                                <button class="next">Save And Continue</button>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+                <section class="signup-section">
+                    <h2>Terms & Conditions</h2>
+                    <p>
+                        <input type="checkbox">I confirm that the information provided is correct.<br>
+                        <input type="checkbox">I agree to the accommodation rules and policies.<br>
+                        <input type="checkbox">I consent to my information being stored securely.<br>
+                    </p><br><br>
+                    <p style="display: flex;justify-content: space-between; gap:10rem;">
+                        <table width="1">
+                            <th>
+                                <button style="width: 140px;">Save & Continue</button>
+                            </th>
+                            <th>
+                                <button>Cancel</button>
+                            </th>
+                            <th>
+                                <button type="Submit">Submit</button>
+                            </th>
+                        </table>
+                    </p>
+                </section>
+            </form>
+        </div>
+        <footer>
+            <p>&copy; 2026 Find My Vibe. All rights reserved. </p>
+        </footer>
+    </main>
+</html>
