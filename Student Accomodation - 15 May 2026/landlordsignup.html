@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lan="en">
+     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image" href="Images/logo.jpg">
+        <title>Student SignUp</title>
+    </head>
+    <header>
+    <p style="text-align: left;"> <!--add progress bar under and decorate "start your journey"-->
+        <img src="Images/logo.jpg" height="200">Start Your Journey Here
+    </p>
+    <hr>
+    </header>
+    <main>
+        <p style="text-align: center;"><img src="Images/student.jpg" height="200"></p>
+        <p><H2>Personal Information</H2></p>
+        <form action="" method="post" enctype="multipart/form-data"> 
+            <!--make all section required-->
+            <!--add name tags-->
+            <label for="pfp">Profile Photo</label><br>
+            <input id="pfp" type="file" name="picture" accept="image/*"><br>
+
+            <label for="name">Full Name</label><br>
+            <input id="name" type="text" ><br>
+
+            <label for="surname">Surname</label><br>
+            <input id="surname" type="text"><br>
+
+            <label for="compname">Company Name</label><br>
+            <select>
+                <option>Select</option>
+                <option>Property Owner</option>
+                <option>Property Manager</option>
+                <option>Agent</option>
+            </select><br>
+
+            <label for="IDnumb">ID number</label><br>
+            <input id="bday" type="text" minlength="13" maxlength="13"><br>
+
+            <label for="Gender">Gender</label><br>
+            <select>
+                <option></option>
+                <option>Male</option>
+                <option>Female</option>
+            </select><br>
+
+        </form >
+        <p><h2>Contact Details</h2></p>
+        <form>
+            <label for="email">Email</label><br>
+            <input type="email" id="email" placeholder="1234567@gmail,com" required><br>
+
+            <label for="phone">Phone Number</label><br>
+            <input type="tel" id="phone" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required><br>
+
+            <label for="altphone">Alternate Phone Number</label><br>
+            <input type="tel" id="altphone" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required><br>
+
+            <label for="address">Home Address</label><br>
+            <textarea id="address" name="address" rows="4" cols="40" placeholder="Enter your home address"></textarea><br>
+
+            <label for="city">City</label><br>
+            <input type="text" id="city"  placeholder="Enter your city"><br>
+
+            <label for="postal-code">Postal Code</label><br>
+            <input type="text" id="postal-code" placeholder="Enter postal code"><br>
+
+        </form>
+
+        <p><h2> Emergency Contact Details</h2></p>
+        <form>
+            <label for="name2">Full Name</label><br>
+            <input id="name2" type="text"><br>
+
+            <label for="surname2">Surname</label><br>
+            <input id="surname2" type="text"><br>
+
+            <label for="bday2">Date of Birth</label><br>
+            <input id="bday2" type="date"><br>
+
+            <label for="Gender2">Gender</label><br>
+            <select>
+                <option></option>
+                <option>Male</option>
+                <option>Female</option>
+            </select><br>
+
+            <label for="relationship">Relationship</label><br>
+            <select>
+                <option></option>
+                <option>Mother</option>
+                <option>Father</option>
+                <option>Sister</option>
+                <option>Brother</option>
+                <option>Guardian</option>
+                <option>Other</option>
+            </select><br>
+            
+            <label for="email2">Email</label><br>
+            <input type="email" id="email2" placeholder="1234567@gmail,com" required><br>
+
+            <label for="phone2">Phone Number</label><br>
+            <input type="tel" id="phone2" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required><br>
+
+            <label for="altphone2">Alternate Phone Number</label><br>
+            <input type="tel" id="altphone2" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required><br>
+
+            <label for="address2">Home Address</label><br>
+            <textarea id="address2" name="address" rows="4" cols="40" placeholder="Enter your home address"></textarea><br>
+
+            <label for="city2">City</label><br>
+            <input type="text" id="city2"  placeholder="Enter your city"><br>
+
+            <label for="postal-code2">Postal Code</label><br>
+            <input type="text" id="postal-code2" placeholder="Enter postal code"><br>
+
+        </form>
+        <p><H2>Property Information</H2></p>
+        <label for="propname">Property Name</label><br>
+        <input typ="text" id="propname"><br>
+        <label for="proptype">Property Type</label><br>
+        <select>
+            <option>Select</option>
+            <option>Student Residence</option>
+            <option>Apartment</option>
+            <option>House</option>
+            <option>Shared Accommodation</option>
+        </select><br>
+        <label for="propadd">Property Address</label><br>
+        <textarea input="text" id="propadd" rows="4" cols="40" placeholder="Enter your property address"></textarea><br>
+        <label for="roomnumb">Number of rooms available</label><br>
+        <input type="text" id="roomnumb"><br>
+        <label for="maxcap">Maximum Student Capacity</label><br>
+        <input type="text" id="maxcap"><br>
+        <label for="distanc">Distance from Campus</label><br>
+        <input type="text" id="distanc"><br>
+        <label for="propdescript">Property Description</label><br>
+        <textarea input="text" id="propadd" rows="8"cols="60" placeholder="Please Enter as much information about your property as possible!"></textarea><br>
+    </form>
+
+    <form>
+
+        <p><H2>Room & Pricing Details</H2></p>
+        <label for="MRP">Monthly Rent Price</label><br>
+        <input type="number" id="MRP"><br>
+        <label for="ARP">Annual Rent Price</label><br>
+        <input type="number" id="ARP"><br>
+        <label for="Deposit">Deposit Price</label><br>
+        <input type="number" id="Deposit"><br>
+        <label for="utilities">Utilities</label><br>
+        <input type="checkbox"><label>Water</label><br>
+        <input type="checkbox"><label>Electricity</label><br>
+        <input type="checkbox"><label>Wi-Fi</label><br>
+        <input type="checkbox"><label>Laundry</label><br>
+        <label for="Lease">Lease Duration</label><br>
+        <select>
+            <option>Select</option>
+            <option>Per Semester</option>
+            <option>Full Academic Year</option>
+        </select><br>
+
+    </form>
+ <p><H2>Property Features & Amenities</H2></p>
+    <form>
+
+        
+            <input type="checkbox"><label>Wi-Fi</label><br>
+            <input type="checkbox"><label>Furniture</label><br>
+            <input type="checkbox"><label>Study Area</label><br>
+            <input type="checkbox"><label>Parking</label><br>
+            <input type="checkbox"><label>Security</label><br>
+            <input type="checkbox"><label>Laundry</label><br>
+            <input type="checkbox"><label>Gym</label><br>
+            <input type="checkbox"><label>Swimming Pool</label><br>
+            <input type="checkbox"><label>Shuttle Service</label><br>
+            <input type="checkbox"><label>Backup Power</label><br>
+            <input type="checkbox"><label>Cleaning Service</label><br>
+
+    </form>
+    
+        <p><H2>Uploads</H2></p>
+    <form>
+            <label for="PropertyImage">Property Images</label><br>
+            <input type="file" id="PropertyImage"><br>
+            <label for="PoO">Proof of Ownership</label><br>
+            <input type="file" id="PoO"><br>
+            <label for="busreg">Business Registration Documents</label><br>
+            <input type="file" id="busreg"><br>
+            <label for="safetycert">Safety Certificates</label><br>
+            <input type="file" id="safetycert"><br>
+            <label for="leaseagree">Lease Agreement Template</label><br>
+            <input type="file" id="leaseagree"><br>
+            <label for="rules">Rules and Regulations For Accomodation</label><br>
+            <input type="file" id="rules"><br>
+    </form>
+        
+       <p><H2>Banking & Payment Information</H2></p>  
+            <label for="bankname">Bank Name</label><br>
+            <input type="text" id="bankname"><br>
+            <label for="Acchold">Account Holder Name</label><br>
+            <input type="text" id="Acchold"><br>
+            <label for="Accnumb">Account Number</label><br>
+            <input type="number" id="Accnumb"><br>
+            <label for="branch">Branch Code</label><br>
+            <input type="text" id="branch"><br>
+            <label for="forpay">Payment Method Reference</label><br>
+            <input type="text" id="forpay">
+        
+        
+        <p><H2>Terms & Conditions</H2></p>
+        <p>
+            <input type="checkbox">I confirm that the information provided is correct.<br>
+            <input type="checkbox">I agree to the accommodation rules and policies.<br>
+            <input type="checkbox">I consent to my information being stored securely.<br>
+        </p>
+
+        <p>
+            <table width="1">
+                <th><button style="width: 120px;">Save & Continue</button></th><th><button>Cancel</button></th><th><button>Submit</button></th>
+            </table>
+        </p>
+
+    </main>
+</html>
