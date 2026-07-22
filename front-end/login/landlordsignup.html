@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image" href="/front-end/Images/logo.jpg">
+    <link rel="stylesheet" href="/front-end/styles_login/signup.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+        .error { color: red; font-size: 0.9em; margin-top: 5px; }
+        .success { color: green; font-size: 0.9em; margin-top: 5px; }
+    </style>
+    <title>Landlord SignUp</title>
+</head>
+<body>
+    <nav class="nav-bar">
+        <img src="/front-end/Images/logo-removebg-preview.png" height="200">
+        <p class="p1">Start Your Journey Here at</p>
+        <p class="p2">Find <span>My </span>Vibe</p>
+    </nav>
+    <br>
+    <hr>
+    
+    <main class="div">
+        <div class="div1">
+            <p style="text-align: center;">
+                <img src="/front-end/Images/student.jpg" height="200">
+            </p>
+        </div>
+        <div class="div2">
+            <form id="landlordSignupForm">
+                <section class="signup-section" id="section1">
+                    <h2>Personal Information</h2>
+                    <label for="first_name">First Name *</label><br>
+                    <input id="first_name" type="text" required><br>
+                    
+                    <label for="last_name">Last Name *</label><br>
+                    <input id="last_name" type="text" required><br>
+                    
+                    <label for="email">Email *</label><br>
+                    <input type="email" id="email" placeholder="landlord@example.com" required><br>
+                    
+                    <label for="username">Username *</label><br>
+                    <input id="username" type="text" required><br>
+                    
+                
+                    
+                    
+                    <div class="button">
+                        <div class="buttondiv2">
+                            <button type="button" class="next" onclick="goToSection(2)">Continue</button>
+                        </div>
+                    </div>
+                    <div id="section1_error" class="error"></div>
+                </section>
+
+                <section class="signup-section" id="section2" style="display:none;">
+                    <h2>Contact Details</h2>
+                    <label for="phone_number">Phone Number *</label><br>
+                    <input type="tel" id="phone_number" placeholder="012 345 6789" ><br>
+                    
+                    <label for="address">Business Address</label><br>
+                    <textarea id="address" rows="4" cols="40" placeholder="Enter your business address"></textarea><br>
+                    
+                    <label for="city">City</label><br>
+                    <input type="text" id="city" placeholder="Enter your city"><br><br>
+                    
+                    <div class="button">
+                        <div class="buttondiv1">
+                            <button type="button" class="previous" onclick="goToSection(1)">Previous</button>
+                        </div>
+                        <div class="buttondiv2">
+                            <button type="button" class="next" onclick="goToSection(3)">Continue</button>
+                        </div>
+                    </div>
+                    <div id="section2_error" class="error"></div>
+                </section>
+
+                <section class="signup-section" id="section3" style="display:none;">
+                    <h2>Account Setup</h2>
+                    <label for="password1">Password *</label><br>
+                    <input type="password" id="password1" minlength="8" required><br>
+                    <small>At least 8 characters</small><br>
+                    
+                    <label for="password2">Confirm Password *</label><br>
+                    <input type="password" id="password2" minlength="8" required><br><br>
+                    
+                    <div class="button">
+                        <div class="buttondiv1">
+                            <button type="button" class="previous" onclick="goToSection(2)">Previous</button>
+                        </div>
+                        <div class="buttondiv2">
+                            <button type="submit" class="next">Create Account</button>
+                        </div>
+                    </div>
+                    <div id="section3_error" class="error"></div>
+                    <div id="section3_success" class="success"></div>
+                </section>
+                <section class="signup-section"  >
+                    <h2>Contact Details</h2>                       
+                        <label for="phone">Phone Number</label><br>
+                        <input type="tel" id="phone" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required><br>
+                        <label for="altphone">Alternate Phone Number</label><br>
+                        <input type="tel" id="altphone" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required><br>
+                        <label for="address">Home Address</label><br>
+                        <textarea id="address" name="address" rows="4" cols="40" placeholder="Enter your home address"></textarea><br>
+                        <label for="city">City</label><br>
+                        <input type="text" id="city"  placeholder="Enter your city"><br>
+                        <label for="postal-code">Postal Code</label><br>
+                        <input type="text" id="postal-code" placeholder="Enter postal code"><br><br>
+                        <div class="button">
+                            <div class="buttondiv1"><button class="previous">Previous</button></div>
+                            <div class="buttondiv2"><button class="next">Save And Continue</button></div>
+                        </div>
+                    
+                </section>
+                
+                <section class="signup-section">
+                    <h2>Terms & Conditions</h2>
+                    <p>
+                        <input type="checkbox">I confirm that the information provided is correct.<br>
+                        <input type="checkbox">I agree to the accommodation rules and policies.<br>
+                        <input type="checkbox">I consent to my information being stored securely.<br>
+                    </p><br><br>
+                    <p style="display: flex;justify-content: space-between; gap:10rem;">
+                        <table width="1">
+                            <th>
+                                <button>Previous</button>
+                            </th>
+                            <th>
+                                <button type="Submit">Submit</button>
+                            </th>
+                        </table>
+                    </p>
+                </section>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2026 Find My Vibe. All rights reserved. </p>
+    </footer>
+    <script src="/front-end/shared/csrf.js"></script>
+    <script src="/front-end/shared/password-toggle.js"></script>
+    <script src="register.js"></script>
+
+</html>
+
+
+
+
+
+
+
+
+

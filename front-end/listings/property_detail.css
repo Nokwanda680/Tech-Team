@@ -1,0 +1,72 @@
+/* Property detail page — extends the listings.css theme variables */
+.detail-wrap{
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 24px 20px 60px;
+}
+.hidden{ display: none !important; }
+.detail-content{ display: grid; gap: 20px; }
+.detail-gallery{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.detail-gallery img{
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  background: var(--surface-soft);
+}
+.detail-main{
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 24px;
+}
+.detail-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.detail-location{ color: var(--muted); margin-top: 4px; }
+.detail-price{ font-size: 1.6rem; font-weight: 700; color: var(--orange); white-space: nowrap; }
+.detail-price small{ font-size: 0.9rem; color: var(--muted); font-weight: 400; }
+.detail-tags{ display: flex; gap: 8px; flex-wrap: wrap; margin: 14px 0; }
+.detail-tag{
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  color: var(--text);
+}
+.detail-section{ margin-top: 22px; border-top: 1px solid var(--border); padding-top: 18px; }
+.detail-section h3{ margin-bottom: 8px; }
+.detail-section p{ color: var(--muted); line-height: 1.5; }
+#enquiry-form, #review-form{ display: flex; flex-direction: column; gap: 10px; max-width: 480px; }
+#enquiry-form textarea, #review-form textarea{
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 10px;
+  padding: 10px;
+  min-height: 80px;
+  resize: vertical;
+}
+#review-form select{
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 6px;
+}
+.review-item{
+  border-bottom: 1px solid var(--border);
+  padding: 10px 0;
+}
+.review-item .review-rating{ color: var(--orange); font-weight: 600; }
+.review-item .review-meta{ color: var(--muted); font-size: 0.8rem; }

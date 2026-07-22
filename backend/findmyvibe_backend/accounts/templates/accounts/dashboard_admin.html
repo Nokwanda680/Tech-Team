@@ -1,0 +1,10 @@
+{% extends "accounts/base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+    <h1>Admin Dashboard</h1>
+    <p>Welcome, {{ request.user.get_full_name|default:request.user.username }}.</p>
+    <p>Total users: {{ total_users }}</p>
+    <p>Landlords: {{ total_landlords }}</p>
+    <p>Students: {{ total_students }}</p>
+    <div class="links"><a href="{% url 'accounts:logout' %}">Log out</a></div>
+{% endblock %}

@@ -1,0 +1,252 @@
+{
+  "name": "backend",
+  "type": "directory",
+  "children": [
+    {
+      "name": "backend.json",
+      "type": "file"
+    },
+    {
+      "name": "findmyvibe_backend",
+      "type": "directory",
+      "children": [
+        {
+          "name": "db.sqlite3",
+          "type": "file",
+          "description": "SQLite database file"
+        },
+        {
+          "name": "manage.py",
+          "type": "file",
+          "description": "Django management utility"
+        },
+        {
+          "name": "views.py",
+          "type": "file",
+          "description": "View definitions"
+        },
+        {
+          "name": "env",
+          "type": "directory",
+          "description": "Python virtual environment",
+          "children": [
+            {
+              "name": "pyvenv.cfg",
+              "type": "file"
+            },
+            {
+              "name": "Include",
+              "type": "directory",
+              "description": "C header files for Python"
+            },
+            {
+              "name": "Lib",
+              "type": "directory",
+              "children": [
+                {
+                  "name": "site-packages",
+                  "type": "directory",
+                  "description": "Installed Python packages",
+                  "packages": [
+                    "asgiref-3.11.1",
+                    "django-6.0.6",
+                    "django-cors-headers-4.9.0",
+                    "djangorestframework-3.17.1",
+                    "gunicorn-26.0.0",
+                    "pillow-12.3.0",
+                    "psycopg2-binary-2.9.12",
+                    "sqlparse-0.5.5",
+                    "tzdata-2026.2",
+                    "whitenoise-6.12.0"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Scripts",
+              "type": "directory",
+              "description": "Executable scripts for virtual environment",
+              "children": [
+                {
+                  "name": "activate",
+                  "type": "file"
+                },
+                {
+                  "name": "activate.bat",
+                  "type": "file"
+                },
+                {
+                  "name": "activate.fish",
+                  "type": "file"
+                },
+                {
+                  "name": "Activate.ps1",
+                  "type": "file"
+                },
+                {
+                  "name": "deactivate.bat",
+                  "type": "file"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "findmyvibe",
+          "type": "directory",
+          "description": "Django app directory",
+          "children": [
+            {
+              "name": "__init__.py",
+              "type": "file"
+            },
+            {
+              "name": "admin.py",
+              "type": "file",
+              "description": "Django admin configuration"
+            },
+            {
+              "name": "apps.py",
+              "type": "file",
+              "description": "App configuration"
+            },
+            {
+              "name": "models.py",
+              "type": "file",
+              "description": "Database models"
+            },
+            {
+              "name": "tests.py",
+              "type": "file",
+              "description": "Unit tests"
+            },
+            {
+              "name": "urls.py",
+              "type": "file",
+              "description": "URL routing"
+            },
+            {
+              "name": "views.py",
+              "type": "file",
+              "description": "View handlers"
+            },
+            {
+              "name": "migrations",
+              "type": "directory",
+              "description": "Database migrations",
+              "children": [
+                {
+                  "name": "__init__.py",
+                  "type": "file"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "findmyvibe_backend",
+          "type": "directory",
+          "description": "Project configuration",
+          "children": [
+            {
+              "name": "__init__.py",
+              "type": "file"
+            },
+            {
+              "name": "asgi.py",
+              "type": "file",
+              "description": "ASGI configuration"
+            },
+            {
+              "name": "settings.py",
+              "type": "file",
+              "description": "Django settings"
+            },
+            {
+              "name": "urls.py",
+              "type": "file",
+              "description": "Main URL configuration"
+            },
+            {
+              "name": "wsgi.py",
+              "type": "file",
+              "description": "WSGI configuration"
+            }
+          ]
+        },
+        {
+          "name": "static",
+          "type": "directory",
+          "description": "Static files (CSS, JS)",
+          "children": [
+            {
+              "name": "css",
+              "type": "directory",
+              "children": [
+                {
+                  "name": "dashboard.css",
+                  "type": "file",
+                  "description": "Dashboard styling"
+                }
+              ]
+            },
+            {
+              "name": "js",
+              "type": "directory",
+              "children": [
+                {
+                  "name": "dashboard.js",
+                  "type": "file",
+                  "description": "Dashboard JavaScript"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "templates",
+          "type": "directory",
+          "description": "HTML templates",
+          "children": [
+            {
+              "name": "f_m_v",
+              "type": "directory",
+              "children": [
+                {
+                  "name": "base.html",
+                  "type": "file",
+                  "description": "Base template"
+                },
+                {
+                  "name": "base1.html",
+                  "type": "file",
+                  "description": "Alternative base template"
+                },
+                {
+                  "name": "dashboard.html",
+                  "type": "file",
+                  "description": "Dashboard template"
+                },
+                {
+                  "name": "another_dashboard.html",
+                  "type": "file",
+                  "description": "Alternative dashboard template"
+                },
+                {
+                  "name": "README.md",
+                  "type": "file",
+                  "description": "Template documentation"
+                }
+              ]
+            },
+            {
+              "name": "students",
+              "type": "directory",
+              "description": "Student-related templates"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

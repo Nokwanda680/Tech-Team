@@ -1,0 +1,624 @@
+{% extends "findmyvibe/base.html" %}
+{% load static %}
+
+{% block title %}{{ page_title|default:"Dashboard" }} — Find My Vibe{% endblock %}
+
+{% block extra_head %}
+{# Pass role data from Django view to JS as a JSON object #}
+<script>
+  const dashboard_initial_role = "{{ current_role|default:'student' }}";
+  {# Override JS role data with server-side data if supplied #}
+  {% if roles_json %}
+  const dashboard_roles = {{ roles_json|safe }};
+  {% endif %}
+</script>
+{% endblock %}
+
+{% block body %}
+<div class="app role-{{ current_role|default:'student' }}" id="app">
+
+  {# ══════════════════════════════════════════
+     SIDEBAR
+  ══════════════════════════════════════════ #}
+  <aside class="sidebar">
+
+    {# Logo #}
+    <div class="sidebar-logo">
+      <div class="logo-wordmark">
+        <span class="logo-find">Find </span><span class="logo-my">My </span><span class="logo-vibe">Vibe</span>
+      </div>
+      <div class="logo-tag">Student Housing Platform</div>
+    </div>
+
+    {# Role switcher — only shown when user has multiple roles #}
+    {% if user_roles and user_roles|length > 1 %}
+    <div class="role-switcher">
+      {% for role_key, role_label in user_roles.items %}
+      <button
+        class="role-btn {% if role_key == current_role %}active{% endif %}"
+        data-role="{{ role_key }}"
+        onclick="switchRole('{{ role_key }}')"
+      >{{ role_label }}</button>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {# Nav — populated by JS using the dashboard_roles config #}
+    <nav class="nav" id="nav" aria-label="Main navigation"></nav>
+
+    {# User card — populated by JS #}
+    <div class="sidebar-footer">
+      <div class="user-card" id="user-card" role="button" aria-label="User menu"></div>
+    </div>
+  </aside>
+
+  {# ══════════════════════════════════════════
+     MAIN CONTENT
+  ══════════════════════════════════════════ #}
+  <main class="main">
+
+    {# Topbar #}
+    <header class="topbar">
+      <span class="topbar-title" id="topbar-title">{{ page_title|default:"Dashboard" }}</span>
+      <div class="topbar-right">
+        <button class="icon-btn" aria-label="Search"><i class="ti ti-search" aria-hidden="true"></i></button>
+        <button class="icon-btn notif-dot" aria-label="Notifications"><i class="ti ti-bell" aria-hidden="true"></i></button>
+        <button class="icon-btn" aria-label="Settings"><i class="ti ti-settings" aria-hidden="true"></i></button>
+      </div>
+    </header>
+
+    <div class="content">
+
+      {# ══════════════════════════════════════
+         STUDENT PANEL
+      ══════════════════════════════════════ #}
+      <div class="panel {% if current_role == 'student' %}active{% endif %}" id="panel-student">
+
+        <div class="greeting">
+          <h1>Hey, <span class="accent-student">{{ student.first_name|default:"there" }}</span> 👋</h1>
+          <p>{{ student.greeting_subtitle|default:"Your accommodation search is looking promising." }}</p>
+        </div>
+
+        {# Stats #}
+        <div class="stats-grid">
+          {% for stat in student.stats %}
+          <div class="stat-card {{ stat.color }}">
+            <div class="stat-label">{{ stat.label }}</div>
+            <div class="stat-value">{{ stat.value }}</div>
+            <div class="stat-meta">
+              {% if stat.trend_up %}<span class="stat-up">↑ {{ stat.trend_up }}</span> {% endif %}
+              {% if stat.trend_down %}<span class="stat-down">↓ {{ stat.trend_down }}</span> {% endif %}
+              {{ stat.meta }}
+            </div>
+          </div>
+          {% empty %}
+          {# Fallback static stats if no context supplied #}
+          <div class="stat-card blue">
+            <div class="stat-label">Saved Listings</div>
+            <div class="stat-value">14</div>
+            <div class="stat-meta"><span class="stat-up">↑ 3</span> this week</div>
+          </div>
+          <div class="stat-card orange">
+            <div class="stat-label">Applications</div>
+            <div class="stat-value">4</div>
+            <div class="stat-meta">2 pending review</div>
+          </div>
+          <div class="stat-card lime">
+            <div class="stat-label">Vibe Score</div>
+            <div class="stat-value">87</div>
+            <div class="stat-meta">Top match accuracy</div>
+          </div>
+          <div class="stat-card muted">
+            <div class="stat-label">Viewings</div>
+            <div class="stat-value">2</div>
+            <div class="stat-meta">Next: Thu 27 Jun</div>
+          </div>
+          {% endfor %}
+        </div>
+
+        <div class="grid-2">
+
+          {# Recommended listings #}
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Recommended for you</span>
+              <a href="{% url 'listings:list' %}" class="card-action">See all</a>
+            </div>
+            {% for listing in student.recommended_listings %}
+            <div class="listing-card">
+              <div class="listing-img" style="background: var(--{{ listing.accent }}-dim); color: var(--{{ listing.accent }});">
+                {{ listing.initials }}
+              </div>
+              <div class="listing-info">
+                <div class="listing-name">{{ listing.name }}</div>
+                <div class="listing-addr">
+                  <i class="ti ti-map-pin" style="font-size:12px" aria-hidden="true"></i>
+                  {{ listing.address }}
+                </div>
+                <div class="listing-meta">
+                  <span class="tag tag-{{ listing.status_tag }}">{{ listing.status_label }}</span>
+                  <span style="font-size:11px; color:var(--muted)">{{ listing.amenities }}</span>
+                </div>
+              </div>
+              <div class="listing-price">
+                R{{ listing.price }}<span style="font-size:10px; font-weight:400; color:var(--muted)">/mo</span>
+              </div>
+            </div>
+            {% empty %}
+            <p style="color:var(--muted); font-size:13px;">No listings found matching your preferences yet.</p>
+            {% endfor %}
+          </div>
+
+          {# Applications table #}
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">My applications</span>
+              <a href="{% url 'applications:list' %}" class="card-action">Track all</a>
+            </div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Property</th>
+                  <th>Submitted</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for app in student.applications %}
+                <tr>
+                  <td><span style="font-weight:500">{{ app.property_name }}</span></td>
+                  <td style="color:var(--muted)">{{ app.submitted_date }}</td>
+                  <td><span class="tag tag-{{ app.status_tag }}">{{ app.status_label }}</span></td>
+                </tr>
+                {% empty %}
+                <tr>
+                  <td colspan="3" style="color:var(--muted); text-align:center;">No applications yet.</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="grid-3">
+
+          {# Messages #}
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Messages</span>
+              <a href="{% url 'messages:inbox' %}" class="card-action">Inbox</a>
+            </div>
+            {% for msg in student.messages %}
+            <div class="msg-row {% if msg.unread %}msg-unread{% endif %}">
+              <div class="msg-av" style="background: var(--{{ msg.accent }}-dim); color: var(--{{ msg.accent }});">
+                {{ msg.initials }}
+              </div>
+              <div class="msg-body">
+                <div class="msg-name">{{ msg.sender }}</div>
+                <div class="msg-preview">{{ msg.preview }}</div>
+              </div>
+              <div class="msg-time">{{ msg.time_ago }}</div>
+            </div>
+            {% empty %}
+            <p style="color:var(--muted); font-size:13px;">No messages.</p>
+            {% endfor %}
+          </div>
+
+          {# Move-in checklist #}
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Move-in checklist</span>
+              <span style="font-size:11px; color:var(--muted)">
+                {{ student.checklist_done }} / {{ student.checklist_total }} done
+              </span>
+            </div>
+            {% for item in student.checklist %}
+            <div class="check-item">
+              <div class="check-box {% if item.done %}done{% endif %}">
+                {% if item.done %}<i class="ti ti-check" style="font-size:11px; color:#fff" aria-hidden="true"></i>{% endif %}
+              </div>
+              <span class="check-text {% if item.done %}done-text{% endif %}">{{ item.label }}</span>
+            </div>
+            {% endfor %}
+            <div class="progress-bar" style="margin-top:12px">
+              <div class="progress-fill" style="width:{{ student.checklist_pct }}%; background: var(--blue)"></div>
+            </div>
+          </div>
+
+          {# Vibe match factors #}
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Vibe match factors</span>
+            </div>
+            {% for factor in student.vibe_factors %}
+            <div style="margin-bottom:10px">
+              <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:4px">
+                <span style="color:var(--muted)">{{ factor.label }}</span>
+                <span style="font-weight:600; color:var(--{{ factor.color }})">{{ factor.value }}%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width:{{ factor.value }}%; background:var(--{{ factor.color }})"></div>
+              </div>
+            </div>
+            {% endfor %}
+            <div style="margin-top:16px; padding:12px; background:var(--blue-dim); border-radius:8px; border:1px solid rgba(33,150,243,0.2); text-align:center">
+              <div style="font-family:'Space Grotesk',sans-serif; font-size:28px; font-weight:700; color:var(--blue)">
+                {{ student.vibe_score|default:"—" }}
+              </div>
+              <div style="font-size:11px; color:var(--muted)">Overall Vibe Score</div>
+            </div>
+          </div>
+
+        </div>
+      </div>{# /panel-student #}
+
+      {# ══════════════════════════════════════
+         LANDLORD PANEL
+      ══════════════════════════════════════ #}
+      <div class="panel {% if current_role == 'landlord' %}active{% endif %}" id="panel-landlord">
+
+        <div class="greeting">
+          <h1>Welcome back, <span class="accent-landlord">{{ landlord.first_name|default:"there" }}</span></h1>
+          <p>{{ landlord.greeting_subtitle|default:"You have pending applications awaiting action." }}</p>
+        </div>
+
+        <div class="stats-grid">
+          {% for stat in landlord.stats %}
+          <div class="stat-card {{ stat.color }}">
+            <div class="stat-label">{{ stat.label }}</div>
+            <div class="stat-value">{{ stat.value }}</div>
+            <div class="stat-meta">
+              {% if stat.trend_up %}<span class="stat-up">↑ {{ stat.trend_up }}</span> {% endif %}
+              {{ stat.meta }}
+            </div>
+          </div>
+          {% empty %}
+          <div class="stat-card orange">
+            <div class="stat-label">Active Listings</div>
+            <div class="stat-value">6</div>
+            <div class="stat-meta">4 occupied · 2 available</div>
+          </div>
+          <div class="stat-card blue">
+            <div class="stat-label">Monthly Revenue</div>
+            <div class="stat-value">R38k</div>
+            <div class="stat-meta"><span class="stat-up">↑ 8%</span> vs last month</div>
+          </div>
+          <div class="stat-card lime">
+            <div class="stat-label">Occupancy Rate</div>
+            <div class="stat-value">83%</div>
+            <div class="stat-meta">Target: 90%</div>
+          </div>
+          <div class="stat-card muted">
+            <div class="stat-label">Open Applications</div>
+            <div class="stat-value">7</div>
+            <div class="stat-meta">2 new today</div>
+          </div>
+          {% endfor %}
+        </div>
+
+        <div class="grid-2">
+
+          {# My properties #}
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">My properties</span>
+              <a href="{% url 'listings:create' %}" class="card-action">Add listing</a>
+            </div>
+            {% for prop in landlord.properties %}
+            <div class="listing-card">
+              <div class="listing-img" style="background: var(--{{ prop.accent }}-dim); color: var(--{{ prop.accent }});">
+                {{ prop.initials }}
+              </div>
+              <div class="listing-info">
+                <div class="listing-name">{{ prop.name }}</div>
+                <div class="listing-addr">
+                  <i class="ti ti-map-pin" style="font-size:12px" aria-hidden="true"></i> {{ prop.address }}
+                </div>
+                <div class="listing-meta">
+                  <span class="tag tag-{{ prop.status_tag }}">{{ prop.status_label }}</span>
+                  <span style="font-size:11px; color:var(--muted)">{{ prop.meta }}</span>
+                </div>
+              </div>
+              <div class="listing-price">R{{ prop.price }}/mo</div>
+            </div>
+            {% empty %}
+            <p style="color:var(--muted); font-size:13px;">No properties listed yet.</p>
+            {% endfor %}
+          </div>
+
+          {# Revenue chart #}
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Revenue (last 6 months)</span>
+            </div>
+            <div class="bar-chart" id="rev-chart"></div>
+            <div style="margin-top:18px; padding-top:14px; border-top:1px solid var(--border)">
+              <div style="display:flex; gap:20px">
+                <div>
+                  <div style="font-size:11px; color:var(--muted); margin-bottom:2px">Total YTD</div>
+                  <div style="font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; color:var(--orange)">
+                    R{{ landlord.revenue_ytd|default:"—" }}
+                  </div>
+                </div>
+                <div>
+                  <div style="font-size:11px; color:var(--muted); margin-bottom:2px">Avg / month</div>
+                  <div style="font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700">
+                    R{{ landlord.revenue_avg|default:"—" }}
+                  </div>
+                </div>
+                <div>
+                  <div style="font-size:11px; color:var(--muted); margin-bottom:2px">Outstanding</div>
+                  <div style="font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; color:var(--danger)">
+                    R{{ landlord.revenue_outstanding|default:"—" }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-3">
+
+          {# Incoming applications table #}
+          <div class="card col-span-2">
+            <div class="card-header">
+              <span class="card-title">Incoming applications</span>
+              <a href="{% url 'applications:landlord_list' %}" class="card-action">View all</a>
+            </div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Applicant</th>
+                  <th>Property</th>
+                  <th>Vibe Score</th>
+                  <th>Applied</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for app in landlord.applications %}
+                <tr>
+                  <td>
+                    <div style="display:flex; align-items:center; gap:8px">
+                      <div class="avatar avatar-student"
+                           style="width:28px; height:28px; font-size:10px;
+                                  background:var(--{{ app.accent }}-dim);
+                                  color:var(--{{ app.accent }});
+                                  border-color:rgba({{ app.accent_rgb }},0.2)">
+                        {{ app.initials }}
+                      </div>
+                      <span style="font-weight:500">{{ app.applicant_name }}</span>
+                    </div>
+                  </td>
+                  <td style="color:var(--muted)">{{ app.property_name }}</td>
+                  <td>
+                    <span style="color:var(--{{ app.score_color }}); font-weight:600">{{ app.vibe_score }}</span>
+                  </td>
+                  <td style="color:var(--muted)">{{ app.applied_date }}</td>
+                  <td>
+                    <div style="display:flex; gap:6px">
+                      <a href="{% url 'applications:approve' app.id %}"
+                         class="btn btn-primary-landlord"
+                         style="padding:4px 10px; font-size:11px">Approve</a>
+                      <a href="{% url 'applications:decline' app.id %}"
+                         class="btn btn-ghost"
+                         style="padding:4px 10px; font-size:11px">Decline</a>
+                    </div>
+                  </td>
+                </tr>
+                {% empty %}
+                <tr>
+                  <td colspan="5" style="color:var(--muted); text-align:center;">No pending applications.</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+          {# Maintenance tickets #}
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Maintenance</span>
+              <a href="{% url 'maintenance:list' %}" class="card-action">All tickets</a>
+            </div>
+            {% for ticket in landlord.maintenance_tickets %}
+            <div class="activity-item">
+              <div class="activity-dot" style="background: var(--{{ ticket.priority_color }})"></div>
+              <div class="activity-content">
+                <div class="activity-text">{{ ticket.description }}</div>
+                <div class="activity-time">{{ ticket.time_ago }} · {{ ticket.priority_label }}</div>
+              </div>
+            </div>
+            {% empty %}
+            <p style="color:var(--muted); font-size:13px;">No open tickets.</p>
+            {% endfor %}
+          </div>
+
+        </div>
+      </div>{# /panel-landlord #}
+
+      {# ══════════════════════════════════════
+         ADMIN PANEL
+      ══════════════════════════════════════ #}
+      <div class="panel {% if current_role == 'admin' %}active{% endif %}" id="panel-admin">
+
+        <div class="greeting">
+          <h1>Platform <span class="accent-admin">Control</span></h1>
+          <p>{{ admin.greeting_subtitle|default:"Find My Vibe is running normally." }}</p>
+        </div>
+
+        <div class="stats-grid">
+          {% for stat in admin.stats %}
+          <div class="stat-card {{ stat.color }}">
+            <div class="stat-label">{{ stat.label }}</div>
+            <div class="stat-value">{{ stat.value }}</div>
+            <div class="stat-meta">
+              {% if stat.trend_up %}<span class="stat-up">↑ {{ stat.trend_up }}</span> {% endif %}
+              {{ stat.meta }}
+            </div>
+          </div>
+          {% empty %}
+          <div class="stat-card lime">
+            <div class="stat-label">Total Users</div>
+            <div class="stat-value">4 821</div>
+            <div class="stat-meta"><span class="stat-up">↑ 134</span> this week</div>
+          </div>
+          <div class="stat-card orange">
+            <div class="stat-label">Active Listings</div>
+            <div class="stat-value">1 204</div>
+            <div class="stat-meta">38 pending approval</div>
+          </div>
+          <div class="stat-card blue">
+            <div class="stat-label">Placements</div>
+            <div class="stat-value">762</div>
+            <div class="stat-meta"><span class="stat-up">↑ 12%</span> vs last month</div>
+          </div>
+          <div class="stat-card muted">
+            <div class="stat-label">Disputes</div>
+            <div class="stat-value">3</div>
+            <div class="stat-meta">2 awaiting response</div>
+          </div>
+          {% endfor %}
+        </div>
+
+        <div class="grid-2">
+
+          {# User growth donut #}
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">User growth</span>
+              <a href="{% url 'admin_panel:reports' %}" class="card-action">Full report</a>
+            </div>
+            <div class="donut-wrap">
+              <svg class="donut-svg" width="110" height="110" viewBox="0 0 110 110" aria-hidden="true">
+                <circle cx="55" cy="55" r="40" fill="none" stroke="var(--surface-soft)" stroke-width="16"/>
+                {# Segments — ideally driven by admin.user_segments in a real impl #}
+                <circle cx="55" cy="55" r="40" fill="none" stroke="var(--blue)" stroke-width="16"
+                  stroke-dasharray="{{ admin.donut_students }} {{ admin.donut_remainder }}"
+                  stroke-dashoffset="0" transform="rotate(-90 55 55)"/>
+                <circle cx="55" cy="55" r="40" fill="none" stroke="var(--orange)" stroke-width="16"
+                  stroke-dasharray="{{ admin.donut_landlords }} {{ admin.donut_remainder }}"
+                  stroke-dashoffset="-{{ admin.donut_students }}" transform="rotate(-90 55 55)"/>
+                <text x="55" y="51" text-anchor="middle" fill="var(--text)"
+                      font-family="Space Grotesk,sans-serif" font-size="16" font-weight="700">
+                  {{ admin.total_users|default:"—" }}
+                </text>
+                <text x="55" y="64" text-anchor="middle" fill="var(--muted)"
+                      font-family="Inter,sans-serif" font-size="9">total users</text>
+              </svg>
+              <div class="donut-legend">
+                {% for segment in admin.user_segments %}
+                <div class="legend-item">
+                  <div class="legend-dot" style="background:var(--{{ segment.color }})"></div>
+                  <span class="legend-label">{{ segment.label }}</span>
+                  <span class="legend-val">{{ segment.count }}</span>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+            <div style="margin-top:18px; padding-top:14px; border-top:1px solid var(--border)">
+              <div style="font-size:12px; color:var(--muted); margin-bottom:8px">Weekly signups</div>
+              <div class="bar-chart" id="signup-chart"></div>
+            </div>
+          </div>
+
+          {# Platform activity feed #}
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Platform activity</span>
+              <a href="{% url 'admin_panel:logs' %}" class="card-action">View logs</a>
+            </div>
+            {% for event in admin.activity_feed %}
+            <div class="activity-item">
+              <div class="activity-dot" style="background:var(--{{ event.color }})"></div>
+              <div class="activity-content">
+                <div class="activity-text"><b>{{ event.title }}</b> — {{ event.description }}</div>
+                <div class="activity-time">{{ event.time_ago }}</div>
+              </div>
+            </div>
+            {% empty %}
+            <p style="color:var(--muted); font-size:13px;">No recent activity.</p>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="grid-3">
+
+          {# Listing approval queue #}
+          <div class="card col-span-2">
+            <div class="card-header">
+              <span class="card-title">Listing approval queue</span>
+              <span style="font-size:11px; color:var(--muted)">{{ admin.pending_listings_count }} pending</span>
+            </div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Property</th>
+                  <th>Landlord</th>
+                  <th>Location</th>
+                  <th>Price</th>
+                  <th>Submitted</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for listing in admin.pending_listings %}
+                <tr>
+                  <td><span style="font-weight:500">{{ listing.name }}</span></td>
+                  <td style="color:var(--muted)">{{ listing.landlord }}</td>
+                  <td style="color:var(--muted)">{{ listing.location }}</td>
+                  <td style="color:var(--orange); font-weight:600">R{{ listing.price }}</td>
+                  <td style="color:var(--muted)">{{ listing.submitted_date }}</td>
+                  <td>
+                    <div style="display:flex; gap:6px">
+                      <a href="{% url 'admin_panel:listing_approve' listing.id %}"
+                         class="btn btn-primary-admin"
+                         style="padding:4px 10px; font-size:11px">Approve</a>
+                      <a href="{% url 'admin_panel:listing_flag' listing.id %}"
+                         class="btn btn-ghost"
+                         style="padding:4px 10px; font-size:11px">Flag</a>
+                    </div>
+                  </td>
+                </tr>
+                {% empty %}
+                <tr>
+                  <td colspan="6" style="color:var(--muted); text-align:center;">No listings awaiting approval.</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+          {# System health #}
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">System health</span>
+            </div>
+            {% for service in admin.system_health %}
+            <div style="margin-bottom:14px">
+              <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:4px">
+                <span style="color:var(--muted)">{{ service.name }}</span>
+                <span style="color:var(--{{ service.color }}); font-weight:600">{{ service.status }}</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width:{{ service.pct }}%; background:var(--{{ service.color }})"></div>
+              </div>
+            </div>
+            {% endfor %}
+
+            {% if admin.system_alert %}
+            <div style="margin-top:16px; padding:10px 12px; background:var(--orange-dim); border-radius:8px;
+                        border:1px solid rgba(243,146,0,0.2); display:flex; gap:8px; align-items:center">
+              <i class="ti ti-alert-triangle" style="color:var(--orange); font-size:16px" aria-hidden="true"></i>
+              <span style="font-size:12px; color:var(--orange)">{{ admin.system_alert }}</span>
+            </div>
+            {% endif %}
+          </div>
+
+        </div>
+      </div>{# /panel-admin #}
+
+    </div>{# /content #}
+  </main>
+</div>{# /app #}
+{% endblock %}

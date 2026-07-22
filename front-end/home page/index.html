@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Find My Vibe — Student Accommodation</title>
+  <meta name="description" content="Find verified student accommodation near your campus. Browse real listings, compare prices, and contact landlords directly.">
+  <link rel="icon" type="image" href="/front-end/Images/logo-removebg-preview.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/front-end/styles_login/styles.css">
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <div class="logo"><img src="/front-end/Images/logo_removed2.png" alt="">Find<span>My</span>Vibe</div>
+    <ul class="nav-links">
+      <li><a href="/front-end/home%20page/index.html">Home</a></li>
+      <li><a href="/front-end/listings/listings.html">Listings</a></li>
+      <li><a href="/front-end/dashboards/student%20dashboard/saved_listings.html">Favourites</a></li>
+    </ul>
+    <div class="nav-cta">
+      <button class="btn-solid" onclick="window.location.href='/front-end/login/Login.html'">Sign In</button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero-strip">
+    <div class="hero-copy">
+      <p class="eyebrow">Student accommodation made simple</p>
+      <h1>Find accommodation that matches your vibe.</h1>
+      <p class="hero-text">Verified listings near your campus. Browse photos, compare prices, and contact landlords directly — no agents, no guesswork.</p>
+      <form class="search-bar" id="hero-search-form">
+        <input type="text" id="hero-search-input" placeholder="Search by campus, suburb or budget…">
+        <button class="search-btn" type="submit">Search</button>
+      </form>
+      <div class="hero-stats" id="hero-stats">
+        <span class="stat-pill"><span class="dot"></span> Loading live listings…</span>
+      </div>
+    </div>
+    <div class="hero-image" aria-label="Student accommodation slideshow">
+      <div class="slideshow">
+        <div class="slide slide-1"></div>
+        <div class="slide slide-2"></div>
+        <div class="slide slide-3"></div>
+        <div class="slide slide-4"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Value props -->
+  <section class="home-section">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Why Find My Vibe</p>
+        <h2>Built around how students actually search for a place</h2>
+      </div>
+    </div>
+    <div class="value-props">
+      <div class="value-card">
+        <div class="value-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+        </div>
+        <h3>Verified listings</h3>
+        <p>Every listing goes through admin review before it goes live, so what you see is a real, checked property — not a scam or a duplicate.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h3>Talk to the landlord directly</h3>
+        <p>Send an enquiry from any listing and get a reply straight from the landlord — no middleman, no waiting on an agent to call you back.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <h3>Search by what matters</h3>
+        <p>Filter by rent, room type, amenities and distance from campus, then save your favourites and pick up your search later.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured listings (real data) -->
+  <section class="home-section featured-section">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Fresh on the platform</p>
+        <h2>Recently listed near campus</h2>
+      </div>
+      <a href="/front-end/listings/listings.html" class="section-link">Browse all listings →</a>
+    </div>
+    <div class="featured-grid" id="featured-grid">
+      <p style="color:var(--muted)">Loading listings…</p>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="home-section">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">How it works</p>
+        <h2>From search to move-in</h2>
+      </div>
+    </div>
+    <div class="how-columns">
+      <div class="how-col for-students">
+        <h3>For students <span class="role-tag">Student</span></h3>
+        <div class="step-card">
+          <span class="step-number">01</span>
+          <div><h4>Search and filter</h4><p>Look up your campus or suburb, set your budget, and filter by room type or amenities.</p></div>
+        </div>
+        <div class="step-card">
+          <span class="step-number">02</span>
+          <div><h4>Enquire or save</h4><p>Message a landlord directly from any listing, or save it to your favourites to compare later.</p></div>
+        </div>
+        <div class="step-card">
+          <span class="step-number">03</span>
+          <div><h4>Confirm and move in</h4><p>Once you've agreed on a place with the landlord, you're set — no agent fees in between.</p></div>
+        </div>
+      </div>
+      <div class="how-col for-landlords">
+        <h3>For landlords <span class="role-tag">Landlord</span></h3>
+        <div class="step-card">
+          <span class="step-number">01</span>
+          <div><h4>List your property</h4><p>Add your listing with photos, rent, and amenities. It goes to an admin for a quick review.</p></div>
+        </div>
+        <div class="step-card">
+          <span class="step-number">02</span>
+          <div><h4>Get real enquiries</h4><p>Students message you directly through the platform — reply and manage every enquiry from your dashboard.</p></div>
+        </div>
+        <div class="step-card">
+          <span class="step-number">03</span>
+          <div><h4>Manage it all in one place</h4><p>Track your listings, favourites, and enquiries from a single landlord dashboard.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA band -->
+  <div class="cta-band">
+    <div>
+      <h2>Ready to find your vibe?</h2>
+      <p>Browse verified student accommodation near your campus, or list your property to reach students directly.</p>
+    </div>
+    <div class="cta-band-actions">
+      <button class="btn-solid" onclick="window.location.href='/front-end/listings/listings.html'">Browse listings</button>
+      <button class="btn-ghost" onclick="window.location.href='/front-end/login/studentsignup.html'">Sign up</button>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <div class="logo"><img src="/front-end/Images/logo_removed2.png" alt="">Find<span>My</span>Vibe</div>
+      <ul class="site-footer-links">
+        <li><a href="/front-end/listings/listings.html">Listings</a></li>
+        <li><a href="/front-end/login/studentsignup.html">Student sign up</a></li>
+        <li><a href="/front-end/login/landlordsignup.html">Landlord sign up</a></li>
+        <li><a href="/front-end/login/Login.html">Sign in</a></li>
+      </ul>
+      <p class="site-footer-copy">&copy; 2026 Find My Vibe. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="index.js"></script>
+</body>
+</html>

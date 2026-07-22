@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find My Vibe — Budget & preferences</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="budget">
+
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><img src='/front-end/Images/logo_removed2.png'class="brand-mark"><div class="brand-name">Find My Vibe</div></div>
+    <nav class="nav">
+      <div class="nav-label">Menu</div>
+      <a class="nav-item" data-page="dashboard" href="dashboard.html"><span class="nav-dot"></span>Dashboard</a>
+      <a class="nav-item" data-page="search" href="search-listings.html">Search listings</a>
+      <a class="nav-item" data-page="saved" href="saved-homes.html">Saved homes</a>
+      <a class="nav-item" data-page="applications" href="applications.html">Applications</a>
+      <a class="nav-item" data-page="messages" href="messages.html">Messages<span class="nav-badge">2</span></a>
+      <a class="nav-item" data-page="roommates" href="roommate-matches.html">Roommate matches</a>
+      <div class="nav-label" style="margin-top:14px;">Account</div>
+      <a class="nav-item" data-page="account" href="account.html">Account</a>
+      <a class="nav-item" data-page="budget" href="budget-preferences.html">Budget &amp; preferences</a>
+      <a class="nav-item" data-page="documents" href="documents.html">Documents</a>
+      <a class="nav-item" data-page="settings" href="settings.html">Settings</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="avatar">TM</div>
+      <div><div class="sf-name">Thandi M.</div><div class="sf-sub">UCT · 3rd year</div></div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topline">
+      <div>
+        <div class="greeting-eyebrow">Budget &amp; preferences</div>
+        <h1>Tune what Find My Vibe recommends</h1>
+      </div>
+      <button class="btn btn-primary">Save changes</button>
+    </div>
+
+    <div class="two-col">
+      <div class="panel">
+        <div class="section-title" style="margin-bottom: 18px;">Monthly budget</div>
+
+        <div class="field range-field" style="margin-bottom: 22px;">
+          <label for="r-budget">Maximum rent: <strong style="color: var(--text);">R7,000</strong></label>
+          <input type="range" id="r-budget" min="2000" max="12000" step="100" value="7000">
+          <div class="range-labels"><span>R2,000</span><span>R12,000</span></div>
+        </div>
+
+        <div class="field range-field" style="margin-bottom: 22px;">
+          <label for="r-dist">Max distance to campus: <strong style="color: var(--text);">2.0 km</strong></label>
+          <input type="range" id="r-dist" min="0" max="10" step="0.5" value="2">
+          <div class="range-labels"><span>0 km</span><span>10 km</span></div>
+        </div>
+
+        <div class="field">
+          <label for="r-includes">Bills included in budget</label>
+          <select id="r-includes">
+            <option selected>Rent only</option>
+            <option>Rent + wifi</option>
+            <option>Rent + wifi + utilities</option>
+            <option>All-inclusive</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="section-title" style="margin-bottom: 14px;">Monthly budget breakdown</div>
+        <div class="budget-row">
+          <div class="budget-amount">R5,400</div>
+          <div class="budget-cap">of R7,000 cap</div>
+        </div>
+        <div class="budget-bar">
+          <div class="budget-seg" style="width: 58%; background: var(--lime);"></div>
+          <div class="budget-seg" style="width: 25%; background: var(--orange);"></div>
+          <div class="budget-seg" style="width: 17%; background: var(--surface-soft);"></div>
+        </div>
+        <div class="budget-legend">
+          <div class="bl-row"><div class="bl-left"><span class="bl-dot" style="background: var(--lime);"></span>Rent average, saved homes</div><span>R5,400</span></div>
+          <div class="bl-row"><div class="bl-left"><span class="bl-dot" style="background: var(--orange);"></span>Utilities &amp; wifi avg.</div><span>R1,630</span></div>
+          <div class="bl-row"><div class="bl-left"><span class="bl-dot" style="background: var(--muted);"></span>Remaining headroom</div><span>R1,600</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel section" style="margin-top: 20px;">
+      <div class="section-title" style="margin-bottom: 16px;">Home preferences</div>
+      <div class="pref-grid">
+        <div class="pref-chip"><input type="checkbox" id="p1" checked><label for="p1">Wifi included</label></div>
+        <div class="pref-chip"><input type="checkbox" id="p2" checked><label for="p2">Furnished</label></div>
+        <div class="pref-chip"><input type="checkbox" id="p3"><label for="p3">Pet friendly</label></div>
+        <div class="pref-chip"><input type="checkbox" id="p4" checked><label for="p4">On shuttle route</label></div>
+        <div class="pref-chip"><input type="checkbox" id="p5"><label for="p5">Own bathroom</label></div>
+        <div class="pref-chip"><input type="checkbox" id="p6" checked><label for="p6">Quiet study space</label></div>
+        <div class="pref-chip"><input type="checkbox" id="p7"><label for="p7">Parking included</label></div>
+        <div class="pref-chip"><input type="checkbox" id="p8"><label for="p8">Security estate</label></div>
+      </div>
+    </div>
+
+    <div class="panel section">
+      <div class="section-title" style="margin-bottom: 4px;">Roommate matching preferences</div>
+      <div class="toggle-row">
+        <div class="toggle-text"><div class="tt">Non-smoking household</div><div class="ts">Only match with non-smokers</div></div>
+        <label class="switch"><input type="checkbox" checked><span class="slider-track"></span></label>
+      </div>
+      <div class="toggle-row">
+        <div class="toggle-text"><div class="tt">Quiet hours preferred</div><div class="ts">Prioritise matches who study at home</div></div>
+        <label class="switch"><input type="checkbox" checked><span class="slider-track"></span></label>
+      </div>
+      <div class="toggle-row">
+        <div class="toggle-text"><div class="tt">Open to mixed-gender housing</div><div class="ts">Include all roommate matches</div></div>
+        <label class="switch"><input type="checkbox"><span class="slider-track"></span></label>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+document.querySelectorAll('.nav-item[data-page]').forEach(function(el){
+  if (el.dataset.page === document.body.dataset.page) el.classList.add('active');
+});
+document.querySelectorAll('input[type=range]').forEach(function(r){
+  r.addEventListener('input', function(){
+    var label = r.closest('.field').querySelector('label strong');
+    if (!label) return;
+    if (r.id === 'r-budget') label.textContent = 'R' + Number(r.value).toLocaleString();
+    if (r.id === 'r-dist') label.textContent = parseFloat(r.value).toFixed(1) + ' km';
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find My Vibe — Settings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="settings">
+
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><img src='/front-end/Images/logo_removed2.png'class="brand-mark"><div class="brand-name">Find My Vibe</div></div>
+    <nav class="nav">
+      <div class="nav-label">Menu</div>
+      <a class="nav-item" data-page="dashboard" href="dashboard.html"><span class="nav-dot"></span>Dashboard</a>
+      <a class="nav-item" data-page="search" href="search-listings.html">Search listings</a>
+      <a class="nav-item" data-page="saved" href="saved-homes.html">Saved homes</a>
+      <a class="nav-item" data-page="applications" href="applications.html">Applications</a>
+      <a class="nav-item" data-page="messages" href="messages.html">Messages<span class="nav-badge">2</span></a>
+      <a class="nav-item" data-page="roommates" href="roommate-matches.html">Roommate matches</a>
+      <div class="nav-label" style="margin-top:14px;">Account</div>
+      <a class="nav-item" data-page="account" href="account.html">Account</a>
+      <a class="nav-item" data-page="budget" href="budget-preferences.html">Budget &amp; preferences</a>
+      <a class="nav-item" data-page="documents" href="documents.html">Documents</a>
+      <a class="nav-item" data-page="settings" href="settings.html">Settings</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="avatar">TM</div>
+      <div><div class="sf-name">Thandi M.</div><div class="sf-sub">UCT · 3rd year</div></div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topline">
+      <div>
+        <div class="greeting-eyebrow">Settings</div>
+        <h1>App settings</h1>
+      </div>
+    </div>
+
+    <div class="panel section">
+      <div class="section-title" style="margin-bottom: 4px;">Notifications</div>
+      <div class="toggle-row">
+        <div class="toggle-text"><div class="tt">New matching listings</div><div class="ts">Get notified when a home matches your saved search</div></div>
+        <label class="switch"><input type="checkbox" checked><span class="slider-track"></span></label>
+      </div>
+      <div class="toggle-row">
+        <div class="toggle-text"><div class="tt">Application updates</div><div class="ts">Status changes on your applications</div></div>
+        <label class="switch"><input type="checkbox" checked><span class="slider-track"></span></label>
+      </div>
+      <div class="toggle-row">
+        <div class="toggle-text"><div class="tt">Messages</div><div class="ts">Landlord, agent and roommate replies</div></div>
+        <label class="switch"><input type="checkbox" checked><span class="slider-track"></span></label>
+      </div>
+      <div class="toggle-row">
+        <div class="toggle-text"><div class="tt">Roommate match suggestions</div><div class="ts">Weekly digest of new compatible matches</div></div>
+        <label class="switch"><input type="checkbox"><span class="slider-track"></span></label>
+      </div>
+      <div class="toggle-row">
+        <div class="toggle-text"><div class="tt">Price drop alerts</div><div class="ts">When a saved home lowers its rent</div></div>
+        <label class="switch"><input type="checkbox" checked><span class="slider-track"></span></label>
+      </div>
+    </div>
+
+    <div class="panel section">
+      <div class="section-title" style="margin-bottom: 4px;">Privacy</div>
+      <div class="toggle-row">
+        <div class="toggle-text"><div class="tt">Show my profile to roommate matches</div><div class="ts">Others can see your name, course and compatibility score</div></div>
+        <label class="switch"><input type="checkbox" checked><span class="slider-track"></span></label>
+      </div>
+      <div class="toggle-row">
+        <div class="toggle-text"><div class="tt">Share contact details after mutual interest</div><div class="ts">Only once both sides express interest</div></div>
+        <label class="switch"><input type="checkbox" checked><span class="slider-track"></span></label>
+      </div>
+      <div class="toggle-row">
+        <div class="toggle-text"><div class="tt">Allow landlords to see application history</div><div class="ts">Helps speed up approvals</div></div>
+        <label class="switch"><input type="checkbox"><span class="slider-track"></span></label>
+      </div>
+    </div>
+
+    <div class="panel section">
+      <div class="section-title" style="margin-bottom: 4px;">Preferences</div>
+      <div class="form-grid">
+        <div class="field">
+          <label for="s-lang">Language</label>
+          <select id="s-lang">
+            <option selected>English</option>
+            <option>Afrikaans</option>
+            <option>isiXhosa</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="s-curr">Currency</label>
+          <select id="s-curr">
+            <option selected>ZAR (R)</option>
+            <option>USD ($)</option>
+            <option>EUR (€)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel section">
+      <div class="section-title" style="margin-bottom: 4px; color: var(--danger);">Danger zone</div>
+      <div class="toggle-row">
+        <div class="toggle-text"><div class="tt">Deactivate account</div><div class="ts">Hide your profile and pause all applications</div></div>
+        <button class="btn btn-ghost">Deactivate</button>
+      </div>
+      <div class="toggle-row">
+        <div class="toggle-text"><div class="tt">Delete account</div><div class="ts">Permanently remove your data — cannot be undone</div></div>
+        <button class="btn btn-danger">Delete account</button>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+document.querySelectorAll('.nav-item[data-page]').forEach(function(el){
+  if (el.dataset.page === document.body.dataset.page) el.classList.add('active');
+});
+</script>
+</body>
+</html>

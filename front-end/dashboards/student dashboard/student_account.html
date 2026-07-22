@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find My Vibe — My Profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+:root {
+  --orange: #f39200;
+  --blue: #2196F3;
+  --bg: #0f0f0f;
+  --surface: #141414;
+  --surface-soft: #1d1d1d;
+  --text: #f5f5f5;
+  --muted: #a7a7a7;
+  --border: rgba(255,255,255,0.08);
+  --lime: #00FF00;
+  --orange-dim: rgba(243,146,0,0.12);
+  --blue-dim: rgba(33,150,243,0.12);
+  --lime-dim: rgba(0,255,0,0.10);
+  --danger: #ff4d4d;
+  --danger-dim: rgba(255,77,77,0.12);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app { display: flex; min-height: 100vh; }
+
+/* ── Sidebar ─────────────────────────────── */
+.sidebar {
+  width: 240px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  z-index: 10;
+  transition: transform 0.25s ease;
+}
+
+.sidebar-logo {
+  padding: 24px 20px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.logo-wordmark {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.logo-find { color: var(--text); }
+.logo-my { color: var(--orange); }
+.logo-vibe { color: var(--blue); }
+
+.logo-tag {
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  margin-top: 2px;
+  text-transform: uppercase;
+}
+
+.role-switcher {
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 4px;
+}
+
+.role-btn {
+  flex: 1;
+  padding: 6px 4px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 500;
+  transition: all 0.15s;
+  font-family: 'Inter', sans-serif;
+}
+
+.role-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.18); }
+.role-btn.active[data-role="student"] { background: var(--blue-dim); border-color: var(--blue); color: var(--blue); }
+.role-btn.active[data-role="landlord"] { background: var(--orange-dim); border-color: var(--orange); color: var(--orange); }
+.role-btn.active[data-role="admin"] { background: var(--lime-dim); border-color: var(--lime); color: var(--lime); }
+
+.nav { padding: 12px 0; flex: 1; overflow-y: auto; }
+
+.nav-section-label {
+  padding: 4px 20px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 8px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 20px;
+  color: var(--muted);
+  cursor: pointer;
+  border-radius: 0;
+  transition: all 0.15s;
+  position: relative;
+  font-size: 13.5px;
+}
+
+.nav-item:hover { color: var(--text); background: var(--surface-soft); }
+
+.nav-item.active {
+  color: var(--text);
+  background: var(--surface-soft);
+}
+
+.nav-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 4px; bottom: 4px;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+}
+
+.role-student .nav-item.active::before { background: var(--blue); }
+.role-landlord .nav-item.active::before { background: var(--orange); }
+.role-admin .nav-item.active::before { background: var(--lime); }
+
+.nav-item .ti { font-size: 17px; }
+
+.nav-badge {
+  margin-left: auto;
+  background: var(--orange);
+  color: #000;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 6px;
+  min-width: 18px;
+  text-align: center;
+}
+
+.sidebar-footer {
+  padding: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.user-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.user-card:hover { background: var(--surface-soft); }
+
+.avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.avatar-student { background: var(--blue-dim); color: var(--blue); border: 1px solid rgba(33,150,243,0.3); }
+.avatar-landlord { background: var(--orange-dim); color: var(--orange); border: 1px solid rgba(243,146,0,0.3); }
+.avatar-admin { background: var(--lime-dim); color: var(--lime); border: 1px solid rgba(0,255,0,0.25); }
+
+.user-info { flex: 1; min-width: 0; }
+.user-name { font-size: 13px; font-weight: 500; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.user-role-label { font-size: 11px; color: var(--muted); }
+
+/* ── Main ─────────────────────────────── */
+.main {
+  margin-left: 240px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 28px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.topbar-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.topbar-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.icon-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.18); background: var(--surface-soft); }
+
+.notif-dot {
+  position: relative;
+}
+.notif-dot::after {
+  content: '';
+  position: absolute;
+  top: 6px; right: 6px;
+  width: 7px; height: 7px;
+  background: var(--orange);
+  border-radius: 50%;
+  border: 1.5px solid var(--surface);
+}
+
+.content { padding: 28px; flex: 1; }
+
+/* ── Panels ─────────────────────────────── */
+.panel { display: none; }
+.panel.active { display: block; }
+
+/* ── Components ─────────────────────────── */
+.greeting { margin-bottom: 24px; }
+.greeting h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  margin-bottom: 4px;
+}
+.greeting p { color: var(--muted); font-size: 14px; }
+
+.accent-student { color: var(--blue); }
+.accent-landlord { color: var(--orange); }
+.accent-admin { color: var(--lime); }
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 18px;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+}
+
+.stat-card.orange::after { background: var(--orange); }
+.stat-card.blue::after { background: var(--blue); }
+.stat-card.lime::after { background: var(--lime); }
+.stat-card.muted::after { background: rgba(255,255,255,0.15); }
+
+.stat-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+.stat-value { font-family: 'Space Grotesk', sans-serif; font-size: 26px; font-weight: 700; line-height: 1; margin-bottom: 6px; }
+.stat-meta { font-size: 11px; color: var(--muted); }
+.stat-up { color: var(--lime); }
+.stat-down { color: var(--danger); }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; margin-bottom: 18px; }
+.col-span-2 { grid-column: span 2; }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.card-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.card-action {
+  font-size: 12px;
+  color: var(--blue);
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: 'Inter', sans-serif;
+}
+.role-landlord .card-action { color: var(--orange); }
+.role-admin .card-action { color: var(--lime); }
+
+/* Listing cards */
+.listing-card {
+  display: flex;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.listing-card:last-child { border-bottom: none; }
+
+.listing-img {
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 700;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.listing-info { flex: 1; min-width: 0; }
+.listing-name { font-weight: 600; font-size: 13.5px; margin-bottom: 3px; }
+.listing-addr { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+.listing-meta { display: flex; gap: 8px; align-items: center; }
+
+.tag {
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.tag-available { background: var(--lime-dim); color: var(--lime); border: 1px solid rgba(0,255,0,0.2); }
+.tag-occupied { background: var(--blue-dim); color: var(--blue); border: 1px solid rgba(33,150,243,0.2); }
+.tag-pending { background: var(--orange-dim); color: var(--orange); border: 1px solid rgba(243,146,0,0.2); }
+.tag-rejected { background: var(--danger-dim); color: var(--danger); border: 1px solid rgba(255,77,77,0.2); }
+
+.listing-price {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--orange);
+  white-space: nowrap;
+  align-self: center;
+}
+
+/* Timeline / activity */
+.activity-item {
+  display: flex;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+.activity-item:last-child { border-bottom: none; }
+
+.activity-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+
+.activity-content { flex: 1; min-width: 0; }
+.activity-text { font-size: 13px; line-height: 1.4; margin-bottom: 2px; }
+.activity-time { font-size: 11px; color: var(--muted); }
+
+/* Map placeholder */
+.map-placeholder {
+  background: var(--surface-soft);
+  border-radius: 8px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 13px;
+  gap: 8px;
+  border: 1px solid var(--border);
+}
+
+/* Progress bar */
+.progress-bar {
+  height: 6px;
+  background: var(--surface-soft);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 6px;
+}
+.progress-fill { height: 100%; border-radius: 10px; transition: width 0.5s ease; }
+
+/* Table */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.data-table th {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 8px 10px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+.data-table td {
+  padding: 11px 10px;
+  font-size: 13px;
+  border-bottom: 1px solid var(--border);
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: var(--surface-soft); }
+
+/* Chart bars */
+.bar-chart { display: flex; align-items: flex-end; gap: 8px; height: 100px; margin-top: 12px; }
+.bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.bar {
+  width: 100%;
+  border-radius: 4px 4px 0 0;
+  transition: height 0.4s ease;
+}
+.bar-label { font-size: 10px; color: var(--muted); }
+.bar-val { font-size: 10px; font-weight: 600; }
+
+/* Donut placeholder */
+.donut-wrap {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.donut-svg { flex-shrink: 0; }
+.donut-legend { flex: 1; }
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 12px;
+}
+.legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.legend-label { color: var(--muted); flex: 1; }
+.legend-val { font-weight: 600; }
+
+/* Search */
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0 14px;
+  height: 40px;
+  margin-bottom: 16px;
+}
+.search-bar input {
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+  flex: 1;
+}
+.search-bar input::placeholder { color: var(--muted); }
+
+/* CTA button */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.15s;
+}
+.btn-primary-student { background: var(--blue); color: #fff; }
+.btn-primary-landlord { background: var(--orange); color: #000; }
+.btn-primary-admin { background: var(--lime); color: #000; }
+.btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--muted); }
+.btn-ghost:hover { border-color: rgba(255,255,255,0.2); color: var(--text); }
+
+/* Chat / message row */
+.msg-row {
+  display: flex;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.1s;
+}
+.msg-row:last-child { border-bottom: none; }
+.msg-row:hover { background: var(--surface-soft); }
+.msg-av { width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; }
+.msg-body { flex: 1; min-width: 0; }
+.msg-name { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+.msg-preview { font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.msg-time { font-size: 11px; color: var(--muted); flex-shrink: 0; }
+.msg-unread .msg-name::after { content: ''; display: inline-block; width: 6px; height: 6px; background: var(--blue); border-radius: 50%; margin-left: 6px; vertical-align: middle; }
+
+/* Checklist */
+.check-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+.check-item:last-child { border-bottom: none; }
+.check-box {
+  width: 18px; height: 18px;
+  border-radius: 4px;
+  border: 1.5px solid var(--border);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.check-box.done { background: var(--blue); border-color: var(--blue); }
+.check-box.done.orange-check { background: var(--orange); border-color: var(--orange); }
+.check-text { font-size: 13px; flex: 1; }
+.check-text.done-text { color: var(--muted); text-decoration: line-through; }
+
+/* Score ring */
+.score-ring {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 0;
+}
+.score-number { font-family: 'Space Grotesk', sans-serif; font-size: 36px; font-weight: 700; }
+.score-label { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+/* Responsive tweaks */
+@media (max-width: 1200px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+<div class="app role-student" id="app">
+  <!-- ── Sidebar ── -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-wordmark">
+        <span class="logo-find">Find </span><span class="logo-my">My </span><span class="logo-vibe">Vibe</span>
+      </div>
+      <div class="logo-tag">Student Housing Platform</div>
+    </div>
+
+    <nav class="nav" id="nav">
+      <div class="nav-item" onclick="window.location.href='student_dashboard.html'"><i class="ti ti-layout-dashboard" aria-hidden="true"></i><span>Dashboard</span></div>
+      <div class="nav-item" onclick="window.location.href='/front-end/listings/listings.html'"><i class="ti ti-search" aria-hidden="true"></i><span>Find housing</span></div>
+      <div class="nav-item" onclick="window.location.href='saved_listings.html'"><i class="ti ti-heart" aria-hidden="true"></i><span>Saved listings</span><span class="nav-badge" id="nav-saved-badge">–</span></div>
+      <div class="nav-item" onclick="window.location.href='student_enquiries.html'"><i class="ti ti-file-text" aria-hidden="true"></i><span>My enquiries</span><span class="nav-badge" id="nav-enquiries-badge">–</span></div>
+      <div class="nav-section-label">Account</div>
+      <div class="nav-item active" onclick="window.location.href='student_account.html'"><i class="ti ti-user" aria-hidden="true"></i><span>My profile</span></div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-card" id="user-card">
+        <div class="avatar avatar-student" id="user-avatar">··</div>
+        <div class="user-info">
+          <div class="user-name" id="user-name">…</div>
+          <div class="user-role-label" id="user-role-label">…</div>
+        </div>
+        <i class="ti ti-chevron-down" style="font-size:14px; color:var(--muted)" aria-hidden="true"></i>
+      </div>
+      <button class="btn btn-ghost" id="logout-btn" onclick="if(confirm('Log out?')) logoutUser();" style="width:100%; margin-top:8px; font-size:12px; justify-content:center;"><i class="ti ti-logout" aria-hidden="true"></i> Log out</button>
+    </div>
+  </aside>
+
+  <!-- ── Main ── -->
+  <main class="main">
+    <header class="topbar">
+      <span class="topbar-title" id="topbar-title">My Profile</span>
+      <div class="topbar-right">
+        <button class="icon-btn"><i class="ti ti-search" aria-hidden="true"></i></button>
+        <button class="icon-btn notif-dot"><i class="ti ti-bell" aria-hidden="true"></i></button>
+        <button class="icon-btn"><i class="ti ti-settings" aria-hidden="true"></i></button>
+      </div>
+    </header>
+
+    <div class="content">
+
+      <div class="panel active" id="panel-student">
+
+        <div class="greeting">
+          <h1>My profile</h1>
+          <p>Update your personal details, photo, and password.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Personal details</span>
+            </div>
+            <form id="profile-form" style="display:flex; flex-direction:column; gap:12px;">
+              <div style="display:flex; align-items:center; gap:14px; margin-bottom:6px;">
+                <div class="avatar avatar-student" id="profile-avatar-preview" style="width:56px; height:56px; font-size:18px;">··</div>
+                <label style="font-size:12.5px; color:var(--muted);">
+                  Profile photo<br>
+                  <input type="file" id="profile-avatar-input" accept="image/*" style="margin-top:6px;">
+                </label>
+              </div>
+              <label style="display:flex; flex-direction:column; gap:4px; font-size:12.5px; color:var(--muted);">
+                First name
+                <input type="text" id="profile-first-name" style="background:var(--surface-soft); border:1px solid var(--border); color:var(--text); border-radius:8px; padding:8px 10px;">
+              </label>
+              <label style="display:flex; flex-direction:column; gap:4px; font-size:12.5px; color:var(--muted);">
+                Last name
+                <input type="text" id="profile-last-name" style="background:var(--surface-soft); border:1px solid var(--border); color:var(--text); border-radius:8px; padding:8px 10px;">
+              </label>
+              <label style="display:flex; flex-direction:column; gap:4px; font-size:12.5px; color:var(--muted);">
+                Email <span style="opacity:0.6">(contact an admin to change)</span>
+                <input type="email" id="profile-email" disabled style="background:var(--surface-soft); border:1px solid var(--border); color:var(--muted); border-radius:8px; padding:8px 10px;">
+              </label>
+              <label style="display:flex; flex-direction:column; gap:4px; font-size:12.5px; color:var(--muted);">
+                Phone number
+                <input type="tel" id="profile-phone" style="background:var(--surface-soft); border:1px solid var(--border); color:var(--text); border-radius:8px; padding:8px 10px;">
+              </label>
+              <label style="display:flex; flex-direction:column; gap:4px; font-size:12.5px; color:var(--muted);">
+                About me
+                <textarea id="profile-bio" style="background:var(--surface-soft); border:1px solid var(--border); color:var(--text); border-radius:8px; padding:8px 10px; min-height:70px; resize:vertical;"></textarea>
+              </label>
+              <p id="profile-status" style="font-size:12.5px;"></p>
+              <button type="submit" class="btn btn-primary-student" style="align-self:flex-start;">Save changes</button>
+            </form>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Change password</span>
+            </div>
+            <form id="password-form" style="display:flex; flex-direction:column; gap:12px;">
+              <label style="display:flex; flex-direction:column; gap:4px; font-size:12.5px; color:var(--muted);">
+                Current password
+                <input type="password" id="pw-current" required style="background:var(--surface-soft); border:1px solid var(--border); color:var(--text); border-radius:8px; padding:8px 10px;">
+              </label>
+              <label style="display:flex; flex-direction:column; gap:4px; font-size:12.5px; color:var(--muted);">
+                New password
+                <input type="password" id="pw-new" required style="background:var(--surface-soft); border:1px solid var(--border); color:var(--text); border-radius:8px; padding:8px 10px;">
+              </label>
+              <p id="password-status" style="font-size:12.5px;"></p>
+              <button type="submit" class="btn btn-primary-student" style="align-self:flex-start;">Update password</button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+  </main>
+</div>
+
+<script src="/front-end/shared/csrf.js"></script>
+<script src="/front-end/shared/password-toggle.js"></script>
+<script src="/front-end/login/logout.js"></script>
+<script src="student_account.js"></script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find My Vibe — Applications</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="applications">
+
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><img src='/front-end/Images/logo_removed2.png'class="brand-mark"><div class="brand-name">Find My Vibe</div></div>
+    <nav class="nav">
+      <div class="nav-label">Menu</div>
+      <a class="nav-item" data-page="dashboard" href="dashboard.html"><span class="nav-dot"></span>Dashboard</a>
+      <a class="nav-item" data-page="search" href="search-listings.html">Search listings</a>
+      <a class="nav-item" data-page="saved" href="saved-homes.html">Saved homes</a>
+      <a class="nav-item" data-page="applications" href="applications.html">Applications</a>
+      <a class="nav-item" data-page="messages" href="messages.html">Messages<span class="nav-badge">2</span></a>
+      <a class="nav-item" data-page="roommates" href="roommate-matches.html">Roommate matches</a>
+      <div class="nav-label" style="margin-top:14px;">Account</div>
+      <a class="nav-item" data-page="account" href="account.html">Account</a>
+      <a class="nav-item" data-page="budget" href="budget-preferences.html">Budget &amp; preferences</a>
+      <a class="nav-item" data-page="documents" href="documents.html">Documents</a>
+      <a class="nav-item" data-page="settings" href="settings.html">Settings</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="avatar">TM</div>
+      <div><div class="sf-name">Thandi M.</div><div class="sf-sub">UCT · 3rd year</div></div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topline">
+      <div>
+        <div class="greeting-eyebrow">Applications</div>
+        <h1>Track every application in one place</h1>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat-card" style="--accent: var(--orange);"><div class="stat-num">1</div><div class="stat-label">Pending review</div></div>
+      <div class="stat-card" style="--accent: var(--blue);"><div class="stat-num">1</div><div class="stat-label">Viewing booked</div></div>
+      <div class="stat-card" style="--accent: var(--lime);"><div class="stat-num">1</div><div class="stat-label">Accepted</div></div>
+      <div class="stat-card" style="--accent: var(--danger);"><div class="stat-num">1</div><div class="stat-label">Action needed</div></div>
+    </div>
+
+    <div class="tabs">
+      <div class="tab active">All (4)</div>
+      <div class="tab">Pending</div>
+      <div class="tab">Viewing set</div>
+      <div class="tab">Accepted</div>
+      <div class="tab">Closed</div>
+    </div>
+
+    <div class="panel">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th>Landlord / agent</th>
+            <th>Rent</th>
+            <th>Status</th>
+            <th>Next step</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Vredehoek Studio Loft</strong><br><span style="color:var(--muted); font-size:12px;">Applied Jul 8</span></td>
+            <td>Nomvula D.</td>
+            <td>R7,800/mo</td>
+            <td><span class="status-pill" style="background: var(--danger-dim); color: var(--danger);">EXPIRES 2D</span></td>
+            <td>Pay deposit by Jul 20</td>
+          </tr>
+          <tr>
+            <td><strong>Observatory Shared House · Rm 3</strong><br><span style="color:var(--muted); font-size:12px;">Applied Jul 14</span></td>
+            <td>Sipho R.</td>
+            <td>R4,600/mo</td>
+            <td><span class="status-pill" style="background: var(--orange-dim); color: var(--orange);">PENDING</span></td>
+            <td>Awaiting landlord review</td>
+          </tr>
+          <tr>
+            <td><strong>Rondebosch Campus Residence</strong><br><span style="color:var(--muted); font-size:12px;">Applied Jul 5</span></td>
+            <td>Lior Naidoo</td>
+            <td>R5,950/mo</td>
+            <td><span class="status-pill" style="background: var(--blue-dim); color: var(--blue);">VIEWING SET</span></td>
+            <td>Attend viewing Jul 22, 2pm</td>
+          </tr>
+          <tr>
+            <td><strong>Mowbray 2-Bed Apartment</strong><br><span style="color:var(--muted); font-size:12px;">Applied Jun 28</span></td>
+            <td>Priya G.</td>
+            <td>R6,900/mo</td>
+            <td><span class="status-pill" style="background: var(--lime-dim); color: var(--lime);">ACCEPTED</span></td>
+            <td>Sign lease by Jul 25</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+</div>
+
+<script>
+document.querySelectorAll('.nav-item[data-page]').forEach(function(el){
+  if (el.dataset.page === document.body.dataset.page) el.classList.add('active');
+});
+</script>
+</body>
+</html>

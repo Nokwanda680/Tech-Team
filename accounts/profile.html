@@ -1,0 +1,61 @@
+{% extends "accounts/base.html" %}
+{% block title %}My profile{% endblock %}
+
+{% block content %}
+<div class="page-head">
+  <div class="eyebrow">Account</div>
+  <h1>My profile</h1>
+</div>
+
+<div class="split">
+  <div class="side card" style="max-width:340px;text-align:center;">
+    <div style="width:88px;height:88px;border-radius:50%;background:var(--forest);color:var(--cream);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:2rem;margin:0 auto 16px;">
+      {{ user.first_name|slice:":1"|default:user.username|slice:":1"|upper }}
+    </div>
+    <h2 style="font-size:1.2rem;">{{ user.first_name }} {{ user.last_name }}</h2>
+    <span class="badge {% if user.is_landlord %}badge-let{% else %}badge-available{% endif %}">
+      {% if user.is_landlord %}Landlord{% else %}Student{% endif %}
+    </span>
+    <div class="btn-row" style="justify-content:center;">
+      <a href="{% url 'accounts:profile_edit' %}" class="btn btn-secondary">Edit profile</a>
+    </div>
+  </div>
+
+  <div class="side">
+    <div class="card">
+      <h3 style="font-size:1.1rem;">Account details</h3>
+      <div class="grid-2" style="margin-top:16px;">
+        <div>
+          <div class="field-hint" style="text-transform:uppercase;font-weight:700;letter-spacing:.05em;">Username</div>
+          <p>{{ user.username }}</p>
+        </div>
+        <div>
+          <div class="field-hint" style="text-transform:uppercase;font-weight:700;letter-spacing:.05em;">Email</div>
+          <p>{{ user.email }}</p>
+        </div>
+        <div>
+          <div class="field-hint" style="text-transform:uppercase;font-weight:700;letter-spacing:.05em;">Phone</div>
+          <p>{{ user.phone_number|default:"Not provided" }}</p>
+        </div>
+        {% if user.is_landlord %}
+        <div>
+          <div class="field-hint" style="text-transform:uppercase;font-weight:700;letter-spacing:.05em;">Company / agency</div>
+          <p>{{ user.company_name|default:"—" }}</p>
+        </div>
+        {% else %}
+        <div>
+          <div class="field-hint" style="text-transform:uppercase;font-weight:700;letter-spacing:.05em;">University</div>
+          <p>{{ user.institution|default:"—" }}</p>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:24px;">
+      <h3 style="font-size:1.1rem;">Password</h3>
+      <p style="color:#6b7263;">Keep your account secure with a strong, unique password.</p>
+      <a href="{% url 'accounts:password_change' %}" class="btn btn-secondary">Change password</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

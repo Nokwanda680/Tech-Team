@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Find My Vibe — Student Accommodation</title>
+  <link rel="icon" type="image" href="/Images/logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles_login/listings.css">
+  
+</head>
+<body>
+    <!--  Nav-bar -->
+  <nav>
+    <div class="logo"><img src="/Images/logo_removed2.png" alt="" srcset="" width="80px" height="55px">  Find<span>My</span>Vibe</div>
+    <div class="nav-cta">
+      <button class="btn-solid" onclick="window.location.href='/home page/index.html'">Home</button>
+    </div>
+  </nav>
+  <!--  hero section -->
+  <section class="hero-strip">
+    <div class="hero-copy">
+      <p class="eyebrow">Student accommodation made simple</p>
+      <p class="hero-text">Find the Best Accomodation that suits your vibe, Verified by your own university </p>
+      <div class="search-bar">
+        <input type="text" id="hero-search" placeholder="Search accommodation by campus, city or budget…">
+        <button class="search-btn" id="hero-search-btn">Search</button>
+      </div>
+    </div>
+    <div class="hero-image" aria-label="Student accommodation slideshow">
+      <div class="slideshow">
+        <div class="slide slide-1"></div>
+        <div class="slide slide-2"></div>
+        <div class="slide slide-3"></div>
+        <div class="slide slide-4"></div>
+      </div>
+    </div>
+  </section>
+  <!-- ====Side Bar==== -->
+  <div class="main-layout">
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <h3>Monthly Rent</h3>
+        <div class="range-row">
+          <input type="number" id="min-rent" placeholder="R 0" value="">
+          <span class="range-sep">–</span>
+          <input type="number" id="max-rent" placeholder="R Max" value="">
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Room Type</h3>
+        <label class="check-item"><input type="checkbox" class="room-type-filter" value="SINGLE" checked><span class="check-box"></span> Single Room</label>
+        <label class="check-item"><input type="checkbox" class="room-type-filter" value="SHARED" checked><span class="check-box"></span> Shared Room</label>
+        <label class="check-item"><input type="checkbox" class="room-type-filter" value="STUDIO" checked><span class="check-box"></span> Studio</label>
+        <label class="check-item"><input type="checkbox" class="room-type-filter" value="FLAT" checked><span class="check-box"></span> Flat / Apartment</label>
+        <label class="check-item"><input type="checkbox" class="room-type-filter" value="HOUSE" checked><span class="check-box"></span> House</label>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Amenities</h3>
+        <label class="check-item"><input type="checkbox" class="amenity-filter" value="WiFi"><span class="check-box"></span> Wi-Fi</label>
+        <label class="check-item"><input type="checkbox" class="amenity-filter" value="Laundry"><span class="check-box"></span> Laundry</label>
+        <label class="check-item"><input type="checkbox" class="amenity-filter" value="Gym"><span class="check-box"></span> Gym</label>
+        <label class="check-item"><input type="checkbox" class="amenity-filter" value="Security"><span class="check-box"></span> Security</label>
+      </div>
+
+      <button class="btn-solid" id="apply-filters-btn" style="width:100%;margin-top:12px;">Apply Filters</button>
+    </aside>
+    <!-- ===Listings===  -->
+     <main class="listings-area">
+      <div class="results-meta">
+        <strong id="results-count">–</strong>
+        <span>properties found</span>
+      </div>
+
+      <div class="listings-grid" id="listings">
+        <p id="listings-loading">Loading listings…</p>
+      </div>
+     </main>
+  </div>
+  <script src="/front-end/shared/csrf.js"></script>
+  <script src="listings.js"></script>
+</body>
+</html>

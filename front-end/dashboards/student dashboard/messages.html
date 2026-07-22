@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find My Vibe — Messages</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="messages">
+
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><img src='/front-end/Images/logo_removed2.png'class="brand-mark"><div class="brand-name">Find My Vibe</div></div>
+    <nav class="nav">
+      <div class="nav-label">Menu</div>
+      <a class="nav-item" data-page="dashboard" href="dashboard.html"><span class="nav-dot"></span>Dashboard</a>
+      <a class="nav-item" data-page="search" href="search-listings.html">Search listings</a>
+      <a class="nav-item" data-page="saved" href="saved-homes.html">Saved homes</a>
+      <a class="nav-item" data-page="applications" href="applications.html">Applications</a>
+      <a class="nav-item" data-page="messages" href="messages.html">Messages<span class="nav-badge">2</span></a>
+      <a class="nav-item" data-page="roommates" href="roommate-matches.html">Roommate matches</a>
+      <div class="nav-label" style="margin-top:14px;">Account</div>
+      <a class="nav-item" data-page="account" href="account.html">Account</a>
+      <a class="nav-item" data-page="budget" href="budget-preferences.html">Budget &amp; preferences</a>
+      <a class="nav-item" data-page="documents" href="documents.html">Documents</a>
+      <a class="nav-item" data-page="settings" href="settings.html">Settings</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="avatar">TM</div>
+      <div><div class="sf-name">Thandi M.</div><div class="sf-sub">UCT · 3rd year</div></div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topline">
+      <div>
+        <div class="greeting-eyebrow">Messages</div>
+        <h1>Inbox</h1>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="inbox-shell">
+        <div class="thread-list">
+          <div class="msg-row" style="background: var(--surface-soft); margin: 0 -12px 4px; padding: 12px; border-radius: 8px;">
+            <div class="msg-avatar">PR</div>
+            <div class="msg-body">
+              <div class="msg-top"><div class="msg-name">Priya · Sunbird Studios</div><div class="msg-time">14m</div></div>
+              <div class="msg-preview">Great, I've held the studio for your viewing…</div>
+            </div>
+            <div class="msg-unread-dot"></div>
+          </div>
+          <div class="msg-row">
+            <div class="msg-avatar">LN</div>
+            <div class="msg-body">
+              <div class="msg-top"><div class="msg-name">Lior Naidoo · Rondebosch</div><div class="msg-time">3h</div></div>
+              <div class="msg-preview">Bring your student card for the viewing…</div>
+            </div>
+          </div>
+          <div class="msg-row">
+            <div class="msg-avatar">MK</div>
+            <div class="msg-body">
+              <div class="msg-top"><div class="msg-name">Mika K. · Roommate match</div><div class="msg-time">1d</div></div>
+              <div class="msg-preview">Hey! Saw we matched 89% on lifestyle…</div>
+            </div>
+            <div class="msg-unread-dot"></div>
+          </div>
+          <div class="msg-row">
+            <div class="msg-avatar">SR</div>
+            <div class="msg-body">
+              <div class="msg-top"><div class="msg-name">Sipho R. · Observatory House</div><div class="msg-time">2d</div></div>
+              <div class="msg-preview">Thanks for applying, we'll be in touch soon.</div>
+            </div>
+          </div>
+          <div class="msg-row">
+            <div class="msg-avatar">ND</div>
+            <div class="msg-body">
+              <div class="msg-top"><div class="msg-name">Nomvula D. · Vredehoek Loft</div><div class="msg-time">3d</div></div>
+              <div class="msg-preview">The offer is ready — deposit link attached.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="thread-view">
+          <div class="thread-head">
+            <div class="msg-avatar" style="width:40px;height:40px;">PR</div>
+            <div>
+              <div class="msg-name" style="font-size:14px;">Priya · Sunbird Student Studios</div>
+              <div class="msg-time">Usually replies within an hour</div>
+            </div>
+          </div>
+          <div class="thread-body">
+            <div class="bubble them">Hi Thandi, thanks for your interest in the studio! Are you still looking to move in from August?<div class="bubble-time">Yesterday, 4:12 PM</div></div>
+            <div class="bubble me">Yes please, August 1st would be ideal if possible.<div class="bubble-time">Yesterday, 5:03 PM</div></div>
+            <div class="bubble them">Perfect, that works. I can pencil you in for a viewing on the 29th at 4pm — does that suit you?<div class="bubble-time">Yesterday, 5:20 PM</div></div>
+            <div class="bubble me">That works great, see you then!<div class="bubble-time">Yesterday, 5:45 PM</div></div>
+            <div class="bubble them">Great, I've held the studio for your viewing on the 29th — see you then!<div class="bubble-time">14 min ago</div></div>
+          </div>
+          <div class="thread-input">
+            <input type="text" placeholder="Write a message…">
+            <button class="btn btn-primary">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+document.querySelectorAll('.nav-item[data-page]').forEach(function(el){
+  if (el.dataset.page === document.body.dataset.page) el.classList.add('active');
+});
+</script>
+</body>
+</html>

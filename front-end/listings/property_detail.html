@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Find My Vibe — Property Details</title>
+  <link rel="icon" type="image" href="/Images/logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles_login/listings.css">
+  <link rel="stylesheet" href="property_detail.css">
+</head>
+<body>
+  <nav>
+    <div class="logo"><img src="/Images/logo_removed2.png" alt="" width="80px" height="55px">  Find<span>My</span>Vibe</div>
+    <div class="nav-cta">
+      <button class="btn-solid" onclick="window.location.href='listings.html'">Back to listings</button>
+    </div>
+  </nav>
+
+  <main class="detail-wrap">
+    <p id="detail-loading">Loading property…</p>
+
+    <div id="detail-content" class="detail-content hidden">
+      <div class="detail-gallery" id="detail-gallery"></div>
+
+      <div class="detail-main">
+        <div class="detail-header">
+          <div>
+            <h1 id="detail-title"></h1>
+            <p id="detail-location" class="detail-location"></p>
+          </div>
+          <div class="detail-price"><span id="detail-rent"></span><small>/month</small></div>
+        </div>
+
+        <button id="open-report-btn" style="background:none; border:none; color:var(--muted); font-size:12px; text-decoration:underline; cursor:pointer; padding:0; margin-top:6px;">
+          Report this listing or landlord
+        </button>
+
+        <div class="detail-tags" id="detail-tags"></div>
+
+        <section class="detail-section">
+          <h3>About this place</h3>
+          <p id="detail-description"></p>
+        </section>
+
+        <section class="detail-section">
+          <h3>House rules</h3>
+          <p id="detail-rules"></p>
+        </section>
+
+        <section class="detail-section">
+          <h3>Contact</h3>
+          <p id="detail-contact"></p>
+        </section>
+
+        <section class="detail-section" id="enquiry-section">
+          <h3>Contact the landlord</h3>
+          <div id="enquiry-login-notice" class="hidden"><p>Please <a href="/front-end/login/Login.html">log in as a student</a> to send an enquiry.</p></div>
+          <form id="enquiry-form" class="hidden">
+            <textarea id="enquiry-message" placeholder="Hi, I'm interested in this property. Is it still available?" required></textarea>
+            <button type="submit" class="btn-solid">Send enquiry</button>
+            <p id="enquiry-status"></p>
+          </form>
+        </section>
+
+        <section class="detail-section" id="reviews-section">
+          <h3>Reviews <span id="reviews-average"></span></h3>
+          <div id="reviews-list"><p>Loading reviews…</p></div>
+
+          <div id="review-login-notice" class="hidden"><p><a href="/front-end/login/Login.html">Log in as a student</a> to leave a review.</p></div>
+          <form id="review-form" class="hidden">
+            <label>Rating
+              <select id="review-rating">
+                <option value="5">5 — Excellent</option>
+                <option value="4">4 — Good</option>
+                <option value="3">3 — Okay</option>
+                <option value="2">2 — Poor</option>
+                <option value="1">1 — Very poor</option>
+              </select>
+            </label>
+            <textarea id="review-comment" placeholder="Share your experience with this property…"></textarea>
+            <button type="submit" class="btn-solid">Submit review</button>
+            <p id="review-status"></p>
+          </form>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <div class="hidden" id="report-modal-overlay" style="position:fixed; inset:0; background:rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center; z-index:100;">
+    <div style="background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:24px; width:420px; max-height:88vh; overflow-y:auto;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+        <h2 style="font-size:18px;">Report a problem</h2>
+        <button id="report-modal-close" style="background:none; border:none; color:var(--muted); font-size:20px; cursor:pointer;">&times;</button>
+      </div>
+      <div id="report-login-notice" class="hidden"><p>Please <a href="/front-end/login/Login.html">log in</a> to file a report.</p></div>
+      <form id="report-form" class="hidden" style="display:flex; flex-direction:column; gap:10px;">
+        <label style="font-size:12.5px; color:var(--muted);">What are you reporting?
+          <select id="report-target-type" style="width:100%; margin-top:4px; background:var(--surface-soft); border:1px solid var(--border); color:var(--text); border-radius:8px; padding:8px;">
+            <option value="PROPERTY">This listing</option>
+            <option value="USER">The landlord</option>
+          </select>
+        </label>
+        <label style="font-size:12.5px; color:var(--muted);">Reason
+          <input type="text" id="report-reason" required placeholder="e.g. Misleading listing, inappropriate contact"
+                 style="width:100%; margin-top:4px; background:var(--surface-soft); border:1px solid var(--border); color:var(--text); border-radius:8px; padding:8px;">
+        </label>
+        <label style="font-size:12.5px; color:var(--muted);">Details (optional)
+          <textarea id="report-description" style="width:100%; margin-top:4px; min-height:70px; background:var(--surface-soft); border:1px solid var(--border); color:var(--text); border-radius:8px; padding:8px; resize:vertical;"></textarea>
+        </label>
+        <p id="report-status" style="font-size:12.5px;"></p>
+        <button type="submit" class="btn-solid" style="align-self:flex-start;">Submit report</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/front-end/shared/csrf.js"></script>
+  <script src="property_detail.js"></script>
+</body>
+</html>

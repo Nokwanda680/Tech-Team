@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find My Vibe — Account</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="account">
+<img src="" alt="" srcset="">
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><img src='/front-end/Images/logo_removed2.png'class="brand-mark"><div class="brand-name">Find My Vibe</div></div>
+    <nav class="nav">
+      <div class="nav-label">Menu</div>
+      <a class="nav-item" data-page="dashboard" href="dashboard.html"><span class="nav-dot"></span>Dashboard</a>
+      <a class="nav-item" data-page="search" href="search-listings.html">Search listings</a>
+      <a class="nav-item" data-page="saved" href="saved-homes.html">Saved homes</a>
+      <a class="nav-item" data-page="applications" href="applications.html">Applications</a>
+      <a class="nav-item" data-page="messages" href="messages.html">Messages<span class="nav-badge">2</span></a>
+      <a class="nav-item" data-page="roommates" href="roommate-matches.html">Roommate matches</a>
+      <div class="nav-label" style="margin-top:14px;">Account</div>
+      <a class="nav-item" data-page="account" href="account.html">Account</a>
+      <a class="nav-item" data-page="budget" href="budget-preferences.html">Budget &amp; preferences</a>
+      <a class="nav-item" data-page="documents" href="documents.html">Documents</a>
+      <a class="nav-item" data-page="settings" href="settings.html">Settings</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="avatar">TM</div>
+      <div><div class="sf-name">Thandi M.</div><div class="sf-sub">UCT · 3rd year</div></div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topline">
+      <div>
+        <div class="greeting-eyebrow">Account</div>
+        <h1>Your profile</h1>
+      </div>
+      <button class="btn btn-primary">Save changes</button>
+    </div>
+
+    <div class="two-col">
+      <div class="panel">
+        <div class="section-title" style="margin-bottom: 18px;">Personal details</div>
+        <div class="form-grid">
+          <div class="field">
+            <label for="fn">First name</label>
+            <input type="text" id="fn" value="Thandi">
+          </div>
+          <div class="field">
+            <label for="ln">Last name</label>
+            <input type="text" id="ln" value="Mahlangu">
+          </div>
+          <div class="field">
+            <label for="em">Email</label>
+            <input type="email" id="em" value="thandi.m@myuct.ac.za">
+          </div>
+          <div class="field">
+            <label for="ph">Phone number</label>
+            <input type="tel" id="ph" value="+27 71 234 5678">
+          </div>
+          <div class="field">
+            <label for="uni">University</label>
+            <select id="uni">
+              <option selected>University of Cape Town</option>
+              <option>Stellenbosch University</option>
+              <option>University of the Western Cape</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="yr">Year of study</label>
+            <select id="yr">
+              <option>1st year</option>
+              <option>2nd year</option>
+              <option selected>3rd year</option>
+              <option>4th year</option>
+              <option>Postgraduate</option>
+            </select>
+          </div>
+          <div class="field full">
+            <label for="bio">About me</label>
+            <textarea id="bio">Commerce student, tidy and quiet during the week, happy to socialise on weekends. Looking for a place close to upper campus for second semester.</textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="section-title" style="margin-bottom: 14px;">Verification</div>
+        <div class="toggle-row">
+          <div class="toggle-text"><div class="tt">Student email verified</div><div class="ts">myuct.ac.za</div></div>
+          <span class="status-pill" style="background: var(--lime-dim); color: var(--lime);">VERIFIED</span>
+        </div>
+        <div class="toggle-row">
+          <div class="toggle-text"><div class="tt">ID document</div><div class="ts">Required for lease signing</div></div>
+          <span class="status-pill" style="background: var(--lime-dim); color: var(--lime);">VERIFIED</span>
+        </div>
+        <div class="toggle-row">
+          <div class="toggle-text"><div class="tt">Proof of enrollment</div><div class="ts">Uploaded Jul 3</div></div>
+          <span class="status-pill" style="background: var(--orange-dim); color: var(--orange);">PENDING</span>
+        </div>
+        <div class="toggle-row">
+          <div class="toggle-text"><div class="tt">Emergency contact</div><div class="ts">Not added yet</div></div>
+          <a class="section-link" href="#">Add</a>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+document.querySelectorAll('.nav-item[data-page]').forEach(function(el){
+  if (el.dataset.page === document.body.dataset.page) el.classList.add('active');
+});
+</script>
+</body>
+</html>

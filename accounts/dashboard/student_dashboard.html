@@ -1,0 +1,67 @@
+{% extends "accounts/base.html" %}
+{% block title %}Student dashboard{% endblock %}
+
+{% block content %}
+<div class="page-head">
+  <div class="eyebrow">Student dashboard</div>
+  <h1>Welcome back, {{ user.first_name|default:user.username }}</h1>
+</div>
+
+<div class="stat-row">
+  <div class="stat-card">
+    <div class="num">{{ saved_properties_count|default:0 }}</div>
+    <div class="label">Saved listings</div>
+  </div>
+  <div class="stat-card">
+    <div class="num">{{ enquiries_sent|default:0 }}</div>
+    <div class="label">Enquiries sent</div>
+  </div>
+  <div class="stat-card">
+    <div class="num">{{ viewings_booked|default:0 }}</div>
+    <div class="label">Viewings booked</div>
+  </div>
+</div>
+
+<div class="split">
+  <div class="side" style="flex:2;">
+    <h2 style="font-size:1.2rem;">Saved listings</h2>
+    {% if saved_properties %}
+      <div class="property-grid">
+        {% for property in saved_properties %}
+          <div class="property-card">
+            <div class="property-photo">
+              {% if property.main_image %}
+                <img src="{{ property.main_image.url }}" alt="{{ property.title }}">
+              {% else %}
+                No photo yet
+              {% endif %}
+            </div>
+            <div class="property-body">
+              <h3>{{ property.title }}</h3>
+              <div class="property-meta">{{ property.address }}</div>
+              <div class="property-price">R{{ property.rent_amount }} / month</div>
+            </div>
+            <div class="property-actions">
+              <a href="{% url 'accounts:property_detail' property.pk %}" class="btn btn-secondary">View</a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="empty-state">
+        <h3>Nothing saved yet</h3>
+        <p>Browse listings and tap the heart icon to save places you like.</p>
+        <a href="{% url 'accounts:property_search' %}" class="btn btn-primary">Browse listings</a>
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="side" style="flex:1;">
+    <h2 style="font-size:1.2rem;">Quick actions</h2>
+    <div class="card-flat" style="display:flex;flex-direction:column;gap:10px;">
+      <a href="{% url 'accounts:property_search' %}" class="btn btn-primary btn-block">Browse listings</a>
+      <a href="{% url 'accounts:profile' %}" class="btn btn-secondary btn-block">Edit profile</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

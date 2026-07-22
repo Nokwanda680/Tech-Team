@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find My Vibe — Saved homes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="saved">
+
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><img src='/front-end/Images/logo_removed2.png'class="brand-mark"><div class="brand-name">Find My Vibe</div></div>
+    <nav class="nav">
+      <div class="nav-label">Menu</div>
+      <a class="nav-item" data-page="dashboard" href="dashboard.html"><span class="nav-dot"></span>Dashboard</a>
+      <a class="nav-item" data-page="search" href="search-listings.html">Search listings</a>
+      <a class="nav-item" data-page="saved" href="saved-homes.html">Saved homes</a>
+      <a class="nav-item" data-page="applications" href="applications.html">Applications</a>
+      <a class="nav-item" data-page="messages" href="messages.html">Messages<span class="nav-badge">2</span></a>
+      <a class="nav-item" data-page="roommates" href="roommate-matches.html">Roommate matches</a>
+      <div class="nav-label" style="margin-top:14px;">Account</div>
+      <a class="nav-item" data-page="account" href="account.html">Account</a>
+      <a class="nav-item" data-page="budget" href="budget-preferences.html">Budget &amp; preferences</a>
+      <a class="nav-item" data-page="documents" href="documents.html">Documents</a>
+      <a class="nav-item" data-page="settings" href="settings.html">Settings</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="avatar">TM</div>
+      <div><div class="sf-name">Thandi M.</div><div class="sf-sub">UCT · 3rd year</div></div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topline">
+      <div>
+        <div class="greeting-eyebrow">Saved homes</div>
+        <h1>11 places on your shortlist</h1>
+      </div>
+      <a class="btn btn-primary" href="search-listings.html">Find more places</a>
+    </div>
+
+    <div class="tabs">
+      <div class="tab active">All (11)</div>
+      <div class="tab">Available now (6)</div>
+      <div class="tab">Filling fast (3)</div>
+      <div class="tab">Contacted (5)</div>
+    </div>
+
+    <div class="listings-grid">
+      <div class="listing-card">
+        <div class="listing-media"><span class="match-badge">96% match</span><span class="save-toggle">♥</span></div>
+        <div class="listing-body">
+          <div class="listing-title">Sunbird Student Studios</div>
+          <div class="listing-loc">0.4 km from UCT upper campus</div>
+          <div class="listing-foot">
+            <div class="listing-price">R6,200 <span>/mo</span></div>
+            <div class="listing-tag" style="background: var(--lime-dim); color: var(--lime);">Available now</div>
+          </div>
+        </div>
+      </div>
+      <div class="listing-card">
+        <div class="listing-media"><span class="match-badge">91% match</span><span class="save-toggle">♥</span></div>
+        <div class="listing-body">
+          <div class="listing-title">Rosemead Shared House</div>
+          <div class="listing-loc">1.1 km · jammie shuttle stop</div>
+          <div class="listing-foot">
+            <div class="listing-price">R4,850 <span>/mo</span></div>
+            <div class="listing-tag" style="background: var(--orange-dim); color: var(--orange);">2 spots left</div>
+          </div>
+        </div>
+      </div>
+      <div class="listing-card">
+        <div class="listing-media"><span class="match-badge">88% match</span><span class="save-toggle">♥</span></div>
+        <div class="listing-body">
+          <div class="listing-title">The Yard Co-living</div>
+          <div class="listing-loc">0.8 km · gym &amp; study pods</div>
+          <div class="listing-foot">
+            <div class="listing-price">R7,400 <span>/mo</span></div>
+            <div class="listing-tag" style="background: var(--blue-dim); color: var(--blue);">Tour available</div>
+          </div>
+        </div>
+      </div>
+      <div class="listing-card">
+        <div class="listing-media"><span class="match-badge">84% match</span><span class="save-toggle">♥</span></div>
+        <div class="listing-body">
+          <div class="listing-title">Liesbeek Riverside Rooms</div>
+          <div class="listing-loc">1.6 km · quiet residential street</div>
+          <div class="listing-foot">
+            <div class="listing-price">R5,300 <span>/mo</span></div>
+            <div class="listing-tag" style="background: var(--lime-dim); color: var(--lime);">Available now</div>
+          </div>
+        </div>
+      </div>
+      <div class="listing-card">
+        <div class="listing-media"><span class="match-badge">80% match</span><span class="save-toggle">♥</span></div>
+        <div class="listing-body">
+          <div class="listing-title">Rustenburg Res Annex</div>
+          <div class="listing-loc">2.0 km · on shuttle route</div>
+          <div class="listing-foot">
+            <div class="listing-price">R4,100 <span>/mo</span></div>
+            <div class="listing-tag" style="background: var(--orange-dim); color: var(--orange);">1 spot left</div>
+          </div>
+        </div>
+      </div>
+      <div class="listing-card">
+        <div class="listing-media"><span class="match-badge">77% match</span><span class="save-toggle">♥</span></div>
+        <div class="listing-body">
+          <div class="listing-title">Mowbray 2-Bed Apartment</div>
+          <div class="listing-loc">1.3 km · furnished</div>
+          <div class="listing-foot">
+            <div class="listing-price">R6,900 <span>/mo</span></div>
+            <div class="listing-tag" style="background: var(--lime-dim); color: var(--lime);">Available now</div>
+          </div>
+        </div>
+      </div>
+      <div class="listing-card">
+        <div class="listing-media"><span class="match-badge">75% match</span><span class="save-toggle">♥</span></div>
+        <div class="listing-body">
+          <div class="listing-title">Vredehoek Studio Loft</div>
+          <div class="listing-loc">2.4 km · mountain view</div>
+          <div class="listing-foot">
+            <div class="listing-price">R7,800 <span>/mo</span></div>
+            <div class="listing-tag" style="background: var(--danger-dim); color: var(--danger);">Offer pending</div>
+          </div>
+        </div>
+      </div>
+      <div class="listing-card">
+        <div class="listing-media"><span class="match-badge">72% match</span><span class="save-toggle">♥</span></div>
+        <div class="listing-body">
+          <div class="listing-title">Observatory Shared House</div>
+          <div class="listing-loc">1.8 km · near Lower Main Road</div>
+          <div class="listing-foot">
+            <div class="listing-price">R4,600 <span>/mo</span></div>
+            <div class="listing-tag" style="background: var(--orange-dim); color: var(--orange);">Applied</div>
+          </div>
+        </div>
+      </div>
+      <div class="listing-card">
+        <div class="listing-media"><span class="match-badge">69% match</span><span class="save-toggle">♥</span></div>
+        <div class="listing-body">
+          <div class="listing-title">Rondebosch Campus Residence</div>
+          <div class="listing-loc">0.6 km · on-campus catering</div>
+          <div class="listing-foot">
+            <div class="listing-price">R5,950 <span>/mo</span></div>
+            <div class="listing-tag" style="background: var(--blue-dim); color: var(--blue);">Viewing set</div>
+          </div>
+        </div>
+      </div>
+      <div class="listing-card">
+        <div class="listing-media"><span class="match-badge">65% match</span><span class="save-toggle">♥</span></div>
+        <div class="listing-body">
+          <div class="listing-title">Claremont Garden Cottage</div>
+          <div class="listing-loc">3.1 km · own entrance</div>
+          <div class="listing-foot">
+            <div class="listing-price">R5,600 <span>/mo</span></div>
+            <div class="listing-tag" style="background: var(--lime-dim); color: var(--lime);">Available now</div>
+          </div>
+        </div>
+      </div>
+      <div class="listing-card">
+        <div class="listing-media"><span class="match-badge">61% match</span><span class="save-toggle">♥</span></div>
+        <div class="listing-body">
+          <div class="listing-title">Salt River Loft Share</div>
+          <div class="listing-loc">3.6 km · artist community</div>
+          <div class="listing-foot">
+            <div class="listing-price">R3,900 <span>/mo</span></div>
+            <div class="listing-tag" style="background: var(--lime-dim); color: var(--lime);">Available now</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+document.querySelectorAll('.nav-item[data-page]').forEach(function(el){
+  if (el.dataset.page === document.body.dataset.page) el.classList.add('active');
+});
+</script>
+</body>
+</html>

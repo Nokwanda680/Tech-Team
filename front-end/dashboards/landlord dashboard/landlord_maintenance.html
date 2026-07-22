@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find My Vibe — Maintenance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+:root {
+  --orange: #f39200;
+  --blue: #2196F3;
+  --bg: #0f0f0f;
+  --surface: #141414;
+  --surface-soft: #1d1d1d;
+  --text: #f5f5f5;
+  --muted: #a7a7a7;
+  --border: rgba(255,255,255,0.08);
+  --lime: #00FF00;
+  --orange-dim: rgba(243,146,0,0.12);
+  --blue-dim: rgba(33,150,243,0.12);
+  --lime-dim: rgba(0,255,0,0.10);
+  --danger: #ff4d4d;
+  --danger-dim: rgba(255,77,77,0.12);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app { display: flex; min-height: 100vh; }
+
+/* ── Sidebar ─────────────────────────────── */
+.sidebar {
+  width: 240px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  z-index: 10;
+  transition: transform 0.25s ease;
+}
+
+.sidebar-logo {
+  padding: 24px 20px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.logo-wordmark {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.logo-find { color: var(--text); }
+.logo-my { color: var(--orange); }
+.logo-vibe { color: var(--blue); }
+
+.logo-tag {
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  margin-top: 2px;
+  text-transform: uppercase;
+}
+
+.role-switcher {
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 4px;
+}
+
+.role-btn {
+  flex: 1;
+  padding: 6px 4px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 500;
+  transition: all 0.15s;
+  font-family: 'Inter', sans-serif;
+}
+
+.role-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.18); }
+.role-btn.active[data-role="student"] { background: var(--blue-dim); border-color: var(--blue); color: var(--blue); }
+.role-btn.active[data-role="landlord"] { background: var(--orange-dim); border-color: var(--orange); color: var(--orange); }
+.role-btn.active[data-role="admin"] { background: var(--lime-dim); border-color: var(--lime); color: var(--lime); }
+
+.nav { padding: 12px 0; flex: 1; overflow-y: auto; }
+
+.nav-section-label {
+  padding: 4px 20px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 8px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 20px;
+  color: var(--muted);
+  cursor: pointer;
+  border-radius: 0;
+  transition: all 0.15s;
+  position: relative;
+  font-size: 13.5px;
+}
+
+.nav-item:hover { color: var(--text); background: var(--surface-soft); }
+
+.nav-item.active {
+  color: var(--text);
+  background: var(--surface-soft);
+}
+
+.nav-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 4px; bottom: 4px;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+}
+
+.role-student .nav-item.active::before { background: var(--blue); }
+.role-landlord .nav-item.active::before { background: var(--orange); }
+.role-admin .nav-item.active::before { background: var(--lime); }
+
+.nav-item .ti { font-size: 17px; }
+
+.nav-badge {
+  margin-left: auto;
+  background: var(--orange);
+  color: #000;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 6px;
+  min-width: 18px;
+  text-align: center;
+}
+
+.sidebar-footer {
+  padding: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.user-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.user-card:hover { background: var(--surface-soft); }
+
+.avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.avatar-student { background: var(--blue-dim); color: var(--blue); border: 1px solid rgba(33,150,243,0.3); }
+.avatar-landlord { background: var(--orange-dim); color: var(--orange); border: 1px solid rgba(243,146,0,0.3); }
+.avatar-admin { background: var(--lime-dim); color: var(--lime); border: 1px solid rgba(0,255,0,0.25); }
+
+.user-info { flex: 1; min-width: 0; }
+.user-name { font-size: 13px; font-weight: 500; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.user-role-label { font-size: 11px; color: var(--muted); }
+
+/* ── Main ─────────────────────────────── */
+.main {
+  margin-left: 240px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 28px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.topbar-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.topbar-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.icon-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.18); background: var(--surface-soft); }
+
+.notif-dot {
+  position: relative;
+}
+.notif-dot::after {
+  content: '';
+  position: absolute;
+  top: 6px; right: 6px;
+  width: 7px; height: 7px;
+  background: var(--orange);
+  border-radius: 50%;
+  border: 1.5px solid var(--surface);
+}
+
+.content { padding: 28px; flex: 1; }
+
+/* ── Panels ─────────────────────────────── */
+.panel { display: none; }
+.panel.active { display: block; }
+
+/* ── Components ─────────────────────────── */
+.greeting { margin-bottom: 24px; }
+.greeting h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  margin-bottom: 4px;
+}
+.greeting p { color: var(--muted); font-size: 14px; }
+
+.accent-student { color: var(--blue); }
+.accent-landlord { color: var(--orange); }
+.accent-admin { color: var(--lime); }
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 18px;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+}
+
+.stat-card.orange::after { background: var(--orange); }
+.stat-card.blue::after { background: var(--blue); }
+.stat-card.lime::after { background: var(--lime); }
+.stat-card.muted::after { background: rgba(255,255,255,0.15); }
+
+.stat-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+.stat-value { font-family: 'Space Grotesk', sans-serif; font-size: 26px; font-weight: 700; line-height: 1; margin-bottom: 6px; }
+.stat-meta { font-size: 11px; color: var(--muted); }
+.stat-up { color: var(--lime); }
+.stat-down { color: var(--danger); }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; margin-bottom: 18px; }
+.col-span-2 { grid-column: span 2; }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.card-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.card-action {
+  font-size: 12px;
+  color: var(--blue);
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: 'Inter', sans-serif;
+}
+.role-landlord .card-action { color: var(--orange); }
+.role-admin .card-action { color: var(--lime); }
+
+/* Listing cards */
+.listing-card {
+  display: flex;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.listing-card:last-child { border-bottom: none; }
+
+.listing-img {
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 700;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.listing-info { flex: 1; min-width: 0; }
+.listing-name { font-weight: 600; font-size: 13.5px; margin-bottom: 3px; }
+.listing-addr { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+.listing-meta { display: flex; gap: 8px; align-items: center; }
+
+.tag {
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.tag-available { background: var(--lime-dim); color: var(--lime); border: 1px solid rgba(0,255,0,0.2); }
+.tag-occupied { background: var(--blue-dim); color: var(--blue); border: 1px solid rgba(33,150,243,0.2); }
+.tag-pending { background: var(--orange-dim); color: var(--orange); border: 1px solid rgba(243,146,0,0.2); }
+.tag-rejected { background: var(--danger-dim); color: var(--danger); border: 1px solid rgba(255,77,77,0.2); }
+
+.listing-price {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--orange);
+  white-space: nowrap;
+  align-self: center;
+}
+
+/* Timeline / activity */
+.activity-item {
+  display: flex;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+.activity-item:last-child { border-bottom: none; }
+
+.activity-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+
+.activity-content { flex: 1; min-width: 0; }
+.activity-text { font-size: 13px; line-height: 1.4; margin-bottom: 2px; }
+.activity-time { font-size: 11px; color: var(--muted); }
+
+/* Map placeholder */
+.map-placeholder {
+  background: var(--surface-soft);
+  border-radius: 8px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 13px;
+  gap: 8px;
+  border: 1px solid var(--border);
+}
+
+/* Progress bar */
+.progress-bar {
+  height: 6px;
+  background: var(--surface-soft);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 6px;
+}
+.progress-fill { height: 100%; border-radius: 10px; transition: width 0.5s ease; }
+
+/* Table */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.data-table th {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 8px 10px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+.data-table td {
+  padding: 11px 10px;
+  font-size: 13px;
+  border-bottom: 1px solid var(--border);
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: var(--surface-soft); }
+
+/* Chart bars */
+.bar-chart { display: flex; align-items: flex-end; gap: 8px; height: 100px; margin-top: 12px; }
+.bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.bar {
+  width: 100%;
+  border-radius: 4px 4px 0 0;
+  transition: height 0.4s ease;
+}
+.bar-label { font-size: 10px; color: var(--muted); }
+.bar-val { font-size: 10px; font-weight: 600; }
+
+/* Donut placeholder */
+.donut-wrap {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.donut-svg { flex-shrink: 0; }
+.donut-legend { flex: 1; }
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 12px;
+}
+.legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.legend-label { color: var(--muted); flex: 1; }
+.legend-val { font-weight: 600; }
+
+/* Search */
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0 14px;
+  height: 40px;
+  margin-bottom: 16px;
+}
+.search-bar input {
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+  flex: 1;
+}
+.search-bar input::placeholder { color: var(--muted); }
+
+/* CTA button */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.15s;
+}
+.btn-primary-student { background: var(--blue); color: #fff; }
+.btn-primary-landlord { background: var(--orange); color: #000; }
+.btn-primary-admin { background: var(--lime); color: #000; }
+.btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--muted); }
+.btn-ghost:hover { border-color: rgba(255,255,255,0.2); color: var(--text); }
+
+/* Chat / message row */
+.msg-row {
+  display: flex;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.1s;
+}
+.msg-row:last-child { border-bottom: none; }
+.msg-row:hover { background: var(--surface-soft); }
+.msg-av { width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; }
+.msg-body { flex: 1; min-width: 0; }
+.msg-name { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+.msg-preview { font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.msg-time { font-size: 11px; color: var(--muted); flex-shrink: 0; }
+.msg-unread .msg-name::after { content: ''; display: inline-block; width: 6px; height: 6px; background: var(--blue); border-radius: 50%; margin-left: 6px; vertical-align: middle; }
+
+/* Checklist */
+.check-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+.check-item:last-child { border-bottom: none; }
+.check-box {
+  width: 18px; height: 18px;
+  border-radius: 4px;
+  border: 1.5px solid var(--border);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.check-box.done { background: var(--blue); border-color: var(--blue); }
+.check-box.done.orange-check { background: var(--orange); border-color: var(--orange); }
+.check-text { font-size: 13px; flex: 1; }
+.check-text.done-text { color: var(--muted); text-decoration: line-through; }
+
+/* Score ring */
+.score-ring {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 0;
+}
+.score-number { font-family: 'Space Grotesk', sans-serif; font-size: 36px; font-weight: 700; }
+.score-label { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+/* Responsive tweaks */
+@media (max-width: 1200px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ── Page header ─────────────────────────── */
+.page-header { margin-bottom: 20px; display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.page-header h1 { font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: -0.3px; margin-bottom: 4px; }
+.page-header p { color: var(--muted); font-size: 13.5px; }
+
+/* ── Filter chips ─────────────────────────── */
+.filter-row { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+.chip {
+  padding: 7px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.chip:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+.chip.active { background: var(--blue-dim); border-color: var(--blue); color: var(--blue); }
+.chip.active-orange { background: var(--orange-dim); border-color: var(--orange); color: var(--orange); }
+.chip.active-lime { background: var(--lime-dim); border-color: var(--lime); color: var(--lime); }
+.chip .ti { font-size: 14px; }
+
+.tag-flagged { background: var(--danger-dim); color: var(--danger); border: 1px solid rgba(255,77,77,0.2); }
+.tag-live { background: var(--lime-dim); color: var(--lime); border: 1px solid rgba(0,255,0,0.2); }
+.tag-suspended { background: var(--danger-dim); color: var(--danger); border: 1px solid rgba(255,77,77,0.2); }
+.tag-resolved { background: var(--lime-dim); color: var(--lime); border: 1px solid rgba(0,255,0,0.2); }
+.tag-review { background: var(--orange-dim); color: var(--orange); border: 1px solid rgba(243,146,0,0.2); }
+.tag-paid { background: var(--lime-dim); color: var(--lime); border: 1px solid rgba(0,255,0,0.2); }
+.tag-overdue { background: var(--danger-dim); color: var(--danger); border: 1px solid rgba(255,77,77,0.2); }
+.tag-urgent { background: var(--danger-dim); color: var(--danger); border: 1px solid rgba(255,77,77,0.2); }
+
+.table-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; flex-wrap: wrap; }
+.table-toolbar .search-bar { max-width: 340px; margin-bottom: 0; height: 38px; }
+
+.results-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.results-count { font-size: 12.5px; color: var(--muted); }
+.sort-select {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12.5px; color: var(--muted);
+  border: 1px solid var(--border); border-radius: 8px;
+  padding: 6px 12px; cursor: pointer;
+}
+
+/* ── Listing grid cards ─────────────────────────── */
+.listing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.grid-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.15s;
+}
+.grid-card:hover { border-color: rgba(255,255,255,0.18); }
+.grid-card-photo {
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  position: relative;
+}
+.grid-card-save {
+  position: absolute;
+  top: 10px; right: 10px;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: rgba(15,15,15,0.55);
+  backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+.grid-card-save .ti { font-size: 15px; color: var(--text); }
+.grid-card-save.saved .ti { color: var(--blue); }
+.grid-card-save.saved { border-color: var(--blue); }
+.grid-card-body { padding: 14px; }
+.grid-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px; gap: 8px; }
+.grid-card-name { font-weight: 600; font-size: 13.5px; }
+.grid-card-price { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 14px; color: var(--orange); white-space: nowrap; }
+.grid-card-price span { font-size: 10px; font-weight: 400; color: var(--muted); }
+.grid-card-addr { font-size: 12px; color: var(--muted); margin-bottom: 10px; display: flex; align-items: center; gap: 4px; }
+.grid-card-meta { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.grid-card-collection { font-size: 11px; color: var(--muted); margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); display: flex; align-items: center; gap: 5px; }
+
+/* Pagination */
+.pagination { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 8px; }
+.page-btn {
+  width: 32px; height: 32px;
+  border-radius: 7px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 12.5px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Inter', sans-serif;
+}
+.page-btn.active { background: var(--blue-dim); border-color: var(--blue); color: var(--blue); font-weight: 600; }
+.page-btn:hover:not(.active) { color: var(--text); border-color: rgba(255,255,255,0.2); }
+
+/* ── Chat / Messages page ─────────────────────────── */
+.chat-shell {
+  display: flex;
+  height: calc(100vh - 148px);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--surface);
+}
+.chat-list-pane { width: 320px; flex-shrink: 0; border-right: 1px solid var(--border); display: flex; flex-direction: column; }
+.chat-list-header { padding: 16px; border-bottom: 1px solid var(--border); }
+.chat-list-header .search-bar { margin-bottom: 0; height: 36px; }
+.chat-list-body { flex: 1; overflow-y: auto; padding: 6px; }
+.chat-list-item {
+  display: flex; gap: 10px; padding: 10px; border-radius: 8px; cursor: pointer;
+}
+.chat-list-item:hover { background: var(--surface-soft); }
+.chat-list-item.active { background: var(--blue-dim); }
+.chat-main-pane { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+.chat-thread-header {
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 12px;
+}
+.chat-thread-title { font-weight: 600; font-size: 14px; }
+.chat-thread-sub { font-size: 11.5px; color: var(--muted); }
+.chat-messages { flex: 1; overflow-y: auto; padding: 20px 24px; display: flex; flex-direction: column; gap: 4px; }
+.bubble-row { display: flex; flex-direction: column; margin-bottom: 14px; max-width: 62%; }
+.bubble-row.me { align-self: flex-end; align-items: flex-end; }
+.bubble-row.them { align-self: flex-start; align-items: flex-start; }
+.bubble {
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 13px;
+  line-height: 1.45;
+}
+.bubble-row.them .bubble { background: var(--surface-soft); border-bottom-left-radius: 4px; }
+.bubble-row.me .bubble { background: var(--blue); color: #fff; border-bottom-right-radius: 4px; }
+.bubble-time { font-size: 10.5px; color: var(--muted); margin-top: 4px; padding: 0 2px; }
+.chat-day-divider { text-align: center; font-size: 11px; color: var(--muted); margin: 12px 0; position: relative; }
+.chat-input-row { padding: 14px 20px; border-top: 1px solid var(--border); display: flex; gap: 10px; align-items: center; }
+.chat-input-row input {
+  flex: 1; background: var(--surface-soft); border: 1px solid var(--border); border-radius: 22px;
+  padding: 11px 18px; color: var(--text); font-size: 13px; font-family: 'Inter', sans-serif; outline: none;
+}
+.chat-input-row input::placeholder { color: var(--muted); }
+.chat-send-btn {
+  width: 40px; height: 40px; border-radius: 50%; background: var(--blue); color: #fff;
+  border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0;
+}
+</style>
+</head>
+<body>
+<div class="app role-landlord" id="app">
+  <!-- ── Sidebar ── -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-wordmark">
+        <span class="logo-find">Find </span><span class="logo-my">My </span><span class="logo-vibe">Vibe</span>
+      </div>
+      <div class="logo-tag">Landlord Portal</div>
+    </div>
+
+    <nav class="nav" id="nav">
+      <div class="nav-item" ><i class="ti ti-layout-dashboard" aria-hidden="true"></i><span>Overview</span></div>
+      <div class="nav-item" onclick="window.location.href='landlord_properties.html'"><i class="ti ti-building" aria-hidden="true"></i><span>My properties</span></div>
+      <div class="nav-item" onclick="window.location.href='landlord_applications.html'"><i class="ti ti-users" aria-hidden="true"></i><span>Applications</span><span class="nav-badge">7</span></div>
+      <div class="nav-item" onclick="window.location.href='landlord_revenue.html'"><i class="ti ti-chart-bar" aria-hidden="true"></i><span>Revenue</span></div>
+      <div class="nav-item active"onclick="window.location.href='landlord_maintenance.html'"><i class="ti ti-tool" aria-hidden="true"></i><span>Maintenance</span><span class="nav-badge">1</span></div>
+      <div class="nav-item" onclick="window.location.href='landlord_messages.html'"><i class="ti ti-message" aria-hidden="true"></i><span>Messages</span></div>
+      <div class="nav-section-label">Account</div>
+      <div class="nav-item"><i class="ti ti-user" aria-hidden="true"></i><span>My account</span></div>
+      <div class="nav-item"><i class="ti ti-file-invoice" aria-hidden="true"></i><span>Documents</span></div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-card" id="user-card">
+        <div class="avatar avatar-landlord">JD</div>
+        <div class="user-info">
+          <div class="user-name">James Davids</div>
+          <div class="user-role-label">Landlord</div>
+        </div>
+        <i class="ti ti-chevron-down" style="font-size:14px; color:var(--muted)" aria-hidden="true"></i>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── Main ── -->
+  <main class="main">
+    <header class="topbar">
+      <span class="topbar-title">Maintenance</span>
+      <div class="topbar-right">
+        <button class="icon-btn"><i class="ti ti-search" aria-hidden="true"></i></button>
+        <button class="icon-btn notif-dot"><i class="ti ti-bell" aria-hidden="true"></i></button>
+        <button class="icon-btn"><i class="ti ti-settings" aria-hidden="true"></i></button>
+      </div>
+    </header>
+
+    <div class="content">
+
+      <div class="page-header">
+        <div>
+          <h1>Maintenance</h1>
+          <p>3 open requests · 1 urgent</p>
+        </div>
+        <button class="btn btn-primary-landlord"><i class="ti ti-plus" aria-hidden="true"></i> Log a request</button>
+      </div>
+
+      <div class="filter-row">
+        <button class="chip active-orange active">All (3)</button>
+        <button class="chip">Urgent (1)</button>
+        <button class="chip">In progress (1)</button>
+        <button class="chip">Scheduled (1)</button>
+      </div>
+
+      <div class="grid-2">
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Burst geyser — Parkside Loft</span>
+            <span class="tag tag-urgent">Urgent</span>
+          </div>
+          <div style="font-size:12.5px; color:var(--muted); margin-bottom:10px">Reported by tenant · 4 hours ago</div>
+          <div style="font-size:13px; line-height:1.5; margin-bottom:14px">Geyser burst in the upstairs bathroom, water leaking into the ceiling below. Plumber needed urgently.</div>
+          <div style="display:flex; align-items:center; justify-content:space-between">
+            <div style="display:flex; align-items:center; gap:8px; font-size:12px; color:var(--muted)">
+              <i class="ti ti-user" aria-hidden="true"></i> Assigned: Cape Plumbing Co.
+            </div>
+            <button class="btn btn-primary-landlord" style="padding:6px 12px; font-size:11px">Mark resolved</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Broken intercom — Sunset Apts</span>
+            <span class="tag tag-pending">In progress</span>
+          </div>
+          <div style="font-size:12.5px; color:var(--muted); margin-bottom:10px">Reported by tenant · 2 days ago</div>
+          <div style="font-size:13px; line-height:1.5; margin-bottom:14px">Building intercom for Unit 2 and Unit 4 stopped working, visitors can't buzz in.</div>
+          <div style="display:flex; align-items:center; justify-content:space-between">
+            <div style="display:flex; align-items:center; gap:8px; font-size:12px; color:var(--muted)">
+              <i class="ti ti-user" aria-hidden="true"></i> Assigned: Secure Access Ltd.
+            </div>
+            <button class="btn btn-primary-landlord" style="padding:6px 12px; font-size:11px">Mark resolved</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Annual gutter clean — All properties</span>
+            <span class="tag tag-occupied">Scheduled</span>
+          </div>
+          <div style="font-size:12.5px; color:var(--muted); margin-bottom:10px">Recurring · Scheduled for 28 Jul 2026</div>
+          <div style="font-size:13px; line-height:1.5; margin-bottom:14px">Routine gutter and downpipe clearing ahead of the winter rains, across all 6 units.</div>
+          <div style="display:flex; align-items:center; justify-content:space-between">
+            <div style="display:flex; align-items:center; gap:8px; font-size:12px; color:var(--muted)">
+              <i class="ti ti-user" aria-hidden="true"></i> Assigned: GreenScape Maintenance
+            </div>
+            <button class="btn btn-ghost" style="padding:6px 12px; font-size:11px">Reschedule</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Resolved this month</span>
+          </div>
+          <div class="check-item">
+            <div class="check-box done orange-check"><i class="ti ti-check" style="font-size:11px; color:#000" aria-hidden="true"></i></div>
+            <span class="check-text done-text">Leaking tap — Garden Annex</span>
+          </div>
+          <div class="check-item">
+            <div class="check-box done orange-check"><i class="ti ti-check" style="font-size:11px; color:#000" aria-hidden="true"></i></div>
+            <span class="check-text done-text">Wi-Fi router replacement — Rosebank Cottage</span>
+          </div>
+          <div class="check-item">
+            <div class="check-box done orange-check"><i class="ti ti-check" style="font-size:11px; color:#000" aria-hidden="true"></i></div>
+            <span class="check-text done-text">Broken window latch — Mowbray Court 3B</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+</div>
+
+</body>
+</html>

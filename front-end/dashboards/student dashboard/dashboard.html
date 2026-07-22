@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find My Vibe — Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="dashboard">
+
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand"><img src='/front-end/Images/logo_removed2.png'class="brand-mark"><div class="brand-name">Find My Vibe</div></div>
+    <nav class="nav">
+      <div class="nav-label">Menu</div>
+      <a class="nav-item" data-page="dashboard" href="dashboard.html"><span class="nav-dot"></span>Dashboard</a>
+      <a class="nav-item" data-page="search" href="search-listings.html">Search listings</a>
+      <a class="nav-item" data-page="saved" href="saved-homes.html">Saved homes</a>
+      <a class="nav-item" data-page="applications" href="applications.html">Applications</a>
+      <a class="nav-item" data-page="messages" href="messages.html">Messages<span class="nav-badge">2</span></a>
+      <a class="nav-item" data-page="roommates" href="roommate-matches.html">Roommate matches</a>
+
+      <div class="nav-label" style="margin-top:14px;">Account</div>
+      <a class="nav-item" data-page="account" href="account.html">Account</a>
+      <a class="nav-item" data-page="budget" href="budget-preferences.html">Budget &amp; preferences</a>
+      <a class="nav-item" data-page="documents" href="documents.html">Documents</a>
+      <a class="nav-item" data-page="settings" href="settings.html">Settings</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="avatar">TM</div>
+      <div>
+        <div class="sf-name">Thandi M.</div>
+        <div class="sf-sub">UCT · 3rd year</div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <div class="topline">
+      <div>
+        <div class="greeting-eyebrow">Dashboard · Semester 2 search</div>
+        <h1>Welcome back, Thandi</h1>
+      </div>
+      <a class="btn btn-primary" href="search-listings.html">Search new listings →</a>
+    </div>
+
+    <div class="stats">
+      <div class="stat-card" style="--accent: var(--orange);">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Applications in progress</div>
+      </div>
+      <div class="stat-card" style="--accent: var(--blue);">
+        <div class="stat-num">2</div>
+        <div class="stat-label">Viewings this week</div>
+      </div>
+      <div class="stat-card" style="--accent: var(--lime);">
+        <div class="stat-num">11</div>
+        <div class="stat-label">Homes saved</div>
+      </div>
+      <div class="stat-card" style="--accent: var(--danger);">
+        <div class="stat-num">1</div>
+        <div class="stat-label">Offer expiring soon</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">
+        <div class="section-title">Application tracker</div>
+        <a class="section-link" href="applications.html">View all</a>
+      </div>
+      <div class="track-list">
+        <div class="track-card">
+          <div class="signal live" style="background: var(--danger);"></div>
+          <div class="track-main">
+            <div class="track-title">Vredehoek Studio Loft</div>
+            <div class="track-sub">Offer sent · deposit required to secure</div>
+          </div>
+          <div class="status-pill" style="background: var(--danger-dim); color: var(--danger);">EXPIRES 2D</div>
+          <div class="track-date">Due Jul 20</div>
+        </div>
+        <div class="track-card">
+          <div class="signal" style="background: var(--orange);"></div>
+          <div class="track-main">
+            <div class="track-title">Observatory Shared House · Rm 3</div>
+            <div class="track-sub">Application submitted, awaiting landlord review</div>
+          </div>
+          <div class="status-pill" style="background: var(--orange-dim); color: var(--orange);">PENDING</div>
+          <div class="track-date">Applied Jul 14</div>
+        </div>
+        <div class="track-card">
+          <div class="signal" style="background: var(--blue);"></div>
+          <div class="track-main">
+            <div class="track-title">Rondebosch Campus Residence</div>
+            <div class="track-sub">Viewing confirmed with agent Lior</div>
+          </div>
+          <div class="status-pill" style="background: var(--blue-dim); color: var(--blue);">VIEWING SET</div>
+          <div class="track-date">Jul 22, 2pm</div>
+        </div>
+        <div class="track-card">
+          <div class="signal" style="background: var(--lime);"></div>
+          <div class="track-main">
+            <div class="track-title">Mowbray 2-Bed Apartment</div>
+            <div class="track-sub">Accepted — lease sent for signature</div>
+          </div>
+          <div class="status-pill" style="background: var(--lime-dim); color: var(--lime);">ACCEPTED</div>
+          <div class="track-date">Jul 10</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">
+        <div class="section-title">Saved homes near campus</div>
+        <a class="section-link" href="saved-homes.html">See all 11</a>
+      </div>
+      <div class="listings-grid">
+        <div class="listing-card">
+          <div class="listing-media"><span class="match-badge">96% match</span></div>
+          <div class="listing-body">
+            <div class="listing-title">Sunbird Student Studios</div>
+            <div class="listing-loc">0.4 km from UCT upper campus</div>
+            <div class="listing-foot">
+              <div class="listing-price">R6,200 <span>/mo</span></div>
+              <div class="listing-tag" style="background: var(--lime-dim); color: var(--lime);">Available now</div>
+            </div>
+          </div>
+        </div>
+        <div class="listing-card">
+          <div class="listing-media"><span class="match-badge">91% match</span></div>
+          <div class="listing-body">
+            <div class="listing-title">Rosemead Shared House</div>
+            <div class="listing-loc">1.1 km · jammie shuttle stop</div>
+            <div class="listing-foot">
+              <div class="listing-price">R4,850 <span>/mo</span></div>
+              <div class="listing-tag" style="background: var(--orange-dim); color: var(--orange);">2 spots left</div>
+            </div>
+          </div>
+        </div>
+        <div class="listing-card">
+          <div class="listing-media"><span class="match-badge">88% match</span></div>
+          <div class="listing-body">
+            <div class="listing-title">The Yard Co-living</div>
+            <div class="listing-loc">0.8 km · gym &amp; study pods</div>
+            <div class="listing-foot">
+              <div class="listing-price">R7,400 <span>/mo</span></div>
+              <div class="listing-tag" style="background: var(--blue-dim); color: var(--blue);">Tour available</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col section">
+      <div class="panel">
+        <div class="section-head" style="margin-bottom: 6px;">
+          <div class="section-title">Upcoming viewings</div>
+          <a class="section-link">Calendar</a>
+        </div>
+        <div class="viewing-row">
+          <div class="viewing-date"><span class="d">22</span>JUL</div>
+          <div class="viewing-info">
+            <div class="vt">Rondebosch Campus Residence</div>
+            <div class="vs">2:00 PM · with agent Lior Naidoo</div>
+          </div>
+        </div>
+        <div class="viewing-row">
+          <div class="viewing-date"><span class="d">24</span>JUL</div>
+          <div class="viewing-info">
+            <div class="vt">Observatory Shared House · Rm 3</div>
+            <div class="vs">10:30 AM · self-guided tour</div>
+          </div>
+        </div>
+        <div class="viewing-row">
+          <div class="viewing-date"><span class="d">29</span>JUL</div>
+          <div class="viewing-info">
+            <div class="vt">Sunbird Student Studios</div>
+            <div class="vs">4:00 PM · with landlord Priya</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="section-title" style="margin-bottom: 14px;">Monthly budget</div>
+        <div class="budget-row">
+          <div class="budget-amount">R5,400</div>
+          <div class="budget-cap">of R6,500 cap</div>
+        </div>
+        <div class="budget-bar">
+          <div class="budget-seg" style="width: 58%; background: var(--lime);"></div>
+          <div class="budget-seg" style="width: 25%; background: var(--orange);"></div>
+          <div class="budget-seg" style="width: 17%; background: var(--surface-soft);"></div>
+        </div>
+        <div class="budget-legend">
+          <div class="bl-row">
+            <div class="bl-left"><span class="bl-dot" style="background: var(--lime);"></span>Within comfortable range</div>
+            <span>R3,770</span>
+          </div>
+          <div class="bl-row">
+            <div class="bl-left"><span class="bl-dot" style="background: var(--orange);"></span>Utilities &amp; wifi avg.</div>
+            <span>R1,630</span>
+          </div>
+          <div class="bl-row">
+            <div class="bl-left"><span class="bl-dot" style="background: var(--muted);"></span>Remaining headroom</div>
+            <span>R1,100</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">
+        <div class="section-title">Messages</div>
+        <a class="section-link" href="messages.html">Open inbox</a>
+      </div>
+      <div class="panel">
+        <div class="msg-row">
+          <div class="msg-avatar">PR</div>
+          <div class="msg-body">
+            <div class="msg-top"><div class="msg-name">Priya · Sunbird Student Studios</div><div class="msg-time">14 min ago</div></div>
+            <div class="msg-preview">Great, I've held the studio for your viewing on the 29th — see you then!</div>
+          </div>
+          <div class="msg-unread-dot"></div>
+        </div>
+        <div class="msg-row">
+          <div class="msg-avatar">LN</div>
+          <div class="msg-body">
+            <div class="msg-top"><div class="msg-name">Lior Naidoo · Rondebosch Residence</div><div class="msg-time">3 hrs ago</div></div>
+            <div class="msg-preview">Bring your student card for the viewing on Tuesday, parking is limited.</div>
+          </div>
+        </div>
+        <div class="msg-row">
+          <div class="msg-avatar">MK</div>
+          <div class="msg-body">
+            <div class="msg-top"><div class="msg-name">Mika K. · Roommate match</div><div class="msg-time">Yesterday</div></div>
+            <div class="msg-preview">Hey! Saw we matched 89% on lifestyle — keen to split the Observatory room?</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+document.querySelectorAll('.nav-item[data-page]').forEach(function(el){
+  if (el.dataset.page === document.body.dataset.page) el.classList.add('active');
+});
+</script>
+</body>
+</html>

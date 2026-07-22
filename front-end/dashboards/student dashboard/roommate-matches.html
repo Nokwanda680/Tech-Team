@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find My Vibe — Roommate matches</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="roommates">
+
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><img src='/front-end/Images/logo_removed2.png'class="brand-mark"><div class="brand-name">Find My Vibe</div></div>
+    <nav class="nav">
+      <div class="nav-label">Menu</div>
+      <a class="nav-item" data-page="dashboard" href="dashboard.html"><span class="nav-dot"></span>Dashboard</a>
+      <a class="nav-item" data-page="search" href="search-listings.html">Search listings</a>
+      <a class="nav-item" data-page="saved" href="saved-homes.html">Saved homes</a>
+      <a class="nav-item" data-page="applications" href="applications.html">Applications</a>
+      <a class="nav-item" data-page="messages" href="messages.html">Messages<span class="nav-badge">2</span></a>
+      <a class="nav-item" data-page="roommates" href="roommate-matches.html">Roommate matches</a>
+      <div class="nav-label" style="margin-top:14px;">Account</div>
+      <a class="nav-item" data-page="account" href="account.html">Account</a>
+      <a class="nav-item" data-page="budget" href="budget-preferences.html">Budget &amp; preferences</a>
+      <a class="nav-item" data-page="documents" href="documents.html">Documents</a>
+      <a class="nav-item" data-page="settings" href="settings.html">Settings</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="avatar">TM</div>
+      <div><div class="sf-name">Thandi M.</div><div class="sf-sub">UCT · 3rd year</div></div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topline">
+      <div>
+        <div class="greeting-eyebrow">Roommate matches</div>
+        <h1>People who fit your lifestyle</h1>
+      </div>
+      <a class="btn btn-ghost" href="budget-preferences.html">Edit my roommate preferences</a>
+    </div>
+
+    <div class="tabs">
+      <div class="tab active">Suggested (6)</div>
+      <div class="tab">Sent requests (2)</div>
+      <div class="tab">Connected (1)</div>
+    </div>
+
+    <div class="match-grid">
+      <div class="match-card">
+        <div class="match-photo">MK</div>
+        <div class="match-name">Mika K.</div>
+        <div class="match-sub">2nd year · Commerce</div>
+        <div class="match-score">89%</div>
+        <div class="match-tags">
+          <span class="chip">Early riser</span>
+          <span class="chip">Non-smoker</span>
+          <span class="chip">Quiet studier</span>
+        </div>
+        <div class="match-actions">
+          <button class="btn btn-ghost">View profile</button>
+          <button class="btn btn-primary">Message</button>
+        </div>
+      </div>
+
+      <div class="match-card">
+        <div class="match-photo">JV</div>
+        <div class="match-name">Jodie v.d. W.</div>
+        <div class="match-sub">3rd year · Law</div>
+        <div class="match-score">84%</div>
+        <div class="match-tags">
+          <span class="chip">Tidy</span>
+          <span class="chip">Social weekends</span>
+          <span class="chip">Has own car</span>
+        </div>
+        <div class="match-actions">
+          <button class="btn btn-ghost">View profile</button>
+          <button class="btn btn-primary">Message</button>
+        </div>
+      </div>
+
+      <div class="match-card">
+        <div class="match-photo">RN</div>
+        <div class="match-name">Ronan N.</div>
+        <div class="match-sub">1st year · Engineering</div>
+        <div class="match-score">78%</div>
+        <div class="match-tags">
+          <span class="chip">Gamer</span>
+          <span class="chip">Night owl</span>
+          <span class="chip">Cooks often</span>
+        </div>
+        <div class="match-actions">
+          <button class="btn btn-ghost">View profile</button>
+          <button class="btn btn-primary">Message</button>
+        </div>
+      </div>
+
+      <div class="match-card">
+        <div class="match-photo">AZ</div>
+        <div class="match-name">Aisha Z.</div>
+        <div class="match-sub">2nd year · Psychology</div>
+        <div class="match-score">76%</div>
+        <div class="match-tags">
+          <span class="chip">Vegetarian</span>
+          <span class="chip">Non-smoker</span>
+          <span class="chip">Loves pets</span>
+        </div>
+        <div class="match-actions">
+          <button class="btn btn-ghost">View profile</button>
+          <button class="btn btn-primary">Message</button>
+        </div>
+      </div>
+
+      <div class="match-card">
+        <div class="match-photo">DT</div>
+        <div class="match-name">Dean T.</div>
+        <div class="match-sub">4th year · Architecture</div>
+        <div class="match-score">71%</div>
+        <div class="match-tags">
+          <span class="chip">Studio hours</span>
+          <span class="chip">Tidy</span>
+        </div>
+        <div class="match-actions">
+          <button class="btn btn-ghost">View profile</button>
+          <button class="btn btn-primary">Message</button>
+        </div>
+      </div>
+
+      <div class="match-card">
+        <div class="match-photo">NP</div>
+        <div class="match-name">Naledi P.</div>
+        <div class="match-sub">3rd year · Media Studies</div>
+        <div class="match-score">68%</div>
+        <div class="match-tags">
+          <span class="chip">Social</span>
+          <span class="chip">Non-smoker</span>
+        </div>
+        <div class="match-actions">
+          <button class="btn btn-ghost">View profile</button>
+          <button class="btn btn-primary">Message</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+document.querySelectorAll('.nav-item[data-page]').forEach(function(el){
+  if (el.dataset.page === document.body.dataset.page) el.classList.add('active');
+});
+</script>
+</body>
+</html>

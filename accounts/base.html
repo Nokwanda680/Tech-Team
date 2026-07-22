@@ -1,0 +1,296 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}Digs{% endblock %} · Student Housing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F6F1E6;
+    --cream-deep:#EFE6D2;
+    --ink:#22281F;
+    --forest:#1F3A2E;
+    --forest-light:#2F5342;
+    --rust:#C1553A;
+    --rust-deep:#A2412A;
+    --gold:#D6A340;
+    --line:#DCD2B8;
+    --radius:14px;
+    --shadow: 0 12px 30px -14px rgba(31,58,46,0.35);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Karla', sans-serif;
+    line-height:1.55;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces', serif;
+    color:var(--forest);
+    margin:0 0 .4em;
+    letter-spacing:-0.01em;
+  }
+  a{color:var(--forest);}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+
+  /* Navbar */
+  .navbar{
+    background:var(--forest);
+    color:var(--cream);
+    border-bottom:4px solid var(--rust);
+  }
+  .navbar .wrap{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;}
+  .brand{
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    font-size:1.5rem;
+    color:var(--cream);
+    text-decoration:none;
+    display:flex;align-items:center;gap:8px;
+  }
+  .brand span.dot{color:var(--gold);}
+  .nav-links{display:flex;gap:22px;align-items:center;font-weight:600;}
+  .nav-links a{color:var(--cream);text-decoration:none;opacity:.85;font-size:.95rem;}
+  .nav-links a:hover{opacity:1;text-decoration:underline;text-decoration-color:var(--rust);}
+  .nav-cta{
+    background:var(--rust);
+    color:#fff !important;
+    padding:8px 18px;
+    border-radius:999px;
+    opacity:1 !important;
+  }
+  .nav-cta:hover{background:var(--rust-deep);text-decoration:none !important;}
+
+  /* Layout */
+  main{padding:48px 0 80px;}
+  .page-head{margin-bottom:32px;}
+  .page-head .eyebrow{
+    text-transform:uppercase;
+    letter-spacing:.14em;
+    font-size:.75rem;
+    font-weight:700;
+    color:var(--rust);
+  }
+
+  /* Cards */
+  .card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:28px;
+    box-shadow:var(--shadow);
+  }
+  .card-flat{
+    background:var(--cream-deep);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:24px;
+  }
+
+  /* Forms */
+  form.styled label{
+    display:block;
+    font-weight:700;
+    font-size:.85rem;
+    text-transform:uppercase;
+    letter-spacing:.05em;
+    color:var(--forest);
+    margin:18px 0 6px;
+  }
+  form.styled label:first-of-type{margin-top:0;}
+  .field-hint{font-size:.8rem;color:#6b7263;margin-top:4px;}
+  input[type=text], input[type=email], input[type=password], input[type=number],
+  input[type=date], input[type=tel], input[type=url], textarea, select{
+    width:100%;
+    padding:12px 14px;
+    border:1.5px solid var(--line);
+    border-radius:10px;
+    font-family:'Karla', sans-serif;
+    font-size:1rem;
+    background:#fffdf9;
+    color:var(--ink);
+    transition:border-color .15s ease, box-shadow .15s ease;
+  }
+  textarea{min-height:120px;resize:vertical;}
+  input:focus, textarea:focus, select:focus{
+    outline:none;
+    border-color:var(--rust);
+    box-shadow:0 0 0 3px rgba(193,85,58,0.15);
+  }
+  .checkbox-row{display:flex;align-items:center;gap:10px;margin-top:10px;}
+  .checkbox-row input{width:auto;}
+  .checkbox-row label{margin:0;text-transform:none;font-weight:500;letter-spacing:0;}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:0 20px;}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:0 20px;}
+  @media (max-width:640px){.grid-2,.grid-3{grid-template-columns:1fr;}}
+
+  .errorlist{list-style:none;padding:0;margin:6px 0 0;color:var(--rust-deep);font-size:.85rem;font-weight:600;}
+  .form-errors{
+    background:#FBE9E4;
+    border:1px solid var(--rust);
+    color:var(--rust-deep);
+    padding:14px 16px;
+    border-radius:10px;
+    margin-bottom:20px;
+    font-weight:600;
+  }
+
+  /* Buttons */
+  .btn{
+    display:inline-block;
+    font-family:'Karla', sans-serif;
+    font-weight:700;
+    font-size:.95rem;
+    padding:12px 26px;
+    border-radius:999px;
+    border:none;
+    cursor:pointer;
+    text-decoration:none;
+    text-align:center;
+  }
+  .btn-primary{background:var(--rust);color:#fff;}
+  .btn-primary:hover{background:var(--rust-deep);}
+  .btn-secondary{background:transparent;color:var(--forest);border:1.5px solid var(--forest);}
+  .btn-secondary:hover{background:var(--forest);color:#fff;}
+  .btn-ghost{background:transparent;color:var(--forest);text-decoration:underline;padding:12px 6px;}
+  .btn-danger{background:#fff;color:var(--rust-deep);border:1.5px solid var(--rust-deep);}
+  .btn-danger:hover{background:var(--rust-deep);color:#fff;}
+  .btn-block{display:block;width:100%;}
+  .btn-row{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap;}
+
+  /* Messages */
+  .messages{list-style:none;padding:0;margin:0 0 24px;display:flex;flex-direction:column;gap:10px;}
+  .messages li{
+    padding:12px 16px;
+    border-radius:10px;
+    font-weight:600;
+    font-size:.9rem;
+    border:1px solid var(--line);
+  }
+  .messages li.success{background:#E8F0E5;color:var(--forest);border-color:#BFDCC1;}
+  .messages li.error{background:#FBE9E4;color:var(--rust-deep);border-color:var(--rust);}
+  .messages li.info,.messages li.warning{background:#FDF3DE;color:#7A5B12;border-color:var(--gold);}
+
+  /* Badges */
+  .badge{
+    display:inline-block;
+    padding:4px 12px;
+    border-radius:999px;
+    font-size:.72rem;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.05em;
+  }
+  .badge-available{background:#E8F0E5;color:var(--forest);}
+  .badge-let{background:#EFE6D2;color:#7A5B12;}
+  .badge-pending{background:#FDF3DE;color:#7A5B12;}
+
+  /* Property grid */
+  .property-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:24px;margin-top:28px;}
+  .property-card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+    box-shadow:var(--shadow);
+    display:flex;flex-direction:column;
+  }
+  .property-photo{
+    height:160px;
+    background:linear-gradient(135deg, var(--forest-light), var(--forest));
+    display:flex;align-items:center;justify-content:center;
+    color:rgba(246,241,230,.5);
+    font-family:'Fraunces',serif;
+    font-size:.85rem;
+  }
+  .property-photo img{width:100%;height:100%;object-fit:cover;}
+  .property-body{padding:18px 20px;flex:1;display:flex;flex-direction:column;gap:8px;}
+  .property-body h3{font-size:1.15rem;margin:0;}
+  .property-meta{color:#6b7263;font-size:.85rem;}
+  .property-price{font-family:'Fraunces',serif;font-weight:700;color:var(--rust);font-size:1.15rem;margin-top:auto;}
+  .property-actions{display:flex;gap:8px;padding:0 20px 18px;}
+  .property-actions .btn{flex:1;padding:10px 12px;font-size:.85rem;}
+
+  /* Empty state */
+  .empty-state{
+    text-align:center;
+    padding:60px 24px;
+    border:2px dashed var(--line);
+    border-radius:var(--radius);
+    background:var(--cream-deep);
+  }
+  .empty-state h3{margin-bottom:8px;}
+  .empty-state p{color:#6b7263;margin-bottom:20px;}
+
+  /* Dashboard stats */
+  .stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px;margin-bottom:36px;}
+  .stat-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px;}
+  .stat-card .num{font-family:'Fraunces',serif;font-size:2rem;color:var(--forest);font-weight:700;}
+  .stat-card .label{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:#6b7263;font-weight:700;}
+
+  .split{display:flex;gap:48px;align-items:flex-start;}
+  @media (max-width:800px){.split{flex-direction:column;}}
+  .split .side{flex:1;min-width:0;}
+
+  footer{
+    background:var(--forest);
+    color:rgba(246,241,230,.65);
+    padding:28px 0;
+    font-size:.85rem;
+    text-align:center;
+  }
+</style>
+{% block extra_css %}{% endblock %}
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="wrap">
+    <a class="brand" href="{% url 'accounts:home' %}">🏠 Digs<span class="dot">.</span></a>
+    <div class="nav-links">
+      {% if user.is_authenticated %}
+        {% if user.is_landlord %}
+          <a href="{% url 'accounts:landlord_dashboard' %}">Dashboard</a>
+          <a href="{% url 'accounts:property_list' %}">My Properties</a>
+        {% else %}
+          <a href="{% url 'accounts:student_dashboard' %}">Dashboard</a>
+        {% endif %}
+        <a href="{% url 'accounts:profile' %}">{{ user.first_name|default:user.username }}</a>
+        <form action="{% url 'accounts:logout' %}" method="post" style="display:inline;margin:0;">
+          {% csrf_token %}
+          <button type="submit" class="btn nav-cta">Log out</button>
+        </form>
+      {% else %}
+        <a href="{% url 'accounts:login' %}">Log in</a>
+        <a href="{% url 'accounts:register_choice' %}" class="btn nav-cta">Sign up</a>
+      {% endif %}
+    </div>
+  </div>
+</nav>
+
+<main>
+  <div class="wrap">
+    {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+          <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">Digs — student housing, sorted. &copy; {% now "Y" %}</div>
+</footer>
+
+{% block extra_js %}{% endblock %}
+</body>
+</html>

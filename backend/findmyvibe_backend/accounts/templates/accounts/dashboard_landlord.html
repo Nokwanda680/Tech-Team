@@ -1,0 +1,8 @@
+{% extends "accounts/base.html" %}
+{% block title %}Landlord Dashboard{% endblock %}
+{% block content %}
+    <h1>Landlord Dashboard</h1>
+    <p>Welcome, {{ request.user.get_full_name|default:request.user.username }}.</p>
+    <p>Manage your listings and tenant applications here.</p>
+    <div class="links"><a href="{% url 'accounts:logout' %}">Log out</a></div>
+{% endblock %}

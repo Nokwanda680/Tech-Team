@@ -1,0 +1,56 @@
+{% extends "accounts/base.html" %}
+{% block title %}Find student housing{% endblock %}
+
+{% block content %}
+<div class="page-head">
+  <div class="eyebrow">Browse listings</div>
+  <h1>Find your next room</h1>
+</div>
+
+<form method="get" class="card-flat" style="margin-bottom:28px;">
+  <div class="grid-3" style="align-items:end;">
+    <div>
+      <label style="display:block;font-weight:700;font-size:.85rem;text-transform:uppercase;letter-spacing:.05em;color:var(--forest);margin-bottom:6px;">City or campus</label>
+      <input type="text" name="q" value="{{ request.GET.q }}" placeholder="e.g. Stellenbosch">
+    </div>
+    <div>
+      <label style="display:block;font-weight:700;font-size:.85rem;text-transform:uppercase;letter-spacing:.05em;color:var(--forest);margin-bottom:6px;">Max rent (R)</label>
+      <input type="number" name="max_rent" value="{{ request.GET.max_rent }}" placeholder="e.g. 6000">
+    </div>
+    <div>
+      <button type="submit" class="btn btn-primary btn-block">Search</button>
+    </div>
+  </div>
+</form>
+
+{% if properties %}
+  <div class="property-grid">
+    {% for property in properties %}
+      <div class="property-card">
+        <div class="property-photo">
+          {% if property.main_image %}
+            <img src="{{ property.main_image.url }}" alt="{{ property.title }}">
+          {% else %}
+            No photo yet
+          {% endif %}
+        </div>
+        <div class="property-body">
+          <span class="badge badge-available">Available</span>
+          <h3>{{ property.title }}</h3>
+          <div class="property-meta">{{ property.address }}, {{ property.city }}</div>
+          <div class="property-meta">{{ property.bedrooms }} bed · {{ property.bathrooms }} bath</div>
+          <div class="property-price">R{{ property.rent_amount }} / month</div>
+        </div>
+        <div class="property-actions">
+          <a href="{% url 'accounts:property_detail' property.pk %}" class="btn btn-secondary">View listing</a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="empty-state">
+    <h3>No listings match your search</h3>
+    <p>Try widening your search area or increasing your budget.</p>
+  </div>
+{% endif %}
+{% endblock %}

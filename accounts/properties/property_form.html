@@ -1,0 +1,132 @@
+{% extends "accounts/base.html" %}
+{% block title %}{% if property %}Edit property{% else %}Add a property{% endif %}{% endblock %}
+
+{% block content %}
+<div style="max-width:720px;margin:0 auto;">
+  <div class="page-head">
+    <div class="eyebrow">{% if property %}Editing listing{% else %}New listing{% endif %}</div>
+    <h1>{% if property %}Edit "{{ property.title }}"{% else %}Add a property{% endif %}</h1>
+    <p style="color:#6b7263;">Give students the details they need to picture themselves living here.</p>
+  </div>
+
+  <div class="card">
+    {% if form.non_field_errors %}
+      <div class="form-errors">{{ form.non_field_errors }}</div>
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data" class="styled" novalidate>
+      {% csrf_token %}
+
+      <h3 style="font-size:1rem;margin-top:0;">Basics</h3>
+
+      <label for="{{ form.title.id_for_label }}">Listing title</label>
+      {{ form.title }}
+      <div class="field-hint">E.g. "Bright ensuite room near main campus"</div>
+      {{ form.title.errors }}
+
+      <label for="{{ form.description.id_for_label }}">Description</label>
+      {{ form.description }}
+      <div class="field-hint">Describe the space, the neighbourhood, and what's nearby (shops, transport, campus).</div>
+      {{ form.description.errors }}
+
+      <label for="{{ form.property_type.id_for_label }}">Property type</label>
+      {{ form.property_type }}
+      {{ form.property_type.errors }}
+
+      <h3 style="font-size:1rem;margin-top:28px;">Location</h3>
+
+      <label for="{{ form.address.id_for_label }}">Street address</label>
+      {{ form.address }}
+      {{ form.address.errors }}
+
+      <div class="grid-3">
+        <div>
+          <label for="{{ form.city.id_for_label }}">City</label>
+          {{ form.city }}
+          {{ form.city.errors }}
+        </div>
+        <div>
+          <label for="{{ form.postal_code.id_for_label }}">Postal code</label>
+          {{ form.postal_code }}
+          {{ form.postal_code.errors }}
+        </div>
+        <div>
+          <label for="{{ form.nearest_institution.id_for_label }}">Nearest campus</label>
+          {{ form.nearest_institution }}
+          {{ form.nearest_institution.errors }}
+        </div>
+      </div>
+
+      <h3 style="font-size:1rem;margin-top:28px;">Details & pricing</h3>
+
+      <div class="grid-3">
+        <div>
+          <label for="{{ form.bedrooms.id_for_label }}">Bedrooms</label>
+          {{ form.bedrooms }}
+          {{ form.bedrooms.errors }}
+        </div>
+        <div>
+          <label for="{{ form.bathrooms.id_for_label }}">Bathrooms</label>
+          {{ form.bathrooms }}
+          {{ form.bathrooms.errors }}
+        </div>
+        <div>
+          <label for="{{ form.max_occupants.id_for_label }}">Max occupants</label>
+          {{ form.max_occupants }}
+          {{ form.max_occupants.errors }}
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <label for="{{ form.rent_amount.id_for_label }}">Monthly rent (R)</label>
+          {{ form.rent_amount }}
+          {{ form.rent_amount.errors }}
+        </div>
+        <div>
+          <label for="{{ form.deposit_amount.id_for_label }}">Deposit (R)</label>
+          {{ form.deposit_amount }}
+          {{ form.deposit_amount.errors }}
+        </div>
+      </div>
+
+      <label for="{{ form.available_from.id_for_label }}">Available from</label>
+      {{ form.available_from }}
+      {{ form.available_from.errors }}
+
+      <label>Amenities</label>
+      <div class="grid-3" style="margin-top:6px;">
+        {% for checkbox in form.amenities %}
+          <div class="checkbox-row">
+            {{ checkbox.tag }}
+            <label for="{{ checkbox.id_for_label }}">{{ checkbox.choice_label }}</label>
+          </div>
+        {% endfor %}
+      </div>
+      {{ form.amenities.errors }}
+
+      <h3 style="font-size:1rem;margin-top:28px;">Photos</h3>
+      <label for="{{ form.main_image.id_for_label }}">Main photo</label>
+      {{ form.main_image }}
+      <div class="field-hint">A bright, well-lit photo of the room or exterior gets more enquiries.</div>
+      {{ form.main_image.errors }}
+
+      <div class="checkbox-row" style="margin-top:22px;">
+        {{ form.is_available }}
+        <label for="{{ form.is_available.id_for_label }}">This property is currently available to let</label>
+      </div>
+
+      <div class="btn-row">
+        <button type="submit" class="btn btn-primary">
+          {% if property %}Save changes{% else %}Publish listing{% endif %}
+        </button>
+        {% if property %}
+          <a href="{% url 'accounts:property_detail' property.pk %}" class="btn btn-ghost">Cancel</a>
+        {% else %}
+          <a href="{% url 'accounts:property_list' %}" class="btn btn-ghost">Cancel</a>
+        {% endif %}
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

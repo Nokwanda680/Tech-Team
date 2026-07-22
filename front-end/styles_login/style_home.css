@@ -1,0 +1,13 @@
+.header{
+    display: flex;
+    flex-direction: row;
+}
+.div1{
+    display: flex;
+    align-items: center;
+}
+.text{
+    font-size: larger;
+    font-weight: bold;
+
+}

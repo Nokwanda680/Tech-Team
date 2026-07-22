@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Test</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        .test-section { margin: 20px 0; border: 1px solid #ccc; padding: 15px; }
+        button { padding: 10px; margin: 5px; cursor: pointer; }
+        .result { margin-top: 10px; padding: 10px; background: #f0f0f0; border-radius: 5px; }
+        .success { background: #90EE90; }
+        .error { background: #FFB6C6; }
+    </style>
+</head>
+<body>
+    <h1>Find My Vibe - API Testing</h1>
+    
+    <div class="test-section">
+        <h2>Register Student</h2>
+        <button onclick="registerStudent()">Test Student Registration</button>
+        <div id="register-result" class="result" style="display:none;"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Register Landlord</h2>
+        <button onclick="registerLandlord()">Test Landlord Registration</button>
+        <div id="landlord-result" class="result" style="display:none;"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Login</h2>
+        <button onclick="loginUser()">Test Login</button>
+        <div id="login-result" class="result" style="display:none;"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Logout</h2>
+        <button onclick="logoutUser()">Test Logout</button>
+        <div id="logout-result" class="result" style="display:none;"></div>
+    </div>
+
+    <script>
+        function showResult(elementId, success, message) {
+            const elem = document.getElementById(elementId);
+            elem.style.display = 'block';
+            elem.className = success ? 'result success' : 'result error';
+            elem.textContent = message;
+        }
+
+        async function registerStudent() {
+            try {
+                const response = await fetch('http://127.0.0.1:8000/api/accounts/register/', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    credentials: 'include',
+                    body: JSON.stringify({
+                        username: 'teststudent' + Date.now(),
+                        email: 'student' + Date.now() + '@test.com',
+                        first_name: 'Test',
+                        last_name: 'Student',
+                        phone_number: '+27123456789',
+                        password1: 'TestPassword123',
+                        password2: 'TestPassword123',
+                        institution: 'UWC',
+                        student_number: '1234567',
+                        role: 'STUDENT'
+                    })
+                });
+                
+                const data = await response.json();
+                if (data.success) {
+                    showResult('register-result', true, '✓ Student registered: ' + data.username);
+                } else {
+                    showResult('register-result', false, '✗ Error: ' + data.message);
+                }
+            } catch (error) {
+                showResult('register-result', false, '✗ Error: ' + error.message);
+            }
+        }
+
+        async function registerLandlord() {
+            try {
+                const response = await fetch('http://127.0.0.1:8000/api/accounts/register/', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    credentials: 'include',
+                    body: JSON.stringify({
+                        username: 'testlandlord' + Date.now(),
+                        email: 'landlord' + Date.now() + '@test.com',
+                        first_name: 'Test',
+                        last_name: 'Landlord',
+                        phone_number: '+27123456789',
+                        password1: 'TestPassword123',
+                        password2: 'TestPassword123',
+                        company_name: 'Test Company',
+                        id_number: '1234567890123',
+                        role: 'LANDLORD'
+                    })
+                });
+                
+                const data = await response.json();
+                if (data.success) {
+                    showResult('landlord-result', true, '✓ Landlord registered: ' + data.username);
+                } else {
+                    showResult('landlord-result', false, '✗ Error: ' + data.message);
+                }
+            } catch (error) {
+                showResult('landlord-result', false, '✗ Error: ' + error.message);
+            }
+        }
+
+        async function loginUser() {
+            try {
+                const response = await fetch('http://127.0.0.1:8000/api/accounts/login/', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    credentials: 'include',
+                    body: JSON.stringify({
+                        username: 'teststudent1689348270000',
+                        password: 'TestPassword123'
+                    })
+                });
+                
+                const data = await response.json();
+                if (data.success) {
+                    showResult('login-result', true, '✓ Login successful: ' + data.username + ' (' + data.role + ')');
+                } else {
+                    showResult('login-result', false, '✗ Error: ' + data.message);
+                }
+            } catch (error) {
+                showResult('login-result', false, '✗ Error: ' + error.message);
+            }
+        }
+
+        async function logoutUser() {
+            try {
+                const response = await fetch('http://127.0.0.1:8000/api/accounts/logout/', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    credentials: 'include'
+                });
+                
+                const data = await response.json();
+                if (data.success) {
+                    showResult('logout-result', true, '✓ Logout successful');
+                } else {
+                    showResult('logout-result', false, '✗ Error: ' + data.message);
+                }
+            } catch (error) {
+                showResult('logout-result', false, '✗ Error: ' + error.message);
+            }
+        }
+    </script>
+</body>
+</html>

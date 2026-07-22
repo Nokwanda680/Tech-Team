@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find My Vibe-Student Accomodation Finder</title>
+    <link rel="stylesheet" href="/front-end/login/check.css">
+</head>
+<body>
+    <script src="/front-end/shared/csrf.js"></script>
+    <script src="login.js"></script>    
+    <div class="check">
+        <div class="img">
+            <img src="/front-end/Images/logo_removed2.png" alt="" srcset="">
+        </div>
+        <p>Are you a Student or Landlord?</p>
+        <div class="button"><!--
+            <button class="buttons" onclick="window.location.href='/'">Student</button>
+            <button class="buttons">Landlord</button>-->
+            <button class="buttons" onclick="window.location.href='/front-end/login/studentsignup.html'">Student</button>
+            <button class="buttons" onclick="window.location.href='/front-end/login/landlordsignup.html'">Landlord</button>
+        </div>
+        
+    </div>
+</body>
+</html>

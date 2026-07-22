@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image" href="/front-end/Images/logo.jpg" />
+    <link rel="stylesheet" href="/front-end/styles_login/signup.css" />
+    <title>Student SignUp</title>
+    <style>
+      .error { color: red; font-size: 0.9em; margin-top: 5px; }
+      .success { color: green; font-size: 0.9em; margin-top: 5px; }
+    </style>
+  </head>
+  
+
+  <nav class="nav-bar">
+    <img src="/front-end/Images/logo-removebg-preview.png" height="200" />
+    <p class="p1">Start Your Journey Here at</p>
+    <p class="p2">Find <span>My </span>Vibe</p>
+  </nav>
+  <br />
+  <hr />
+
+  <main class="div">
+    <div class="div1">
+      <p style="text-align: center;">
+        <img src="/front-end/Images/student.jpg" height="200" />
+      </p>
+    </div>
+    <div class="div2">
+      <form id="studentSignupForm">
+        <input type="hidden" id="role" value="STUDENT">
+        
+        <section class="signup-section" id="section1">
+          <h2>Personal Information</h2>
+          <label for="first_name">First Name *</label><br />
+          <input id="first_name" type="text" required><br />
+          
+          <label for="last_name">Last Name *</label><br />
+          <input id="last_name" type="text" required><br />
+          
+          <label for="email">Email *</label><br />
+          <input type="email" id="email" placeholder="student@example.com" required><br />
+          
+          <label for="username">Username *</label><br />
+          <input id="username" type="text" required><br />
+          
+          <label for="institution">Institution/University *</label><br />
+          <input id="institution" type="text" placeholder="e.g., UWC, CPUT, UCT" required><br />
+          
+          <label for="student_number">Student Number</label><br />
+          <input id="student_number" type="text" minlength="7" maxlength="10"><br /><br />
+          
+          <div class="button">
+            <div class="buttondiv2">
+              <button type="button" class="next" onclick="goToSection(2)">Continue</button>
+            </div>
+          </div>
+          <div id="section1_error" class="error"></div>
+        </section>
+
+        <section class="signup-section" id="section2" style="display:none;">
+          <h2>Contact Information</h2>
+          
+          <label for="phone_number">Phone Number *</label><br />
+          <input type="tel" id="phone_number" placeholder="+27 12 345 6789" required><br />
+          
+          <label for="address">Home Address</label><br />
+          <textarea id="address" rows="4" cols="40" placeholder="Enter your home address"></textarea><br />
+          
+          <label for="city">City</label><br />
+          <input type="text" id="city" placeholder="Enter your city"><br /><br />
+          
+          <div class="button">
+            <div class="buttondiv1">
+              <button type="button" class="previous" onclick="goToSection(1)">Previous</button>
+            </div>
+            <div class="buttondiv2">
+              <button type="button" class="next" onclick="goToSection(3)">Continue</button>
+            </div>
+          </div>
+          <div id="section2_error" class="error"></div>
+        </section>
+
+        <section class="signup-section" id="section3" style="display:none;">
+          <h2>Account Setup</h2>
+          
+          <label for="password1">Password *</label><br />
+          <input type="password" id="password1" minlength="8" required><br />
+          <small>At least 8 characters</small><br />
+          
+          <label for="password2">Confirm Password *</label><br />
+          <input type="password" id="password2" minlength="8" required><br /><br />
+          
+          <div class="button">
+            <div class="buttondiv1">
+              <button type="button" class="previous" onclick="goToSection(2)">Previous</button>
+            </div>
+            <div class="buttondiv2">
+              <button type="submit" class="next">Create Account</button>
+            </div>
+          </div>
+          <div id="section3_error" class="error"></div>
+          <div id="section3_success" class="success"></div>
+        </section>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy;2026 Tech Team. All Rights Reserved</p>
+  </footer>
+
+  <script src="/front-end/shared/csrf.js"></script>
+  <script src="/front-end/shared/password-toggle.js"></script>
+  <script>
+    let currentSection = 1;
+
+    function goToSection(sectionNum) {
+      // Hide all sections
+      document.querySelectorAll('.signup-section').forEach(section => {
+        section.style.display = 'none';
+      });
+      
+      // Show requested section
+      document.getElementById('section' + sectionNum).style.display = 'block';
+      currentSection = sectionNum;
+      window.scrollTo(0, 0);
+    }
+
+    document.getElementById('studentSignupForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      // Validate passwords match
+      const password1 = document.getElementById('password1').value;
+      const password2 = document.getElementById('password2').value;
+      
+      if (password1 !== password2) {
+        document.getElementById('section3_error').textContent = 'Passwords do not match!';
+        return;
+      }
+
+      if (password1.length < 8) {
+        document.getElementById('section3_error').textContent = 'Password must be at least 8 characters!';
+        return;
+      }
+      
+      const formData = {
+        username: document.getElementById('username').value,
+        email: document.getElementById('email').value,
+        first_name: document.getElementById('first_name').value,
+        last_name: document.getElementById('last_name').value,
+        phone_number: document.getElementById('phone_number').value,
+        password1: password1,
+        password2: password2,
+        institution: document.getElementById('institution').value,
+        student_number: document.getElementById('student_number').value,
+        role: 'STUDENT'
+      };
+      
+      try {
+        const response = await fetch('http://127.0.0.1:8000/api/accounts/register/', {
+          method: 'POST',
+          headers: csrfHeaders({'Content-Type': 'application/json'}),
+          credentials: 'include',
+          body: JSON.stringify(formData)
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+          document.getElementById('section3_success').textContent = 'Account created successfully! Redirecting...';
+          localStorage.setItem('username', data.username);
+          localStorage.setItem('role', data.role);
+          setTimeout(() => {
+            window.location.href = '/front-end/login/Login.html';
+          }, 2000);
+        } else {
+          document.getElementById('section3_error').textContent = 'Error: ' + (data.message || 'Registration failed');
+        }
+      } catch (error) {
+        document.getElementById('section3_error').textContent = 'Error: ' + error.message;
+        console.error('Error:', error);
+      }
+    });
+  </script>
+</body>
+</html>
