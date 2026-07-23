@@ -24,7 +24,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     })
                 });
                 
-                const data = await response.json();
+                const text = await response.text();
+                console.log("Server response:", text);
+                const data = JSON.parse(text);
                 
                 if (data.success) {
                     //alert(data.role);
