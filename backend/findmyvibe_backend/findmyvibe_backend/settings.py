@@ -247,3 +247,8 @@ if not DEBUG:
     # real frontend domain(s) - the localhost entries stay for local testing
     # against a production-configured backend, but should not be the only
     # origins a real deployment trusts.
+
+CSRF_COOKIE_SAMESITE = "None"
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SAMESITE = "None"
+SESSION_COOKIE_SECURE = True
