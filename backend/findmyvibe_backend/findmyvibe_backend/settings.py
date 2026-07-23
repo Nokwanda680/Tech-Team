@@ -77,7 +77,8 @@ CORS_ALLOWED_ORIGINS=[
     'http://localhost:3000',
     'http://127.0.0.1:55433',
     'http://127.0.0.1:54165',
-    'https://find-my-vibe.onrender.com'
+    'https://find-my-vibe.onrender.com',
+    "https://tech-team-ak6j.onrender.com"
 ]
 # Security pass: this was a hardcoded localhost-only list with no way to
 # add a real production frontend origin without editing this file. Extend
