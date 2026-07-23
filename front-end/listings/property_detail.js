@@ -3,7 +3,7 @@
 // from the API, and wires up the enquiry and review forms for logged-in
 // students.
 
-const API_BASE = 'http://127.0.0.1:8000/api';
+const API_BASE = 'https://find-my-vibe.onrender.com/api';
 
 const propertyId = new URLSearchParams(window.location.search).get('id');
 const loadingEl = document.getElementById('detail-loading');

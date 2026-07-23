@@ -6,8 +6,8 @@
 // is the student-facing equivalent of the landlord's enquiry reply page
 // and the admin's platform-wide enquiry oversight page.
 
-const API_BASE = 'http://127.0.0.1:8000/api';
-const ACCOUNTS_BASE = 'http://127.0.0.1:8000/api/accounts';
+const API_BASE = 'https://find-my-vibe.onrender.com/api';
+const ACCOUNTS_BASE = 'https://find-my-vibe.onrender.com/api/accounts';
 
 let allEnquiries = [];
 

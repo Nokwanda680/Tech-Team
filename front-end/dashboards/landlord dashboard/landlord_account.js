@@ -5,7 +5,7 @@
 // POST /api/accounts/me/update/ and POST /api/accounts/me/change-password/
 // - both operate on request.user generically, so they work for any role.
 
-const ACCOUNTS_BASE = 'http://127.0.0.1:8000/api/accounts';
+const ACCOUNTS_BASE = 'https://find-my-vibe.onrender.com//api/accounts';
 
 function initials(name) {
     return name.split(' ').filter(Boolean).slice(0, 2).map(w => w[0].toUpperCase()).join('') || '?';

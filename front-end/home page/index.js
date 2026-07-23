@@ -5,7 +5,7 @@
 // recently-listed properties instead of the old hardcoded/commented-out
 // fake cards.
 
-const API_BASE = 'http://127.0.0.1:8000/api';
+const API_BASE = 'https://find-my-vibe.onrender.com/api';
 
 function escapeHTML(str) {
     if (str === null || str === undefined) return '';

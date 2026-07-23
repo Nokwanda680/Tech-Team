@@ -5,8 +5,8 @@
 // Rebuilt around real data: saved listings, enquiries, reviews, recently
 // listed properties, and real notifications.
 
-const API_BASE = 'http://127.0.0.1:8000/api';
-const ACCOUNTS_BASE = 'http://127.0.0.1:8000/api/accounts';
+const API_BASE = 'https://find-my-vibe.onrender.com/api';
+const ACCOUNTS_BASE = 'https://find-my-vibe.onrender.com/api/accounts';
 
 function escapeHTML(str) {
     if (str === null || str === undefined) return '';

@@ -4,7 +4,7 @@
 // to live in listings.html. Also wires up favouriting for logged-in
 // students via /api/properties/<id>/toggle_favourite/.
 
-const API_BASE = 'http://127.0.0.1:8000/api';
+const API_BASE = 'https://find-my-vibe.onrender.com//api';
 
 const listingsGrid = document.getElementById('listings');
 const resultsCount = document.getElementById('results-count');

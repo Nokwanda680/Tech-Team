@@ -1,7 +1,7 @@
 // Logout handler
 async function logoutUser() {
     try {
-        const response = await fetch('http://127.0.0.1:8000/api/accounts/logout/', {
+        const response = await fetch('https://find-my-vibe.onrender.com/api/accounts/logout/', {
             method: 'POST',
             headers: csrfHeaders({'Content-Type': 'application/json'}),
             credentials: 'include'

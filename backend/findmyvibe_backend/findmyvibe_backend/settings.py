@@ -30,7 +30,7 @@ SECRET_KEY = os.environ.get(
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DJANGO_DEBUG", "True") == "True"
+DEBUG = os.environ.get("DJANGO_DEBUG", "False") == "False"
 
 ALLOWED_HOSTS = [h for h in os.environ.get("DJANGO_ALLOWED_HOSTS", "").split(",") if h]
 
@@ -58,12 +58,15 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+
 ]
 CORS_ALLOWED_ORIGINS=[
     'http://127.0.0.1:5500',
@@ -73,7 +76,8 @@ CORS_ALLOWED_ORIGINS=[
     'http://127.0.0.1:3000',
     'http://localhost:3000',
     'http://127.0.0.1:55433',
-    'http://127.0.0.1:54165'
+    'http://127.0.0.1:54165',
+    'https://find-my-vibe.onrender.com'
 ]
 # Security pass: this was a hardcoded localhost-only list with no way to
 # add a real production frontend origin without editing this file. Extend
@@ -163,6 +167,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static')
 ]
+STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [BASE_DIR / 'static']
 REST_FRAMEWORK = {
     # Phase 0 fix: frontend calls the API with `credentials: 'include'` (session

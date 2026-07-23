@@ -38,7 +38,7 @@ let currentSection = 1;
             };
             
             try {
-                const response = await fetch('http://127.0.0.1:8000/api/accounts/register/', {
+                const response = await fetch('https://find-my-vibe.onrender.com/api/accounts/register/', {
                     method: 'POST',
                     headers: csrfHeaders({'Content-Type': 'application/json'}),
                     credentials: 'include',

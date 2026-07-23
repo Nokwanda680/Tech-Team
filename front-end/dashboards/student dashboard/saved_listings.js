@@ -4,8 +4,8 @@
 // that used to be here. Also fills in the sidebar user card from /api/accounts/me/
 // instead of the hardcoded "Zara Mokoena".
 
-const API_BASE = 'http://127.0.0.1:8000/api';
-const ACCOUNTS_BASE = 'http://127.0.0.1:8000/api/accounts';
+const API_BASE = 'https://find-my-vibe.onrender.com/api';
+const ACCOUNTS_BASE = 'https://find-my-vibe.onrender.com/api/accounts';
 
 const gridEl = document.getElementById('saved-listing-grid');
 const subtitleEl = document.getElementById('saved-subtitle');

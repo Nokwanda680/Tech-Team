@@ -4,8 +4,8 @@
 // Replaces the six hardcoded table rows (Sunset Apts, Garden Annex, ...)
 // that used to be here.
 
-const API_BASE = 'http://127.0.0.1:8000/api';
-const ACCOUNTS_BASE = 'http://127.0.0.1:8000/api/accounts';
+const API_BASE = 'https://find-my-vibe.onrender.com/api';
+const ACCOUNTS_BASE = 'https://find-my-vibe.onrender.com/api/accounts';
 
 let myUserId = null;
 let allProperties = [];

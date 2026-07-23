@@ -14,7 +14,7 @@
 // Usage: fetch(url, { method: 'POST', credentials: 'include',
 //                      headers: csrfHeaders({'Content-Type': 'application/json'}) })
 
-const CSRF_ENDPOINT = 'http://127.0.0.1:8000/api/accounts/csrf/';
+const CSRF_ENDPOINT = 'https://find-my-vibe.onrender.com/api/accounts/csrf/';
 
 function getCookie(name) {
     const match = document.cookie.match(new RegExp('(^|;\\s*)' + name + '=([^;]*)'));

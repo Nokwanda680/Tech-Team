@@ -4,8 +4,8 @@
 // PATCH the property's status, flag/unflag toggles is_flagged, delete
 // removes the listing entirely.
 
-const API_BASE = 'http://127.0.0.1:8000/api';
-const ACCOUNTS_BASE = 'http://127.0.0.1:8000/api/accounts';
+const API_BASE = 'https://find-my-vibe.onrender.com/api';
+const ACCOUNTS_BASE = 'https://find-my-vibe.onrender.com//api/accounts';
 
 let allProperties = [];
 

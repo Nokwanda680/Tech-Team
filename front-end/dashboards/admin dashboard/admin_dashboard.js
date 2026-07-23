@@ -13,8 +13,8 @@
 // in this project, so that card is removed rather than left claiming
 // things that aren't true.
 
-const API_BASE = 'http://127.0.0.1:8000/api';
-const ACCOUNTS_BASE = 'http://127.0.0.1:8000/api/accounts';
+const API_BASE = 'https://find-my-vibe.onrender.com/api';
+const ACCOUNTS_BASE = 'https://find-my-vibe.onrender.com//api/accounts';
 const CIRCUMFERENCE = 2 * Math.PI * 40;
 
 function escapeHTML(str) {

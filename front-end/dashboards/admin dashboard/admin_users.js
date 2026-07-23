@@ -3,7 +3,7 @@
 // list from /api/accounts/admin/users/, including a "Vibe Score" column
 // that had no backing model anywhere — removed rather than faked.
 
-const ACCOUNTS_BASE = 'http://127.0.0.1:8000/api/accounts';
+const ACCOUNTS_BASE = 'https://find-my-vibe.onrender.com/api/accounts';
 
 let currentUrl = `${ACCOUNTS_BASE}/admin/users/`;
 let roleFilter = '';
