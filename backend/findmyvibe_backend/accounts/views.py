@@ -18,7 +18,7 @@ from findmyvibe.permissions import IsAdminRole
 User = get_user_model()
 
 
-@csrf_exempt
+@ensure_csrf_cookie
 def csrf_init(request):
     """Hit once on page load so the browser has a csrftoken cookie before
     any POST/PATCH/DELETE fetch on the site - see front-end/shared/csrf.js.
@@ -200,6 +200,7 @@ def login_user(request):
             {"success": False, "message": "POST request required"},
             status=405
         )
+    
     try:
         data = json.loads(request.body)
         username = data.get("username")
@@ -210,6 +211,7 @@ def login_user(request):
                 {"success": False, "message": "Username and password are required"},
                 status=400
             )
+
         # Security pass: this view had no brute-force protection at all -
         # unlimited password guesses were possible against any account.
         # Cache-based limiter, keyed by client IP + attempted username, so
@@ -223,8 +225,10 @@ def login_user(request):
                 {"success": False, "message": "Too many failed login attempts. Please try again in a few minutes."},
                 status=429
             )
+
         # Authenticate user (supports both username and email)
         user = authenticate(request, username=username, password=password)
+        
         if user is not None:
             cache.delete(throttle_key)
             login(request, user)
@@ -252,6 +256,8 @@ def login_user(request):
             {"success": False, "message": str(e)},
             status=500
         )
+
+
 def logout_user(request):
     """Logout the current user"""
     if request.method != "POST":
