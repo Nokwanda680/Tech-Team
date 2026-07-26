@@ -30,10 +30,10 @@ SECRET_KEY = os.environ.get(
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DJANGO_DEBUG", "False") == "False"
+DEBUG = os.environ.get("DJANGO_DEBUG", "True") == "True"
 
 #ALLOWED_HOSTS = [h for h in os.environ.get("DJANGO_ALLOWED_HOSTS", "").split(",") if h]
-ALLOWED_HOSTS = ['https://find-my-vibe-student-accomodation-finder.onrender.com']
+ALLOWED_HOSTS = ['find-my-vibe-student-accomodation-finder.onrender.com']
 
 # Application definition
 
