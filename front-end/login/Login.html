@@ -22,12 +22,13 @@
                     <h3>Welcome Back!</h3>
                 </p>
                 <form method="POST" id="loginform" >
-                    <label for="email" class="labels">Username Or Email</label>
-                    <input type="text" class="texts" id="username" placeholder="1234567@gmail.com" required><br>
+                    <label for="text" class="labels">Username Or Email</label>
+                    <input type="text" class="texts" id="username" placeholder="John Smith" autocomplete="username" required><br>
                      <label for="Password" class="labels">Password</label>
                     <div class="passwords">
-                    <input type="password" class="password" id="Password">
-                    </div><br>
+                    <input type="password" name='Password'class="password" id="Password" required>
+                    </div>
+                    <br>
                     <div class="buttons">
                         <button type="reset" class="button">Reset</button>
                         <button type="submit" class="button">Submit</button>
@@ -41,6 +42,5 @@
         <p>&copy;2026 Tech Team. All Rights Reserved</p>
     </footer>
     <script src="/front-end/shared/csrf.js"></script>
-    <script src="/front-end/shared/password-toggle.js"></script>
     <script src="login.js"></script>
 </html>
