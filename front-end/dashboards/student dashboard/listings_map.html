@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find My Vibe - Listings Map</title>
+    <link rel="stylesheet" href="/front-end/styles_login/map.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
+
+    <style>
+        #map{
+            height: 90px;px;
+            width:90%;
+        }
+        .search{
+            display: flex;
+
+        }
+        .outer-map{
+          height
+        }
+    </style>
+</head>
+<body>
+    <script src="map_navigation.js"></script>
+    <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-wordmark">
+        <span class="logo-find">Find </span><span class="logo-my">My </span><span class="logo-vibe">Vibe</span>
+      </div>
+      <div class="logo-tag">Student Housing Platform</div>
+    </div>
+    <nav class="nav" id="nav">
+      <div class="nav-item"><i class="ti ti-layout-dashboard" aria-hidden="true"></i><span>Dashboard</span></div>
+      <div class="nav-item"><i class="ti ti-search" aria-hidden="true"></i><span>Find housing</span></div>
+      <div class="nav-item"><i class="ti ti-heart" aria-hidden="true"></i><span>Saved listings</span><span class="nav-badge">14</span></div>
+      <div class="nav-item"><i class="ti ti-file-text" aria-hidden="true"></i><span>My applications</span><span class="nav-badge">2</span></div>
+      <div class="nav-item"><i class="ti ti-calendar" aria-hidden="true"></i><span>Viewings</span></div>
+      <div class="nav-item"><i class="ti ti-message" aria-hidden="true"></i><span>Messages</span><span class="nav-badge">1</span></div>
+      <div class="nav-item active"><i class="ti ti-search" aria-hidden="true"></i><span>Map View</span></div>
+      <div class="nav-section-label">Account</div>
+      <div class="nav-item"><i class="ti ti-user" aria-hidden="true"></i><span>My profile</span></div>
+      <div class="nav-item"><i class="ti ti-adjustments-horizontal" aria-hidden="true"></i><span>Preferences</span></div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-card" id="user-card">
+        <div class="avatar avatar-student">ZM</div>
+        <div class="user-info">
+          <div class="user-name">Zara Mokoena</div>
+          <div class="user-role-label">Student · UCT</div>
+        </div>
+        <i class="ti ti-chevron-down" style="font-size:14px; color:var(--muted)" aria-hidden="true"></i>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── Main ── -->
+  <main class="main">
+    <header class="topbar">
+      <span class="topbar-title">Map View</span>
+      <div class="topbar-right">
+        <button class="icon-btn"><i class="ti ti-search" aria-hidden="true"></i></button>
+        <button class="icon-btn notif-dot"><i class="ti ti-bell" aria-hidden="true"></i></button>
+        <button class="icon-btn"><i class="ti ti-settings" aria-hidden="true"></i></button>
+      </div>
+    </header>
+    
+    <div class="outer-map"><div class='map' id="map"></div></div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
+    <div class="search">
+        <!--<input type="text" placeholder="Latitude" id="lat">
+        <input type="text" placeholder="Longitude" id="long">-->
+        <input type="text" id="address" placeholder="Enter address">
+        <button id="findBtn">Search</button>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image" href="Images/logo.jpg">
+        <link rel="stylesheet" href="/front-end/styles_login/edit.css">
+        <link rel="stylesheet" href="/front-end/styles_login/style_loginstudent.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+        
+        <title>Find My Vibe - Login</title>
+        <style>
+            
+        </style>
+    </head>
+    <body>
+        <div class="div" >
+            <main class="container">
+                
+                <p style="text-align: center;">
+                    <img src="/front-end/Images/images (1).jpg" alt="" srcset="">
+                    <h3>Welcome Back!</h3>
+                </p>
+                <form method="POST" id="loginform" >
+                    <label for="email" class="labels">Username Or Email</label>
+                    <input type="text" class="texts" id="username" placeholder="1234567@gmail.com" required><br>
+                     <label for="Password" class="labels">Password</label>
+                    <div class="passwords">
+                    <input type="password" class="password" id="Password">
+                    </div><br>
+                    <div class="buttons">
+                        <button type="reset" class="button">Reset</button>
+                        <button type="submit" class="button">Submit</button>
+                    </div>
+                    <p>Dont have an account?<a href="check.html">Sign Up</a></p>
+                </form>
+            </main>
+        </div>
+    </body>
+    <footer> 
+        <p>&copy;2026 Tech Team. All Rights Reserved</p>
+    </footer>
+    <script src="/front-end/shared/csrf.js"></script>
+    <script src="/front-end/shared/password-toggle.js"></script>
+    <script src="login.js"></script>
+</html>

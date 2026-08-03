@@ -1,8 +1,6 @@
 """
 Seed the database with realistic demo data:
-3 admins, 20 students, 7 landlords, and a spread of properties/images/
-favourites/enquiries/reviews across them — so the site has something real
-to browse instead of empty tables or frontend dummy data.
+    3 admins, 23 students, 7 landlords, and a spread of properties/images/
 
 Usage:
     python manage.py seed_demo_data
@@ -126,7 +124,7 @@ class Command(BaseCommand):
 
     def _make_students(self):
         students = []
-        for i in range(1, 21):
+        for i in range(1, 24):
             username = f"demo_student{i}"
             user, created = User.objects.get_or_create(
                 username=username,
@@ -161,7 +159,8 @@ class Command(BaseCommand):
             "Student House with Backup Power", "Room in Gated Complex", "Self-Catering Studio",
             "Room Close to Public Transport", "Newly Built Student Flat", "Homely Room with Garden Access",
             "Convenient Room near Library", "Spacious Shared House Room", "Ensuite Room with Parking",
-            "Modern Room in Renovated Villa",
+            "Modern Room in Renovated Villa", "Loft-style Room in City Centre", "Vintage House Room with Kitchen",
+            "Bright Ensuite Room with Balcony",
         ]
         properties = []
         for i, title in enumerate(titles):
