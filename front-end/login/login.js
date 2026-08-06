@@ -51,11 +51,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     const role = (data.role || '').trim().toUpperCase();
                     const redirectMap = {
-                        STUDENT: '../dashboards/student dashboard/student_dashboard.html',
+                        STUDENT: '../dashboards/student dashboard/dashboard.html',
                         LANDLORD: '../dashboards/landlord dashboard/landlord_dashboard.html',
                         ADMIN: '../dashboards/admin dashboard/admin_dashboard.html'
                     };
-
                     let redirectPath = redirectMap[role] || redirectMap.STUDENT;
 
                     if (!redirectMap[role]) {

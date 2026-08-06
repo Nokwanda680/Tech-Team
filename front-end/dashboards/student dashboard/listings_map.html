@@ -31,17 +31,20 @@
       </div>
       <div class="logo-tag">Student Housing Platform</div>
     </div>
-    <nav class="nav" id="nav">
-      <div class="nav-item"><i class="ti ti-layout-dashboard" aria-hidden="true"></i><span>Dashboard</span></div>
-      <div class="nav-item"><i class="ti ti-search" aria-hidden="true"></i><span>Find housing</span></div>
-      <div class="nav-item"><i class="ti ti-heart" aria-hidden="true"></i><span>Saved listings</span><span class="nav-badge">14</span></div>
-      <div class="nav-item"><i class="ti ti-file-text" aria-hidden="true"></i><span>My applications</span><span class="nav-badge">2</span></div>
-      <div class="nav-item"><i class="ti ti-calendar" aria-hidden="true"></i><span>Viewings</span></div>
-      <div class="nav-item"><i class="ti ti-message" aria-hidden="true"></i><span>Messages</span><span class="nav-badge">1</span></div>
-      <div class="nav-item active"><i class="ti ti-search" aria-hidden="true"></i><span>Map View</span></div>
-      <div class="nav-section-label">Account</div>
-      <div class="nav-item"><i class="ti ti-user" aria-hidden="true"></i><span>My profile</span></div>
-      <div class="nav-item"><i class="ti ti-adjustments-horizontal" aria-hidden="true"></i><span>Preferences</span></div>
+    <nav class="nav">
+      <div class="nav-label">Menu</div>
+      <a class="nav-item" data-page="dashboard" href="dashboard.html"><span class="nav-dot"></span>Dashboard</a>
+      <a class="nav-item" data-page="search" href="search-listings.html">Search listings</a>
+      <a class="nav-item" data-page="saved" href="saved-homes.html">Saved homes</a>
+      <a class="nav-item" data-page="applications" href="applications.html">Applications</a>
+      <a class="nav-item active" data-page="Map View" href="listings_map.html"><span class="nav-dot"></span>Map View</a>
+      <a class="nav-item" data-page="messages" href="messages.html">Messages<span class="nav-badge">2</span></a>
+      <a class="nav-item" data-page="roommates" href="roommate-matches.html">Roommate matches</a>
+      <div class="nav-label" style="margin-top:14px;">Account</div>
+      <a class="nav-item" data-page="account" href="account.html">Account</a>
+      <a class="nav-item" data-page="budget" href="budget-preferences.html">Budget &amp; preferences</a>
+      <a class="nav-item" data-page="documents" href="documents.html">Documents</a>
+      <a class="nav-item" data-page="settings" href="settings.html">Settings</a>
     </nav>
 
     <div class="sidebar-footer">
@@ -73,8 +76,8 @@
     <div class="search">
         <!--<input type="text" placeholder="Latitude" id="lat">
         <input type="text" placeholder="Longitude" id="long">-->
-        <input type="text" id="address" placeholder="Enter address">
-        <button id="findBtn">Search</button>
+        <input type="text" id="address" placeholder="Enter address" id="input-address">
+        <button id="findBtn"onclick=''>Search</button>
     </div>
     
 </body>

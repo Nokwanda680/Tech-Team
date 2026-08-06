@@ -962,7 +962,7 @@ footer{
 
 @media screen and (max-width: 480px) {
   nav {
-    padding: 8px 10px;
+    padding: 10px 10px;
   }
   
   .logo {
@@ -981,6 +981,12 @@ footer{
   
   .hero-strip {
     padding: 12px 10px 8px;
+    display: flex;
+  }
+  .hero-copy{
+    display: flex;
+    flex-direction: column;
+    width:250px;
   }
   
   .hero-image {
@@ -1002,6 +1008,8 @@ footer{
   }
   
   .search-bar {
+    display: flex;
+    flex-direction: row;
     gap: 4px;
     padding: 0;
   }
@@ -1012,6 +1020,7 @@ footer{
   }
   
   .search-btn {
+    width: 100px;
     padding: 8px;
     font-size: 0.85rem;
   }
@@ -1028,6 +1037,10 @@ footer{
   .listings-grid {
     gap: 8px;
   }
+  .hero-stats{
+    width:5px;
+  }
+  
   
   .card-media img {
     height: 140px;
