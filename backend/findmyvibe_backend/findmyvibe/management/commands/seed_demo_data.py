@@ -8,13 +8,15 @@ Usage:
 """
 
 import random
+from pathlib import Path
 
 from django.contrib.auth import get_user_model
+from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand
 from django.db import transaction
 
 from accounts.models import LandlordProfile, StudentProfile
-from findmyvibe.models import Amenity, Enquiry, Favourite, Property, Review
+from findmyvibe.models import Amenity, Enquiry, Favourite, Property, PropertyImage, Review
 
 User = get_user_model()
 
@@ -39,6 +41,20 @@ SUBURBS = [
 ]
 ROOM_TYPES = [c[0] for c in Property.RoomType.choices]
 AMENITY_NAMES = ["WiFi", "Parking", "Laundry", "Security", "Gym", "Study Room", "Backup Power", "Furnished"]
+ACCOMMODATION_IMAGES = [
+    "image1.jpg",
+    "image2.jpg",
+    "image3.jpg",
+    "img1.jpeg",
+    "img2.jpeg",
+    "img3.jpeg",
+    "kern1.jpeg",
+    "kern2.jpeg",
+    "kern3.jpeg",
+    "kovacs_image1.jpg",
+    "kovacs_image2.jpg",
+    "kovacs_image3.jpg",
+]
 
 
 class Command(BaseCommand):
@@ -63,11 +79,13 @@ class Command(BaseCommand):
         landlords = self._make_landlords()
         students = self._make_students()
         properties = self._make_properties(landlords, amenities)
+        created_images = self._assign_property_images(properties)
         self._make_activity(students, properties)
 
         self.stdout.write(self.style.SUCCESS(
             f"Seeded {len(admins)} admins, {len(landlords)} landlords, "
-            f"{len(students)} students, {len(properties)} properties."
+            f"{len(students)} students, {len(properties)} properties, "
+            f"and {created_images} accommodation photos."
         ))
 
     def _make_admins(self):
@@ -190,6 +208,47 @@ class Command(BaseCommand):
                 prop.amenities.set(random.sample(amenities, k=random.randint(2, 5)))
             properties.append(prop)
         return properties
+
+    def _assign_property_images(self, properties):
+        if not properties:
+            return 0
+
+        project_root = Path(__file__).resolve().parents[5]
+        image_dir = project_root / "front-end" / "Images"
+        created_count = 0
+
+        for i, prop in enumerate(properties):
+            if prop.images.exists():
+                continue
+
+            for offset in range(3):
+                file_name = ACCOMMODATION_IMAGES[(i + offset) % len(ACCOMMODATION_IMAGES)]
+                image_path = image_dir / file_name
+                if not image_path.exists():
+                    continue
+
+                image_bytes = image_path.read_bytes()
+                caption = f"{prop.title} accommodation photo {offset + 1}"
+                PropertyImage.objects.create(
+                    property=prop,
+                    image=ContentFile(image_bytes, name=file_name),
+                    caption=caption,
+                    is_primary=(offset == 0),
+                )
+                created_count += 1
+
+            if not prop.images.exists():
+                fallback = image_dir / "image1.jpg"
+                if fallback.exists():
+                    PropertyImage.objects.create(
+                        property=prop,
+                        image=ContentFile(fallback.read_bytes(), name="image1.jpg"),
+                        caption=f"{prop.title} accommodation photo",
+                        is_primary=True,
+                    )
+                    created_count += 1
+
+        return created_count
 
     def _make_activity(self, students, properties):
         for student in students:

@@ -20,8 +20,9 @@
       <a class="nav-item" data-page="saved" href="saved-homes.html">Saved homes</a>
       <a class="nav-item" data-page="applications" href="applications.html">Applications</a>
       <a class="nav-item" data-page="Map View" href="listings_map.html">Map View</a>
-      <a class="nav-item active" data-page="messages" href="messages.html"><span class="nav-dot"></span>Messages<span class="nav-badge">2</span></a>
+      <a class="nav-item" data-page="messages" href="messages.html"><span class="nav-dot"></span>Messages<span class="nav-badge">2</span></a>
       <a class="nav-item" data-page="roommates" href="roommate-matches.html">Roommate matches</a>
+
       <div class="nav-label" style="margin-top:14px;">Account</div>
       <a class="nav-item" data-page="account" href="account.html">Account</a>
       <a class="nav-item" data-page="budget" href="budget-preferences.html">Budget &amp; preferences</a>
@@ -44,64 +45,22 @@
 
     <div class="panel">
       <div class="inbox-shell">
-        <div class="thread-list">
-          <div class="msg-row" style="background: var(--surface-soft); margin: 0 -12px 4px; padding: 12px; border-radius: 8px;">
-            <div class="msg-avatar">PR</div>
-            <div class="msg-body">
-              <div class="msg-top"><div class="msg-name">Priya · Sunbird Studios</div><div class="msg-time">14m</div></div>
-              <div class="msg-preview">Great, I've held the studio for your viewing…</div>
-            </div>
-            <div class="msg-unread-dot"></div>
-          </div>
-          <div class="msg-row">
-            <div class="msg-avatar">LN</div>
-            <div class="msg-body">
-              <div class="msg-top"><div class="msg-name">Lior Naidoo · Rondebosch</div><div class="msg-time">3h</div></div>
-              <div class="msg-preview">Bring your student card for the viewing…</div>
-            </div>
-          </div>
-          <div class="msg-row">
-            <div class="msg-avatar">MK</div>
-            <div class="msg-body">
-              <div class="msg-top"><div class="msg-name">Mika K. · Roommate match</div><div class="msg-time">1d</div></div>
-              <div class="msg-preview">Hey! Saw we matched 89% on lifestyle…</div>
-            </div>
-            <div class="msg-unread-dot"></div>
-          </div>
-          <div class="msg-row">
-            <div class="msg-avatar">SR</div>
-            <div class="msg-body">
-              <div class="msg-top"><div class="msg-name">Sipho R. · Observatory House</div><div class="msg-time">2d</div></div>
-              <div class="msg-preview">Thanks for applying, we'll be in touch soon.</div>
-            </div>
-          </div>
-          <div class="msg-row">
-            <div class="msg-avatar">ND</div>
-            <div class="msg-body">
-              <div class="msg-top"><div class="msg-name">Nomvula D. · Vredehoek Loft</div><div class="msg-time">3d</div></div>
-              <div class="msg-preview">The offer is ready — deposit link attached.</div>
-            </div>
-          </div>
-        </div>
+        <div class="thread-list" id="student-thread-list"></div>
 
         <div class="thread-view">
-          <div class="thread-head">
-            <div class="msg-avatar" style="width:40px;height:40px;">PR</div>
+          <div class="thread-head" id="student-thread-header">
+            <div class="msg-avatar" style="width:40px;height:40px;">–</div>
             <div>
-              <div class="msg-name" style="font-size:14px;">Priya · Sunbird Student Studios</div>
-              <div class="msg-time">Usually replies within an hour</div>
+              <div class="msg-name" style="font-size:14px;">No conversation selected</div>
+              <div class="msg-time">Your enquiries will appear here.</div>
             </div>
           </div>
-          <div class="thread-body">
-            <div class="bubble them">Hi Thandi, thanks for your interest in the studio! Are you still looking to move in from August?<div class="bubble-time">Yesterday, 4:12 PM</div></div>
-            <div class="bubble me">Yes please, August 1st would be ideal if possible.<div class="bubble-time">Yesterday, 5:03 PM</div></div>
-            <div class="bubble them">Perfect, that works. I can pencil you in for a viewing on the 29th at 4pm — does that suit you?<div class="bubble-time">Yesterday, 5:20 PM</div></div>
-            <div class="bubble me">That works great, see you then!<div class="bubble-time">Yesterday, 5:45 PM</div></div>
-            <div class="bubble them">Great, I've held the studio for your viewing on the 29th — see you then!<div class="bubble-time">14 min ago</div></div>
+          <div class="thread-body" id="student-thread-body">
+            <p style="color: var(--muted); padding: 20px;">Loading your enquiries…</p>
           </div>
           <div class="thread-input">
-            <input type="text" placeholder="Write a message…">
-            <button class="btn btn-primary">Send</button>
+            <input id="student-message-input" type="text" placeholder="Write a message…">
+            <button id="student-message-send" class="btn btn-primary">Send</button>
           </div>
         </div>
       </div>
@@ -110,9 +69,154 @@
   </main>
 </div>
 
+<script src="/front-end/shared/csrf.js"></script>
 <script>
-document.querySelectorAll('.nav-item[data-page]').forEach(function(el){
-  if (el.dataset.page === document.body.dataset.page) el.classList.add('active');
+const API_BASE = 'http://127.0.0.1:8000/api';
+const ACCOUNTS_BASE = 'http://127.0.0.1:8000/api/accounts';
+let studentEnquiries = [];
+let selectedEnquiryId = null;
+
+function escapeHTML(str) {
+  if (str === null || str === undefined) return '';
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+function initials(name) {
+  return (name || '').split(' ').filter(Boolean).slice(0, 2).map(w => w[0].toUpperCase()).join('') || '?';
+}
+
+async function requireStudent() {
+  const response = await fetch(`${ACCOUNTS_BASE}/me/`, { credentials: 'include' });
+  if (!response.ok) {
+    window.location.href = '/front-end/login/Login.html';
+    return null;
+  }
+  const user = await response.json();
+  if (user.role !== 'STUDENT') {
+    window.location.href = '/front-end/login/Login.html';
+    return null;
+  }
+  return user;
+}
+
+function renderStudentThreads() {
+  const list = document.getElementById('student-thread-list');
+  if (!studentEnquiries.length) {
+    list.innerHTML = '<div class="msg-row"><div class="msg-body"><div class="msg-name">No enquiries yet</div><div class="msg-preview">Send a message from a listing to start a conversation.</div></div></div>';
+    return;
+  }
+
+  list.innerHTML = studentEnquiries.map(enquiry => `
+    <div class="msg-row ${String(selectedEnquiryId) === String(enquiry.id) ? 'active' : ''}" data-id="${enquiry.id}" style="${String(selectedEnquiryId) === String(enquiry.id) ? 'background: var(--surface-soft); margin: 0 -12px 4px; padding: 12px; border-radius: 8px;' : ''}">
+      <div class="msg-avatar">${initials(enquiry.landlord_username || enquiry.property_title || 'L')}</div>
+      <div class="msg-body">
+        <div class="msg-top"><div class="msg-name">${escapeHTML(enquiry.landlord_username || 'Landlord')} · ${escapeHTML(enquiry.property_title || 'Property')}</div><div class="msg-time">${new Date(enquiry.created_at).toLocaleDateString()}</div></div>
+        <div class="msg-preview">${escapeHTML(enquiry.landlord_reply || enquiry.message || 'No message')}</div>
+      </div>
+      ${enquiry.status === 'OPEN' ? '<div class="msg-unread-dot"></div>' : ''}
+    </div>
+  `).join('');
+
+  list.querySelectorAll('.msg-row[data-id]').forEach(item => {
+    item.addEventListener('click', () => {
+      selectedEnquiryId = item.dataset.id;
+      renderStudentThreads();
+      renderStudentThread();
+    });
+  });
+}
+
+function renderStudentThread() {
+  const header = document.getElementById('student-thread-header');
+  const body = document.getElementById('student-thread-body');
+  const active = studentEnquiries.find(enquiry => String(enquiry.id) === String(selectedEnquiryId));
+
+  if (!active) {
+    header.innerHTML = '<div class="msg-avatar" style="width:40px;height:40px;">–</div><div><div class="msg-name" style="font-size:14px;">No conversation selected</div><div class="msg-time">Your enquiries will appear here.</div></div>';
+    body.innerHTML = '<p style="color: var(--muted); padding: 20px;">No active conversation.</p>';
+    return;
+  }
+
+  header.innerHTML = `
+    <div class="msg-avatar" style="width:40px;height:40px;">${initials(active.landlord_username || active.property_title || 'L')}</div>
+    <div>
+      <div class="msg-name" style="font-size:14px;">${escapeHTML(active.landlord_username || 'Landlord')} · ${escapeHTML(active.property_title || 'Property')}</div>
+      <div class="msg-time">${active.status === 'OPEN' ? 'Waiting for a reply' : 'Conversation updated'}</div>
+    </div>
+  `;
+
+  const messages = [];
+  if (active.message) {
+    messages.push({ type: 'me', text: active.message, time: new Date(active.created_at).toLocaleString() });
+  }
+  if (active.landlord_reply) {
+    messages.push({ type: 'them', text: active.landlord_reply, time: new Date(active.replied_at || active.created_at).toLocaleString() });
+  }
+
+  if (!messages.length) {
+    body.innerHTML = '<p style="color: var(--muted); padding: 20px;">No messages in this conversation yet.</p>';
+    return;
+  }
+
+  body.innerHTML = messages.map(msg => `
+    <div class="bubble ${msg.type === 'me' ? 'me' : 'them'}">${escapeHTML(msg.text)}<div class="bubble-time">${escapeHTML(msg.time)}</div></div>
+  `).join('');
+}
+
+async function loadStudentEnquiries() {
+  try {
+    const response = await fetch(`${API_BASE}/enquiries/`, { credentials: 'include' });
+    if (!response.ok) throw new Error(`Server returned ${response.status}`);
+    const data = await response.json();
+    studentEnquiries = data.results !== undefined ? data.results : data;
+    if (!selectedEnquiryId && studentEnquiries.length) {
+      selectedEnquiryId = studentEnquiries[0].id;
+    }
+    renderStudentThreads();
+    renderStudentThread();
+  } catch (error) {
+    console.error('Error loading student enquiries:', error);
+    document.getElementById('student-thread-list').innerHTML = '<div class="msg-row"><div class="msg-body"><div class="msg-name">Could not load your messages</div><div class="msg-preview">Please refresh the page or try again later.</div></div></div>';
+    document.getElementById('student-thread-body').innerHTML = '<p style="color: var(--muted); padding: 20px;">Unable to load conversations.</p>';
+  }
+}
+
+async function sendStudentMessage() {
+  const input = document.getElementById('student-message-input');
+  const message = input.value.trim();
+  const active = studentEnquiries.find(enquiry => String(enquiry.id) === String(selectedEnquiryId));
+  if (!message || !active || !active.property) return;
+
+  try {
+    const response = await fetch(`${API_BASE}/enquiries/`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: csrfHeaders({ 'Content-Type': 'application/json' }),
+      body: JSON.stringify({ property: active.property, message }),
+    });
+    if (!response.ok) throw new Error(`Server returned ${response.status}`);
+    input.value = '';
+    await loadStudentEnquiries();
+  } catch (error) {
+    console.error('Error sending message:', error);
+    alert('Could not send your message right now. Please try again.');
+  }
+}
+
+document.getElementById('student-message-send').addEventListener('click', sendStudentMessage);
+document.getElementById('student-message-input').addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') sendStudentMessage();
+});
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const user = await requireStudent();
+  if (!user) return;
+  document.querySelectorAll('.nav-item[data-page]').forEach(function(el){
+    if (el.dataset.page === document.body.dataset.page) el.classList.add('active');
+  });
+  await loadStudentEnquiries();
 });
 </script>
 </body>

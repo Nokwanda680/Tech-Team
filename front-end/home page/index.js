@@ -60,7 +60,7 @@ async function loadFeaturedListings() {
         container.innerHTML = properties.slice(0, 3).map((property) => {
             const image = (property.images && property.images.length)
                 ? (property.images.find(i => i.is_primary) || property.images[0]).image
-                : '/front-end/Images/logo.jpg';
+                : `/front-end/Images/img3.jpeg`;
             const distance = property.distance_from_campus_km
                 ? `${property.distance_from_campus_km}km from campus`
                 : (property.university_nearby || property.location);
@@ -87,6 +87,7 @@ async function loadFeaturedListings() {
         container.innerHTML = '<p style="color:var(--muted)">Could not load listings right now.</p>';
     }
 }
+
 
 document.addEventListener('DOMContentLoaded', () => {
     loadHeroStats();

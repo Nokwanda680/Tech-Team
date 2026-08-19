@@ -154,15 +154,13 @@ listings.innerHTML= card.map(create_cards).join('');
 function paginantation(){
   return`
   <div class="pagintation">
-          <buttton class="page-btn">‹</buttton>
-          <buttton class="page-btn">1</buttton>
-          <buttton class="page-btn">2</buttton>
-          <buttton class="page-btn">3</buttton>
-          <buttton class="page-btn">4</buttton>
-          <buttton class="page-btn">...</buttton>
-          <buttton class="page-btn">10</buttton>
-          
-        
+          <button type="button" class="page-btn">‹</button>
+          <button type="button" class="page-btn">1</button>
+          <button type="button" class="page-btn">2</button>
+          <button type="button" class="page-btn">3</button>
+          <button type="button" class="page-btn">4</button>
+          <button type="button" class="page-btn">...</button>
+          <button type="button" class="page-btn">10</button>
   `;
 }
 pagintation.innerHTML= paginantation;*/

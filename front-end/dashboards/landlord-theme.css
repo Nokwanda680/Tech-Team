@@ -1,41 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Find My Vibe — Messages</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-<style>
+
 :root {
   --orange: #f39200;
   --blue: #2196F3;
-  --bg: #0f0f0f;
-  --surface: #141414;
-  --surface-soft: #1d1d1d;
+  --bg: #0b0b0c;
+  --surface: #141415;
+  --surface-soft: #1c1c1e;
   --text: #f5f5f5;
-  --muted: #a7a7a7;
+  --muted: #a0a0a5;
   --border: rgba(255,255,255,0.08);
-  --lime: #00FF00;
+  --lime: #34e07a;
   --orange-dim: rgba(243,146,0,0.12);
   --blue-dim: rgba(33,150,243,0.12);
-  --lime-dim: rgba(0,255,0,0.10);
+  --lime-dim: rgba(52,224,122,0.12);
   --danger: #ff4d4d;
   --danger-dim: rgba(255,77,77,0.12);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.35);
+  --shadow-md: 0 8px 24px rgba(0,0,0,0.35);
+  --shadow-lg: 0 16px 40px rgba(0,0,0,0.45);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+html { scrollbar-color: rgba(255,255,255,0.15) transparent; }
+
+::selection { background: var(--orange-dim); color: var(--text); }
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 20px; border: 2px solid var(--bg); background-clip: padding-box; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.22); background-clip: padding-box; }
+
 body {
-  background: var(--bg);
+  background:
+    radial-gradient(900px 480px at 14% -8%, rgba(243,146,0,0.07), transparent 60%),
+    radial-gradient(700px 420px at 100% 0%, rgba(33,150,243,0.05), transparent 55%),
+    var(--bg);
+  background-attachment: fixed;
   color: var(--text);
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 .app { display: flex; min-height: 100vh; }
@@ -51,6 +71,7 @@ body {
   top: 0; left: 0; bottom: 0;
   z-index: 10;
   transition: transform 0.25s ease;
+  box-shadow: var(--shadow-md);
 }
 
 .sidebar-logo {
@@ -103,32 +124,33 @@ body {
 .role-btn.active[data-role="landlord"] { background: var(--orange-dim); border-color: var(--orange); color: var(--orange); }
 .role-btn.active[data-role="admin"] { background: var(--lime-dim); border-color: var(--lime); color: var(--lime); }
 
-.nav { padding: 12px 0; flex: 1; overflow-y: auto; }
+.nav { padding: 12px 10px; flex: 1; overflow-y: auto; }
 
 .nav-section-label {
-  padding: 4px 20px;
+  padding: 4px 10px;
   font-size: 10px;
   font-weight: 600;
   color: var(--muted);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  margin-top: 8px;
+  margin-top: 12px;
 }
 
 .nav-item {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 9px 20px;
+  padding: 9px 10px;
+  margin: 1px 0;
   color: var(--muted);
   cursor: pointer;
-  border-radius: 0;
-  transition: all 0.15s;
+  border-radius: 8px;
+  transition: color 0.15s, background 0.15s, transform 0.15s;
   position: relative;
   font-size: 13.5px;
 }
 
-.nav-item:hover { color: var(--text); background: var(--surface-soft); }
+.nav-item:hover { color: var(--text); background: var(--surface-soft); transform: translateX(1px); }
 
 .nav-item.active {
   color: var(--text);
@@ -138,9 +160,9 @@ body {
 .nav-item.active::before {
   content: '';
   position: absolute;
-  left: 0; top: 4px; bottom: 4px;
+  left: 0; top: 6px; bottom: 6px;
   width: 3px;
-  border-radius: 0 3px 3px 0;
+  border-radius: 3px 0 0 3px;
 }
 
 .role-student .nav-item.active::before { background: var(--blue); }
@@ -159,10 +181,11 @@ body {
   padding: 1px 6px;
   min-width: 18px;
   text-align: center;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.15);
 }
 
 .sidebar-footer {
-  padding: 16px;
+  padding: 12px;
   border-top: 1px solid var(--border);
 }
 
@@ -171,7 +194,7 @@ body {
   align-items: center;
   gap: 10px;
   padding: 8px;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
   transition: background 0.15s;
 }
@@ -189,11 +212,12 @@ body {
   font-weight: 700;
   flex-shrink: 0;
   font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: 0.02em;
 }
 
-.avatar-student { background: var(--blue-dim); color: var(--blue); border: 1px solid rgba(33,150,243,0.3); }
-.avatar-landlord { background: var(--orange-dim); color: var(--orange); border: 1px solid rgba(243,146,0,0.3); }
-.avatar-admin { background: var(--lime-dim); color: var(--lime); border: 1px solid rgba(0,255,0,0.25); }
+.avatar-student { background: linear-gradient(155deg, var(--blue-dim), rgba(33,150,243,0.22)); color: var(--blue); border: 1px solid rgba(33,150,243,0.3); }
+.avatar-landlord { background: linear-gradient(155deg, var(--orange-dim), rgba(243,146,0,0.22)); color: var(--orange); border: 1px solid rgba(243,146,0,0.3); }
+.avatar-admin { background: linear-gradient(155deg, var(--lime-dim), rgba(52,224,122,0.22)); color: var(--lime); border: 1px solid rgba(52,224,122,0.3); }
 
 .user-info { flex: 1; min-width: 0; }
 .user-name { font-size: 13px; font-weight: 500; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -208,7 +232,9 @@ body {
 }
 
 .topbar {
-  background: var(--surface);
+  background: rgba(20,20,21,0.72);
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
   border-bottom: 1px solid var(--border);
   padding: 0 28px;
   height: 56px;
@@ -247,7 +273,8 @@ body {
   transition: all 0.15s;
 }
 
-.icon-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.18); background: var(--surface-soft); }
+.icon-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.18); background: var(--surface-soft); transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+.icon-btn:active { transform: translateY(0); }
 
 .notif-dot {
   position: relative;
@@ -266,13 +293,18 @@ body {
 
 /* ── Panels ─────────────────────────────── */
 .panel { display: none; }
-.panel.active { display: block; }
+.panel.active { display: block; animation: fm-fade-up 0.35s ease both; }
+
+@keyframes fm-fade-up {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
 /* ── Components ─────────────────────────── */
 .greeting { margin-bottom: 24px; }
 .greeting h1 {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 24px;
+  font-size: 25px;
   font-weight: 700;
   letter-spacing: -0.3px;
   margin-bottom: 4px;
@@ -291,12 +323,20 @@ body {
 }
 
 .stat-card {
-  background: var(--surface);
+  background: linear-gradient(180deg, var(--surface), var(--surface) 60%, var(--surface-soft));
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   padding: 16px 18px;
   position: relative;
   overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(255,255,255,0.14);
 }
 
 .stat-card::after {
@@ -306,9 +346,9 @@ body {
   height: 2px;
 }
 
-.stat-card.orange::after { background: var(--orange); }
-.stat-card.blue::after { background: var(--blue); }
-.stat-card.lime::after { background: var(--lime); }
+.stat-card.orange::after { background: linear-gradient(90deg, var(--orange), rgba(243,146,0,0.15)); }
+.stat-card.blue::after { background: linear-gradient(90deg, var(--blue), rgba(33,150,243,0.15)); }
+.stat-card.lime::after { background: linear-gradient(90deg, var(--lime), rgba(52,224,122,0.15)); }
 .stat-card.muted::after { background: rgba(255,255,255,0.15); }
 
 .stat-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
@@ -324,8 +364,9 @@ body {
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   padding: 20px;
+  box-shadow: var(--shadow-sm);
 }
 
 .card-header {
@@ -348,7 +389,11 @@ body {
   background: none;
   border: none;
   font-family: 'Inter', sans-serif;
+  padding: 2px 0;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s;
 }
+.card-action:hover { border-bottom-color: currentColor; }
 .role-landlord .card-action { color: var(--orange); }
 .role-admin .card-action { color: var(--lime); }
 
@@ -356,10 +401,14 @@ body {
 .listing-card {
   display: flex;
   gap: 14px;
-  padding: 14px 0;
+  padding: 14px 6px;
+  margin: 0 -6px;
   border-bottom: 1px solid var(--border);
+  border-radius: 8px;
+  transition: background 0.15s;
 }
 .listing-card:last-child { border-bottom: none; }
+.listing-card:hover { background: var(--surface-soft); }
 
 .listing-img {
   width: 64px;
@@ -372,6 +421,7 @@ body {
   font-size: 22px;
   font-weight: 700;
   font-family: 'Space Grotesk', sans-serif;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
 }
 
 .listing-info { flex: 1; min-width: 0; }
@@ -381,13 +431,15 @@ body {
 
 .tag {
   font-size: 10px;
-  padding: 2px 8px;
+  padding: 3px 9px;
   border-radius: 20px;
   font-weight: 600;
   letter-spacing: 0.04em;
+  display: inline-block;
+  line-height: 1.3;
 }
 
-.tag-available { background: var(--lime-dim); color: var(--lime); border: 1px solid rgba(0,255,0,0.2); }
+.tag-available { background: var(--lime-dim); color: var(--lime); border: 1px solid rgba(52,224,122,0.25); }
 .tag-occupied { background: var(--blue-dim); color: var(--blue); border: 1px solid rgba(33,150,243,0.2); }
 .tag-pending { background: var(--orange-dim); color: var(--orange); border: 1px solid rgba(243,146,0,0.2); }
 .tag-rejected { background: var(--danger-dim); color: var(--danger); border: 1px solid rgba(255,77,77,0.2); }
@@ -416,6 +468,7 @@ body {
   border-radius: 50%;
   flex-shrink: 0;
   margin-top: 5px;
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.04);
 }
 
 .activity-content { flex: 1; min-width: 0; }
@@ -467,6 +520,7 @@ body {
   border-bottom: 1px solid var(--border);
 }
 .data-table tr:last-child td { border-bottom: none; }
+.data-table tr { transition: background 0.1s; }
 .data-table tr:hover td { background: var(--surface-soft); }
 
 /* Chart bars */
@@ -510,7 +564,9 @@ body {
   padding: 0 14px;
   height: 40px;
   margin-bottom: 16px;
+  transition: border-color 0.15s, box-shadow 0.15s;
 }
+.search-bar:focus-within { border-color: rgba(243,146,0,0.4); box-shadow: 0 0 0 3px var(--orange-dim); }
 .search-bar input {
   background: none;
   border: none;
@@ -534,13 +590,17 @@ body {
   cursor: pointer;
   border: none;
   font-family: 'Inter', sans-serif;
-  transition: all 0.15s;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
+.btn:active { transform: translateY(1px); }
 .btn-primary-student { background: var(--blue); color: #fff; }
 .btn-primary-landlord { background: var(--orange); color: #000; }
 .btn-primary-admin { background: var(--lime); color: #000; }
+.btn-primary-student:hover,
+.btn-primary-landlord:hover,
+.btn-primary-admin:hover { filter: brightness(1.08); transform: translateY(-1px); box-shadow: var(--shadow-sm); }
 .btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--muted); }
-.btn-ghost:hover { border-color: rgba(255,255,255,0.2); color: var(--text); }
+.btn-ghost:hover { border-color: rgba(255,255,255,0.2); color: var(--text); background: var(--surface-soft); }
 
 /* Chat / message row */
 .msg-row {
@@ -630,11 +690,11 @@ body {
 .chip .ti { font-size: 14px; }
 
 .tag-flagged { background: var(--danger-dim); color: var(--danger); border: 1px solid rgba(255,77,77,0.2); }
-.tag-live { background: var(--lime-dim); color: var(--lime); border: 1px solid rgba(0,255,0,0.2); }
+.tag-live { background: var(--lime-dim); color: var(--lime); border: 1px solid rgba(52,224,122,0.25); }
 .tag-suspended { background: var(--danger-dim); color: var(--danger); border: 1px solid rgba(255,77,77,0.2); }
-.tag-resolved { background: var(--lime-dim); color: var(--lime); border: 1px solid rgba(0,255,0,0.2); }
+.tag-resolved { background: var(--lime-dim); color: var(--lime); border: 1px solid rgba(52,224,122,0.25); }
 .tag-review { background: var(--orange-dim); color: var(--orange); border: 1px solid rgba(243,146,0,0.2); }
-.tag-paid { background: var(--lime-dim); color: var(--lime); border: 1px solid rgba(0,255,0,0.2); }
+.tag-paid { background: var(--lime-dim); color: var(--lime); border: 1px solid rgba(52,224,122,0.25); }
 .tag-overdue { background: var(--danger-dim); color: var(--danger); border: 1px solid rgba(255,77,77,0.2); }
 .tag-urgent { background: var(--danger-dim); color: var(--danger); border: 1px solid rgba(255,77,77,0.2); }
 
@@ -660,11 +720,12 @@ body {
 .grid-card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   overflow: hidden;
-  transition: border-color 0.15s;
+  transition: border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: var(--shadow-sm);
 }
-.grid-card:hover { border-color: rgba(255,255,255,0.18); }
+.grid-card:hover { border-color: rgba(255,255,255,0.18); transform: translateY(-3px); box-shadow: var(--shadow-md); }
 .grid-card-photo {
   height: 130px;
   display: flex;
@@ -763,251 +824,22 @@ body {
   width: 40px; height: 40px; border-radius: 50%; background: var(--blue); color: #fff;
   border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0;
 }
-</style>
-</head>
-<body>
-<div class="app role-landlord" id="app">
-  <!-- ── Sidebar ── -->
-  <aside class="sidebar">
-    <div class="sidebar-logo">
-      <div class="logo-wordmark">
-        <span class="logo-find">Find </span><span class="logo-my">My </span><span class="logo-vibe">Vibe</span>
-      </div>
-      <div class="logo-tag">Landlord Portal</div>
-    </div>
 
-    <nav class="nav" id="nav">
-      <div class="nav-item" ><i class="ti ti-layout-dashboard" aria-hidden="true"></i><span>Overview</span></div>
-      <div class="nav-item" onclick="window.location.href='landlord_properties.html'"><i class="ti ti-building" aria-hidden="true"></i><span>My properties</span></div>
-      <div class="nav-item" onclick="window.location.href='landlord_applications.html'"><i class="ti ti-users" aria-hidden="true"></i><span>Applications</span><span class="nav-badge">7</span></div>
-      <div class="nav-item" onclick="window.location.href='landlord_revenue.html'"><i class="ti ti-chart-bar" aria-hidden="true"></i><span>Revenue</span></div>
-      <div class="nav-item"onclick="window.location.href='landlord_maintenance.html'"><i class="ti ti-tool" aria-hidden="true"></i><span>Maintenance</span><span class="nav-badge">1</span></div>
-      <div class="nav-item active" onclick="window.location.href='landlord_messages.html'"><i class="ti ti-message" aria-hidden="true"></i><span>Messages</span></div>
-      <div class="nav-section-label">Account</div>
-      <div class="nav-item"><i class="ti ti-user" aria-hidden="true"></i><span>My account</span></div>
-      <div class="nav-item"><i class="ti ti-file-invoice" aria-hidden="true"></i><span>Documents</span></div>
-    </nav>
-
-    <div class="sidebar-footer">
-      <div class="user-card" id="user-card">
-        <div class="avatar avatar-landlord">JD</div>
-        <div class="user-info">
-          <div class="user-name">James Davids</div>
-          <div class="user-role-label">Landlord</div>
-        </div>
-        <i class="ti ti-chevron-down" style="font-size:14px; color:var(--muted)" aria-hidden="true"></i>
-      </div>
-    </div>
-  </aside>
-
-  <!-- ── Main ── -->
-  <main class="main">
-    <header class="topbar">
-      <span class="topbar-title">Messages</span>
-      <div class="topbar-right">
-        <button class="icon-btn"><i class="ti ti-search" aria-hidden="true"></i></button>
-        <button class="icon-btn notif-dot"><i class="ti ti-bell" aria-hidden="true"></i></button>
-        <button class="icon-btn"><i class="ti ti-settings" aria-hidden="true"></i></button>
-      </div>
-    </header>
-
-    <div class="content">
-
-      <div class="page-header">
-        <div>
-          <h1>Messages</h1>
-          <p>5 conversations · 2 unread</p>
-        </div>
-      </div>
-
-      <div class="chat-shell">
-        <div class="chat-list-pane">
-          <div class="chat-list-header">
-            <div class="search-bar">
-              <i class="ti ti-search" aria-hidden="true"></i>
-              <input type="text" placeholder="Search messages...">
-            </div>
-          </div>
-          <div class="chat-list-body">
-
-            <div class="chat-list-body" id="landlord-thread-list"></div>
-          </div>
-        </div>
-
-        <div class="chat-main-pane">
-          <div class="chat-thread-header" id="landlord-thread-header">
-            <div class="avatar avatar-student" style="width:36px; height:36px;">–</div>
-            <div>
-              <div class="chat-thread-title">No conversation selected</div>
-              <div class="chat-thread-sub">Your enquiries will appear here.</div>
-            </div>
-          </div>
-
-          <div class="chat-messages" id="landlord-thread-body">
-            <p style="color: var(--muted); padding: 20px;">Loading enquiries…</p>
-          </div>
-
-          <div class="chat-input-row">
-            <button class="icon-btn"><i class="ti ti-paperclip" aria-hidden="true"></i></button>
-            <input id="landlord-message-input" type="text" placeholder="Type a reply...">
-            <button id="landlord-send-btn" class="chat-send-btn" style="background:var(--orange); color:#000"><i class="ti ti-send" aria-hidden="true"></i></button>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </main>
-</div>
-
-<script src="/front-end/shared/csrf.js"></script>
-<script>
-const API_BASE = 'http://127.0.0.1:8000/api';
-const ACCOUNTS_BASE = 'http://127.0.0.1:8000/api/accounts';
-let landlordEnquiries = [];
-let selectedEnquiryId = null;
-
-function escapeHTML(str) {
-  if (str === null || str === undefined) return '';
-  const div = document.createElement('div');
-  div.textContent = str;
-  return div.innerHTML;
+/* ── Modals (used by Enquiries reply modal & Properties listing form) ── */
+.hidden { display: none !important; }
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(2px);
+  display: flex; align-items: center; justify-content: center; z-index: 100;
+  animation: fm-overlay-in 0.15s ease both;
 }
-
-function initials(name) {
-  return (name || '').split(' ').filter(Boolean).slice(0, 2).map(w => w[0].toUpperCase()).join('') || '?';
+@keyframes fm-overlay-in { from { opacity: 0; } to { opacity: 1; } }
+.modal-box {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+  padding: 24px; max-height: 88vh; overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  animation: fm-modal-in 0.18s ease both;
 }
-
-async function requireLandlord() {
-  const response = await fetch(`${ACCOUNTS_BASE}/me/`, { credentials: 'include' });
-  if (!response.ok) {
-    window.location.href = '/front-end/login/Login.html';
-    return null;
-  }
-  const user = await response.json();
-  if (user.role !== 'LANDLORD') {
-    window.location.href = '/front-end/login/Login.html';
-    return null;
-  }
-  return user;
-}
-
-function renderLandlordThreads() {
-  const list = document.getElementById('landlord-thread-list');
-  if (!landlordEnquiries.length) {
-    list.innerHTML = '<div class="chat-list-item"><div class="msg-body"><div class="msg-name">No enquiries yet</div><div class="msg-preview">Students will appear here when they contact you.</div></div></div>';
-    return;
-  }
-
-  list.innerHTML = landlordEnquiries.map(enquiry => `
-    <div class="chat-list-item ${String(selectedEnquiryId) === String(enquiry.id) ? 'active' : ''} ${enquiry.status === 'OPEN' ? 'msg-unread' : ''}" data-id="${enquiry.id}">
-      <div class="msg-av" style="background: ${enquiry.status === 'OPEN' ? 'var(--orange-dim)' : 'var(--surface-soft)'}; color: var(--orange);">${initials(enquiry.student_username || 'S')}</div>
-      <div class="msg-body">
-        <div class="msg-name">${escapeHTML(enquiry.student_username || 'Student')}</div>
-        <div class="msg-preview">${escapeHTML(enquiry.message || 'No message')}</div>
-      </div>
-      <div class="msg-time">${new Date(enquiry.created_at).toLocaleDateString()}</div>
-    </div>
-  `).join('');
-
-  list.querySelectorAll('.chat-list-item[data-id]').forEach(item => {
-    item.addEventListener('click', () => {
-      selectedEnquiryId = item.dataset.id;
-      renderLandlordThreads();
-      renderLandlordThread();
-    });
-  });
-}
-
-function renderLandlordThread() {
-  const header = document.getElementById('landlord-thread-header');
-  const body = document.getElementById('landlord-thread-body');
-  const active = landlordEnquiries.find(enquiry => String(enquiry.id) === String(selectedEnquiryId));
-
-  if (!active) {
-    header.innerHTML = '<div class="avatar avatar-student" style="width:36px; height:36px;">–</div><div><div class="chat-thread-title">No conversation selected</div><div class="chat-thread-sub">Your enquiries will appear here.</div></div>';
-    body.innerHTML = '<p style="color: var(--muted); padding: 20px;">No active conversation.</p>';
-    return;
-  }
-
-  header.innerHTML = `
-    <div class="avatar avatar-student" style="width:36px; height:36px;">${initials(active.student_username || 'S')}</div>
-    <div>
-      <div class="chat-thread-title">${escapeHTML(active.student_username || 'Student')}</div>
-      <div class="chat-thread-sub">${escapeHTML(active.property_title || 'Property')} · ${active.status === 'OPEN' ? 'Awaiting your reply' : 'Replied'}</div>
-    </div>
-  `;
-
-  const rows = [];
-  if (active.message) {
-    rows.push({ type: 'them', text: active.message, time: new Date(active.created_at).toLocaleString() });
-  }
-  if (active.landlord_reply) {
-    rows.push({ type: 'me', text: active.landlord_reply, time: new Date(active.replied_at || active.created_at).toLocaleString() });
-  }
-
-  if (!rows.length) {
-    body.innerHTML = '<p style="color: var(--muted); padding: 20px;">No messages yet.</p>';
-    return;
-  }
-
-  body.innerHTML = rows.map(row => `
-    <div class="bubble-row ${row.type === 'me' ? 'me' : 'them'}">
-      <div class="bubble">${escapeHTML(row.text)}</div>
-      <div class="bubble-time">${escapeHTML(row.time)}</div>
-    </div>
-  `).join('');
-}
-
-async function loadLandlordEnquiries() {
-  try {
-    const response = await fetch(`${API_BASE}/enquiries/`, { credentials: 'include' });
-    if (!response.ok) throw new Error(`Server returned ${response.status}`);
-    const data = await response.json();
-    landlordEnquiries = data.results !== undefined ? data.results : data;
-    if (!selectedEnquiryId && landlordEnquiries.length) {
-      selectedEnquiryId = landlordEnquiries[0].id;
-    }
-    renderLandlordThreads();
-    renderLandlordThread();
-  } catch (error) {
-    console.error('Error loading landlord enquiries:', error);
-    document.getElementById('landlord-thread-list').innerHTML = '<div class="chat-list-item"><div class="msg-body"><div class="msg-name">Could not load messages</div><div class="msg-preview">Please refresh the page or try again later.</div></div></div>';
-    document.getElementById('landlord-thread-body').innerHTML = '<p style="color: var(--muted); padding: 20px;">Unable to load conversations.</p>';
-  }
-}
-
-async function sendLandlordReply() {
-  const input = document.getElementById('landlord-message-input');
-  const reply = input.value.trim();
-  const active = landlordEnquiries.find(enquiry => String(enquiry.id) === String(selectedEnquiryId));
-  if (!reply || !active) return;
-
-  try {
-    const response = await fetch(`${API_BASE}/enquiries/${active.id}/reply/`, {
-      method: 'POST',
-      credentials: 'include',
-      headers: csrfHeaders({ 'Content-Type': 'application/json' }),
-      body: JSON.stringify({ reply }),
-    });
-    if (!response.ok) throw new Error(`Server returned ${response.status}`);
-    input.value = '';
-    await loadLandlordEnquiries();
-  } catch (error) {
-    console.error('Error sending landlord reply:', error);
-    alert('Could not send the reply. Please try again.');
-  }
-}
-
-document.getElementById('landlord-send-btn').addEventListener('click', sendLandlordReply);
-document.getElementById('landlord-message-input').addEventListener('keydown', (event) => {
-  if (event.key === 'Enter') sendLandlordReply();
-});
-
-document.addEventListener('DOMContentLoaded', async () => {
-  const user = await requireLandlord();
-  if (!user) return;
-  await loadLandlordEnquiries();
-});
-</script>
-</body>
-</html>
+@keyframes fm-modal-in { from { opacity: 0; transform: translateY(6px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+.modal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.modal-head h3, .modal-head .card-title { font-family: 'Space Grotesk', sans-serif; }

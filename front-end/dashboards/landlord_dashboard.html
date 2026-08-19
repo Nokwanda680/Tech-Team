@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find My Vibe — Landlord Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<link rel="stylesheet" href="landlord-theme.css">
+</head>
+<body>
+<div class="app role-landlord" id="app">
+  <!-- ── Sidebar ── -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-wordmark">
+        <span class="logo-find">Find </span><span class="logo-my">My </span><span class="logo-vibe">Vibe</span>
+      </div>
+      <div class="logo-tag">Landlord Portal</div>
+    </div>
+
+    <nav class="nav" id="nav">
+      <div class="nav-item active" onclick="window.location.href='landlord_dashboard.html'"><i class="ti ti-layout-dashboard" aria-hidden="true"></i><span>Overview</span></div>
+      <div class="nav-item" onclick="window.location.href='landlord_properties.html'"><i class="ti ti-building" aria-hidden="true"></i><span>My properties</span></div>
+      <div class="nav-item" onclick="window.location.href='landlord_applications.html'"><i class="ti ti-users" aria-hidden="true"></i><span>Enquiries</span><span class="nav-badge" id="nav-enquiries-badge">–</span></div>
+      <div class="nav-item" onclick="window.location.href='landlord_revenue.html'"><i class="ti ti-chart-bar" aria-hidden="true"></i><span>Listing performance</span></div>
+      <div class="nav-section-label">Account</div>
+      <div class="nav-item" onclick="window.location.href='landlord_account.html'"><i class="ti ti-user" aria-hidden="true"></i><span>My account</span></div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-card" id="user-card">
+        <div class="avatar avatar-landlord">JD</div>
+        <div class="user-info">
+          <div class="user-name">James Davids</div>
+          <div class="user-role-label">Landlord</div>
+        </div>
+        <i class="ti ti-chevron-down" style="font-size:14px; color:var(--muted)" aria-hidden="true"></i>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── Main ── -->
+  <main class="main">
+    <header class="topbar">
+      <span class="topbar-title" id="topbar-title">Landlord Portal</span>
+      <div class="topbar-right">
+        <button class="icon-btn"><i class="ti ti-search" aria-hidden="true"></i></button>
+        <button class="icon-btn notif-dot"><i class="ti ti-bell" aria-hidden="true"></i></button>
+        <button class="icon-btn"><i class="ti ti-settings" aria-hidden="true"></i></button>
+      </div>
+    </header>
+
+    <div class="content">
+
+      <div class="panel active" id="panel-landlord">
+
+        <div class="greeting">
+          <h1>Welcome back, <span class="accent-landlord" id="greeting-name">there</span></h1>
+          <p id="greeting-subtitle">Loading your overview…</p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card orange">
+            <div class="stat-label">My Listings</div>
+            <div class="stat-value" id="stat-listings">–</div>
+            <div class="stat-meta" id="stat-listings-meta"></div>
+          </div>
+          <div class="stat-card blue">
+            <div class="stat-label">Avg. Rent</div>
+            <div class="stat-value" id="stat-avg-rent">–</div>
+            <div class="stat-meta">Across your listings</div>
+          </div>
+          <div class="stat-card lime">
+            <div class="stat-label">Favourites</div>
+            <div class="stat-value" id="stat-favourites">–</div>
+            <div class="stat-meta">Students who saved your listings</div>
+          </div>
+          <div class="stat-card muted">
+            <div class="stat-label">Open Enquiries</div>
+            <div class="stat-value" id="stat-open-enquiries">–</div>
+            <div class="stat-meta">Awaiting your reply</div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+
+          <!-- My properties -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">My properties</span>
+              <button class="card-action" onclick="window.location.href='landlord_properties.html'">Manage</button>
+            </div>
+            <div id="dashboard-properties-list"><p>Loading…</p></div>
+          </div>
+
+          <!-- Recent enquiries -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Recent enquiries</span>
+              <button class="card-action" onclick="window.location.href='landlord_applications.html'">View all</button>
+            </div>
+            <table class="data-table">
+              <thead>
+                <tr><th>Student</th><th>Property</th><th>Status</th></tr>
+              </thead>
+              <tbody id="dashboard-enquiries-tbody">
+                <tr><td colspan="3">Loading…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:20px">
+          <div class="card-header">
+            <span class="card-title">Recent notifications</span>
+          </div>
+          <div id="dashboard-notifications-list"><p>Loading…</p></div>
+        </div>
+
+      </div>
+
+
+
+    </div>
+  </main>
+</div>
+<script src="/front-end/shared/csrf.js"></script>
+<script src="/front-end/login/logout.js"></script>
+<script src="landlord_dashboard.js"></script>
+</body>
+</html>

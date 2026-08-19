@@ -7,13 +7,16 @@ document.addEventListener("DOMContentLoaded", function () {
         attribution:"&copy; OpenStreetMap contributors"
     }
 ).addTo(map);
+var address = ["","",""];
 
 L.marker([-33.93449,18.62997]).addTo(map).bindPopup("University of the Western Cape").openPopup();
-L.marker([-33.93449,18.99657]).addTo(map).bindPopup('Unibel 1').openPopup();
+L.marker([-33.93849,18.62799]).addTo(map).bindPopup("Unibel 1").openPopup();
+L.marker([-33.93889,18.62789]).addTo(map).bindPopup("Unibel 2").openPopup();
 
 L.Routing.control({waypoints: [L.latLng(lat,long),L.latLng(-33.9284,18.6279)],routeWhileDragging: true}).addTo(map);
 });
-document.getElementById("findBtn").addEventListener("click", async () => {
+const button = document.getElementById('search-btn');
+button.addEventListener("click", async () => {
     const address = document.getElementById("address").value;
     if (!address.trim()) {
         alert("Please enter an address.");

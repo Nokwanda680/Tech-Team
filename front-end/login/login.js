@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 if (response.ok && data.success) {
                     console.log("Role:", `"${data.role}"`);
-                    alert('Login successful!');
+                    //alert('Login successful!');
                     //Store user info(
 
                     localStorage.setItem('username', data.username);

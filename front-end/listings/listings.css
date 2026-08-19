@@ -39,6 +39,7 @@ button, input, select, textarea{
 
 button{
   cursor: pointer;
+  pointer-events: auto;
 }
 
 nav{
@@ -110,7 +111,6 @@ nav{
   content: '';
   position: absolute;
   inset: 0;
-  pointer-events: none;
   background: linear-gradient(180deg, rgba(15,15,15,0.08) 0%, rgba(15,15,15,0.72) 95%);
   z-index: 2;
 }

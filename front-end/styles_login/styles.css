@@ -17,6 +17,9 @@
   box-sizing: border-box;
   
 }
+button, .btn, .btn-solid, .btn-ghost, .search-btn, .page-btn, .icon-btn, .role-btn, .chip, .card-action, input, select, textarea {
+  pointer-events: auto;
+}
 /* ====== Page body & image defaults ====== */
 body{
   font-family: 'DM Sans', sans-serif;
@@ -219,22 +222,22 @@ nav{
 }
 
 .slide-1{
-  background-image: url("/front-end/Images/image1.jpg");
+  background-image: url("/front-end/Images/img1.jpg");
   animation-delay: 0s;
 }
 
 .slide-2{
-  background-image: url("/front-end/Images/image2.jpg");
+  background-image: url("/front-end/Images/img3.jpeg");
   animation-delay: 4s;
 }
 
 .slide-3{
-  background-image: url("/front-end/Images/image 6.jpg");
+  background-image: url("/front-end/Images/img5.jpg");
   animation-delay: 8s;
 }
 
 .slide-4{
-  background-image: url("/front-end/Images/kovacs_image1.jpg");
+  background-image: url("/front-end/Images/img12.jpg");
   animation-delay: 12s;
 }
 
