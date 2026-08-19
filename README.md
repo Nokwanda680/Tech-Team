@@ -51,140 +51,27 @@ py -m pip install --upgrade pip
 py -m pip install -r requirements.txt
 ```
 
-### 3. Apply database migrations
-
+## 3. redirect to the main backend directory
+on your terminal run
 ```powershell
-py manage.py migrate
+cd "C:\Users\nomfu\OneDrive\Desktop\Find My VIbe-Student Accomodation Finder\backend\findmyvibe_backend"
 ```
-
-The local project uses SQLite, so no separate database server is required. The existing `db.sqlite3` may already contain development data.
-
-### 4. Create an administrator account
-
-This is optional if the database already contains an administrator:
-
+## 4. run the backend
+on your terminal run
 ```powershell
-py manage.py createsuperuser
+"Find My VIbe-Student Accomodation Finder\backend\findmyvibe_backend> python manage.py runserver"
 ```
-
-Follow the prompts to choose the email/username and password.
-
-### 5. Start the Django backend
-
-```powershell
-py manage.py runserver 127.0.0.1:8000
+## 5. Run it Locally
+Install Live Server extension 
+Right-Click on the index.html page 
+Click Sign in at the top left of the landing page of the website
+on the username part write:
+ ```text 
+ demo_student21 or demo_landlord1
+ ```
+ on the password part write:
+ ```text
+DemoPass123!
 ```
-
-Keep this terminal running. The backend is available at:
-
-- API root: http://127.0.0.1:8000/api/
-- Django admin: http://127.0.0.1:8000/admin/
-- Dashboard: http://127.0.0.1:8000/dashboard/
-
-### 6. Serve the frontend
-
-In a second terminal, return to the repository root and serve the whole repository:
-
-```powershell
-cd "c:\path\to\Find My VIbe-Student Accomodation Finder"
-py -m http.server 5500
-```
-
-Open the application at:
-
-http://127.0.0.1:5500/front-end/home%20page/index.html
-
-Serving from the repository root is important because the frontend uses paths such as `/front-end/...`. Opening the HTML files directly with `file://` can cause broken assets, API requests, or browser security restrictions.
-
-## Main API Endpoints
-
-The API is rooted at `http://127.0.0.1:8000/api/`.
-
-| Area | Endpoint |
-| --- | --- |
-| Accounts | `/api/accounts/register/`, `/login/`, `/logout/`, `/me/` |
-| Properties | `/api/properties/` |
-| Property images | `/api/property-images/` |
-| Amenities | `/api/amenities/` |
-| Favourites | `/api/favourites/` |
-| Enquiries | `/api/enquiries/` |
-| Reviews | `/api/reviews/` |
-| Reports | `/api/reports/` |
-| Notifications | `/api/notifications/` |
-| Admin statistics | `/api/admin/stats/` |
-
-The browsable Django REST Framework interface can be used to inspect endpoints while the development server is running.
-
-## Testing and Maintenance
-
-Run Django's test suite from `backend\findmyvibe_backend`:
-
-```powershell
-py manage.py test
-```
-
-Useful maintenance commands:
-
-```powershell
-py manage.py check
-py manage.py makemigrations
-py manage.py migrate
-py manage.py collectstatic --noinput
-```
-
-Only run `makemigrations` after changing Django models and reviewing the generated migration files.
-
-## Configuration
-
-The backend reads these optional environment variables:
-
-| Variable | Purpose | Local default |
-| --- | --- | --- |
-| `DJANGO_SECRET_KEY` | Secret used for signing cookies and tokens | Development fallback in settings |
-| `DJANGO_DEBUG` | Enables debug mode when set to `True` | `True` |
-| `DJANGO_ALLOWED_HOSTS` | Comma-separated hostnames accepted by Django | Empty list |
-| `DJANGO_EXTRA_CORS_ORIGINS` | Comma-separated additional frontend origins | None |
-
-For a local PowerShell session, for example:
-
-```powershell
-$env:DJANGO_DEBUG = "True"
-$env:DJANGO_ALLOWED_HOSTS = "127.0.0.1,localhost"
-```
-
-The default local CORS and CSRF configuration already allows the frontend on port 5500 and the backend on port 8000.
-
-## Uploaded Files and Static Files
-
-- User avatars and property images are stored under `backend/findmyvibe_backend/media/` during development.
-- Django serves media files locally when `DEBUG=True`.
-- Static assets are collected into `backend/findmyvibe_backend/staticfiles/` by `collectstatic`.
-- Do not rely on Django's development media serving or the committed SQLite database for production.
-
-## Production Notes
-
-Before deploying:
-
-1. Set a strong, unique `DJANGO_SECRET_KEY`.
-2. Set `DJANGO_DEBUG=False`.
-3. Set `DJANGO_ALLOWED_HOSTS` to the real backend hostname(s).
-4. Set `DJANGO_EXTRA_CORS_ORIGINS` to the real frontend origin(s).
-5. Use HTTPS and a production-ready server such as Gunicorn behind a reverse proxy.
-6. Move uploaded media and rate-limit/cache state to production infrastructure.
-7. Use a managed database and configure backups instead of relying on SQLite.
-8. Run `py manage.py check --deploy` and review every warning.
-
-Never commit real passwords, API keys, production secret keys, or private uploaded files.
-
-## Troubleshooting
-
-**The frontend shows no listings:** confirm that `py manage.py runserver 127.0.0.1:8000` is still running and that the browser is using the frontend URL on port 5500.
-
-**CORS or CSRF errors appear:** use the HTTP frontend URL rather than opening a file directly, and ensure the frontend origin is included in `CORS_ALLOWED_ORIGINS` or `DJANGO_EXTRA_CORS_ORIGINS`.
-
-**The database is missing tables:** run `py manage.py migrate` from `backend\findmyvibe_backend`.
-
-**Images do not load:** check that the file exists under `backend\findmyvibe_backend\media` and that the Django server is running with `DEBUG=True`.
-
-**Port 8000 or 5500 is already in use:** stop the process using the port or start the relevant server on another port. The frontend JavaScript currently expects the backend at `127.0.0.1:8000`, so changing the backend port requires updating the frontend API URLs as well.
-
+# Now you can browse through the website
+## HAVE FUN!!!
