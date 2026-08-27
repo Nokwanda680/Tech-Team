@@ -32,6 +32,7 @@
     <div class="sidebar-footer">
       <div class="avatar">TM</div>
       <div><div class="sf-name">Thandi M.</div><div class="sf-sub">UCT · 3rd year</div></div>
+      <button class="btn btn-ghost" id="logout-btn" onclick="if(confirm('Log out?')) logoutUser();" style="width:100%; margin-top:8px; font-size:12px; justify-content:center;"><i class="ti ti-logout" aria-hidden="true"></i> Log out</button>
     </div>
   </aside>
 
@@ -70,6 +71,7 @@
 </div>
 
 <script src="/front-end/shared/csrf.js"></script>
+<script src="/front-end/login/logout.js"></script>
 <script>
 const API_BASE = 'http://127.0.0.1:8000/api';
 const ACCOUNTS_BASE = 'http://127.0.0.1:8000/api/accounts';

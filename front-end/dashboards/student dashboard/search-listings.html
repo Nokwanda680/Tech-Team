@@ -45,6 +45,7 @@
     <div class="sidebar-footer">
       <div class="avatar">TM</div>
       <div><div class="sf-name">Thandi M.</div><div class="sf-sub">UCT · 3rd year</div></div>
+      <button class="btn btn-ghost" id="logout-btn" onclick="if(confirm('Log out?')) logoutUser();" style="width:100%; margin-top:8px; font-size:12px; justify-content:center;"><i class="ti ti-logout" aria-hidden="true"></i> Log out</button>
     </div>
   </aside>
 
@@ -193,6 +194,8 @@
   </main>
 </div>
 
+<script src="/front-end/shared/csrf.js"></script>
+<script src="/front-end/login/logout.js"></script>
 <script>
 document.querySelectorAll('.nav-item[data-page]').forEach(function(el){
   if (el.dataset.page === document.body.dataset.page) el.classList.add('active');

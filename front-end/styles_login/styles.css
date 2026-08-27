@@ -222,17 +222,17 @@ nav{
 }
 
 .slide-1{
-  background-image: url("/front-end/Images/img1.jpg");
+  background-image: url("/front-end/Images/img6.jpeg");
   animation-delay: 0s;
 }
 
 .slide-2{
-  background-image: url("/front-end/Images/img3.jpeg");
+  background-image: url("/front-end/Images/img13.jpg");
   animation-delay: 4s;
 }
 
 .slide-3{
-  background-image: url("/front-end/Images/img5.jpg");
+  background-image: url("/front-end/Images/img9.jpeg");
   animation-delay: 8s;
 }
 

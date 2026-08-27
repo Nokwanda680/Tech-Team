@@ -787,6 +787,7 @@ body {
         </div>
         <i class="ti ti-chevron-down" style="font-size:14px; color:var(--muted)" aria-hidden="true"></i>
       </div>
+      <button class="btn btn-ghost" id="logout-btn" onclick="if(confirm('Log out?')) logoutUser();" style="width:100%; margin-top:8px; font-size:12px; justify-content:center;"><i class="ti ti-logout" aria-hidden="true"></i> Log out</button>
     </div>
   </aside>
 
@@ -956,5 +957,7 @@ body {
   </main>
 </div>
 
+<script src="/front-end/shared/csrf.js"></script>
+<script src="/front-end/login/logout.js"></script>
 </body>
 </html>
