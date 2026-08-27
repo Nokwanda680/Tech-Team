@@ -7,6 +7,19 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<style>
+  .div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  .sidebar-footer{
+    display: flex;
+    flex-direction: column;
+
+  }
+</style>
 </head>
 <body data-page="account">
 <img src="" alt="" srcset="">
@@ -29,8 +42,10 @@
       <a class="nav-item" data-page="settings" href="settings.html">Settings</a>
     </nav>
     <div class="sidebar-footer">
-      <div class="avatar">TM</div>
-      <div><div class="sf-name">Thandi M.</div><div class="sf-sub">UCT · 3rd year</div></div>
+      
+      <div class='div'><div class="avatar">TM</div><div class="outer"><div class="sf-name">Thandi M.</div><div class="sf-sub">UCT · 3rd year</div></div></div>
+      <button class="btn btn-ghost" id="logout-btn" onclick="if(confirm('Log out?')) logoutUser();" style="width:100%; margin-top:8px; font-size:12px; justify-content:center;"><i class="ti ti-logout" aria-hidden="true"></i> Log out</button>
+
     </div>
   </aside>
 
