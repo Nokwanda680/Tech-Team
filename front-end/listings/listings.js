@@ -4,10 +4,82 @@
 // to live in listings.html. Also wires up favouriting for logged-in
 // students via /api/properties/<id>/toggle_favourite/.
 
-const API_BASE = 'http://127.0.0.1:8000//api';
+const API_BASE = 'http://127.0.0.1:8000/api';
 
 const listingsGrid = document.getElementById('listings');
 const resultsCount = document.getElementById('results-count');
+const filtersSidebar = document.getElementById('filters-sidebar');
+const toggleFiltersBtn = document.getElementById('toggle-filters');
+
+// Fallback sample data if API fails
+const FALLBACK_LISTINGS = [
+    {
+        id: 1,
+        title: "Modern Apartment near Campus",
+        rent: 4500,
+        location: "Downtown District",
+        distance_from_campus_km: 2,
+        university_nearby: "University Of the Western Cape",
+        is_available: true,
+        average_rating: 4.5,
+        images: [{ image: '/front-end/Images/image1.jpg', is_primary: true }]
+    },
+    {
+        id: 2,
+        title: "Cozy Studio with Utilities Included",
+        rent: 3200,
+        location: "Riverside Area",
+        distance_from_campus_km: 1.5,
+        university_nearby: "University",
+        is_available: true,
+        average_rating: 4.2,
+        images: [{ image: '/front-end/Images/image2.jpg', is_primary: true }]
+    },
+    {
+        id: 3,
+        title: "Shared Apartment - 3 Bedrooms",
+        rent: 2800,
+        location: "Student Quarter",
+        distance_from_campus_km: 0.8,
+        university_nearby: "University Of the Western Cape",
+        is_available: true,
+        average_rating: 4.7,
+        images: [{ image: '/front-end/Images/image3.jpg', is_primary: true }]
+    },
+    {
+        id: 4,
+        title: "Luxury Suite with Gym Access",
+        rent: 5500,
+        location: "Prestige Heights",
+        distance_from_campus_km: 3,
+        university_nearby: "University Of the Western Cape",
+        is_available: true,
+        average_rating: 4.8,
+        images: [{ image: '/front-end/Images/kovacs_image1.jpg', is_primary: true }]
+    },
+    {
+        id: 5,
+        title: "Budget-Friendly Dorm Room",
+        rent: 2200,
+        location: "Campus Residences",
+        distance_from_campus_km: 0.3,
+        university_nearby: "University Of the Western Cape",
+        is_available: false,
+        average_rating: 4.0,
+        images: [{ image: '/front-end/Images/image1.jpg', is_primary: true }]
+    },
+    {
+        id: 6,
+        title: "Furnished Flat with Balcony",
+        rent: 3800,
+        location: "Garden District",
+        distance_from_campus_km: 1.2,
+        university_nearby: "University Of the Western Cape",
+        is_available: true,
+        average_rating: 4.6,
+        images: [{ image: '/front-end/Images/image2.jpg', is_primary: true }]
+    },
+];
 
 function currentRole() {
     return localStorage.getItem('role');
@@ -105,8 +177,68 @@ async function loadListings() {
         attachFavouriteHandlers();
     } catch (error) {
         console.error('Error loading listings:', error);
-        listingsGrid.innerHTML = '<p>Sorry, we could not load listings right now. Please try again shortly.</p>';
+        // Use fallback data on API error
+        console.log('Using fallback sample data...');
+        displayFallbackListings();
     }
+}
+
+function displayFallbackListings() {
+    const filtered = filterListings(FALLBACK_LISTINGS);
+    resultsCount.textContent = filtered.length;
+    
+    if (!filtered.length) {
+        listingsGrid.innerHTML = '<p>No properties match your filters. Try adjusting your search criteria.</p>';
+        return;
+    }
+    
+    listingsGrid.innerHTML = filtered.map(propertyCardHTML).join('');
+    attachFavouriteHandlers();
+}
+
+function filterListings(listings) {
+    const minRent = parseInt(document.getElementById('min-rent').value) || 0;
+    const maxRent = parseInt(document.getElementById('max-rent').value) || Infinity;
+    
+    const checkedRoomTypes = Array.from(document.querySelectorAll('.room-type-filter:checked')).map(el => el.value);
+    const checkedAmenities = Array.from(document.querySelectorAll('.amenity-filter:checked')).map(el => el.value);
+    const searchTerm = document.getElementById('hero-search').value.trim().toLowerCase();
+    
+    return listings.filter(property => {
+        // Filter by rent
+        if (property.rent < minRent || property.rent > maxRent) {
+            return false;
+        }
+        
+        // Filter by room type (if any are selected)
+        if (checkedRoomTypes.length > 0) {
+            const roomType = property.room_type || 'SINGLE';
+            if (!checkedRoomTypes.includes(roomType)) {
+                return false;
+            }
+        }
+        
+        // Filter by amenities (if any are selected)
+        if (checkedAmenities.length > 0) {
+            const propertyAmenities = property.amenities || [];
+            const hasAllAmenities = checkedAmenities.some(amenity => 
+                propertyAmenities.includes(amenity)
+            );
+            if (!hasAllAmenities && checkedAmenities.length > 0) {
+                return false;
+            }
+        }
+        
+        // Filter by search term
+        if (searchTerm) {
+            const searchableText = `${property.title} ${property.location} ${property.university_nearby}`.toLowerCase();
+            if (!searchableText.includes(searchTerm)) {
+                return false;
+            }
+        }
+        
+        return true;
+    });
 }
 
 function attachFavouriteHandlers() {
@@ -137,6 +269,16 @@ document.getElementById('apply-filters-btn').addEventListener('click', loadListi
 document.getElementById('hero-search-btn').addEventListener('click', loadListings);
 document.getElementById('hero-search').addEventListener('keydown', (e) => {
     if (e.key === 'Enter') loadListings();
+});
+
+// Sidebar toggle functionality
+toggleFiltersBtn.addEventListener('click', () => {
+    filtersSidebar.classList.toggle('collapsed');
+    if (filtersSidebar.classList.contains('collapsed')) {
+        toggleFiltersBtn.textContent = '☰ Show Filters';
+    } else {
+        toggleFiltersBtn.textContent = '✕ Hide Filters';
+    }
 });
 
 document.addEventListener('DOMContentLoaded', () => {

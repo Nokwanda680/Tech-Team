@@ -240,11 +240,22 @@ nav{
   background: rgba(255,255,255,0.04);
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 24px;
+  height: fit-content;
+  position: sticky;
+  top: 100px;
 }
 
-.sidebar-section{
-  margin-bottom: 28px;
-}
+  .sidebar-toggle{
+  display: none;
+  background: var(--orange);
+  color: #0f0f0f;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-bottom: 16px;
+  width: 100%;}
 
 .sidebar-section h3{
   font-family: 'Syne', sans-serif;
@@ -467,6 +478,24 @@ footer{
   .sidebar{
     width: 100%;
     padding: 20px;
+    position: static;
+    max-height: 100vh;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+  }
+  
+  .sidebar-toggle{
+    display: block;
+  }
+  
+  .sidebar.collapsed{
+    max-height: 45px;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  .sidebar.collapsed .sidebar-section,
+  .sidebar.collapsed #apply-filters-btn{
+    display: none;
   }
   
   .listings-grid{
@@ -535,6 +564,11 @@ footer{
   .sidebar{
     width: 100%;
     padding: 16px;
+  }
+  
+  .sidebar-toggle{
+    display: block;
+    margin-bottom: 16px;
   }
   
   .sidebar-section{
@@ -628,6 +662,17 @@ footer{
   
   .sidebar{
     padding: 12px;
+  }
+  
+  .sidebar-toggle{
+    display: block;
+    margin-bottom: 12px;
+    width: 100%;
+  }
+  
+  .sidebar.collapsed .sidebar-section,
+  .sidebar.collapsed #apply-filters-btn{
+    display: none;
   }
   
   .listings-grid{
@@ -747,13 +792,13 @@ footer{
   margin-top: 4px;
 }
 
-  </style>
-  
+</style>
+ 
 </head>
 <body>
     <!--  Nav-bar -->
   <nav>
-    <div class="logo"><img src="/Images/logo_removed2.png" alt="" srcset="" width="80px" height="55px">  Find<span>My</span>Vibe</div>
+    <div class="logo"><img src="/front-end/Images/logo-removebg-preview.png" alt="" srcset="" width="80px" height="55px">  Find<span>My</span>Vibe</div>
     <div class="nav-cta">
       <button class="btn-solid" onclick="window.location.href='/home page/index.html'">Home</button>
     </div>
@@ -779,7 +824,8 @@ footer{
   </section>
   <!-- ====Side Bar==== -->
   <div class="main-layout">
-    <aside class="sidebar">
+    <aside class="sidebar" id="filters-sidebar">
+      <button class="sidebar-toggle" id="toggle-filters">✕ Hide Filters</button>
       <div class="sidebar-section">
         <h3>Monthly Rent</h3>
         <div class="range-row">
@@ -805,6 +851,7 @@ footer{
         <label class="check-item"><input type="checkbox" class="amenity-filter" value="Gym"><span class="check-box"></span> Gym</label>
         <label class="check-item"><input type="checkbox" class="amenity-filter" value="Security"><span class="check-box"></span> Security</label>
       </div>
+      <img src="/front-end/Images/" alt="" srcset="">
 
       <button class="btn-solid" id="apply-filters-btn" style="width:100%;margin-top:12px;">Apply Filters</button>
     </aside>

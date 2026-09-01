@@ -81,14 +81,9 @@ class PropertyViewSet(viewsets.ModelViewSet):
             fav.delete()
             return Response({"favourited": False})
         return Response({"favourited": True})
-
-
 def models_Q_approved_or_own(user):
     from django.db.models import Q
-
     return Q(status=Property.Status.APPROVED, is_available=True) | Q(landlord=user)
-
-
 class PropertyImageViewSet(viewsets.ModelViewSet):
     serializer_class = PropertyImageSerializer
     permission_classes = [IsLandlord]

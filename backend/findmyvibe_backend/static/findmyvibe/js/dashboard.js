@@ -53,42 +53,30 @@ const roles = (typeof dashboard_roles !== 'undefined') ? dashboard_roles : {
     avatarClass: 'avatar-admin',
     topbarTitle: 'Admin Control',
     nav: [
-      { icon: 'ti-layout-dashboard', label: 'Dashboard', active: true },
-      { icon: 'ti-users',            label: 'Users', badge: 134 },
-      { icon: 'ti-building',         label: 'Listings', badge: 38 },
-      { icon: 'ti-clipboard-list',   label: 'Applications' },
-      { icon: 'ti-alert-triangle',   label: 'Disputes', badge: 3 },
-      { icon: 'ti-activity',         label: 'Analytics' },
-      null,
-      { icon: 'ti-shield',           label: 'Moderation' },
-      { icon: 'ti-settings',         label: 'Settings' },
+      { icon: 'ti-layout-dashboard', label: 'Dashboard', active: true },{ icon: 'ti-users',            label: 'Users', badge: 134 },
+      { icon: 'ti-building',         label: 'Listings', badge: 38 },{ icon: 'ti-clipboard-list',   label: 'Applications' },
+      { icon: 'ti-alert-triangle',   label: 'Disputes', badge: 3 },{ icon: 'ti-activity',         label: 'Analytics' },null,
+      { icon: 'ti-shield',           label: 'Moderation' },{ icon: 'ti-settings',         label: 'Settings' },
     ]
   }
 };
-
 let currentRole = (typeof dashboard_initial_role !== 'undefined') ? dashboard_initial_role : 'student';
-
 function switchRole(role) {
   currentRole = role;
   const app = document.getElementById('app');
   app.className = 'app role-' + role;
-
   document.querySelectorAll('.role-btn').forEach(b => {
     b.classList.toggle('active', b.dataset.role === role);
   });
-
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.getElementById('panel-' + role).classList.add('active');
-
   renderNav(role);
   renderUser(role);
   document.getElementById('topbar-title').textContent = roles[role].topbarTitle;
 }
-
 function renderNav(role) {
   const nav = document.getElementById('nav');
   nav.innerHTML = '';
-
   roles[role].nav.forEach(item => {
     if (item === null) {
       const lbl = document.createElement('div');
@@ -109,7 +97,6 @@ function renderNav(role) {
     nav.appendChild(el);
   });
 }
-
 function renderUser(role) {
   const r = roles[role];
   document.getElementById('user-card').innerHTML = `
@@ -121,7 +108,6 @@ function renderUser(role) {
     <i class="ti ti-chevron-down" style="font-size:14px; color:var(--muted)" aria-hidden="true"></i>
   `;
 }
-
 function buildBarChart(chartId, labels, values, color, showValues) {
   const chart = document.getElementById(chartId);
   if (!chart) return;
@@ -138,11 +124,8 @@ function buildBarChart(chartId, labels, values, color, showValues) {
     </div>`;
   }).join('');
 }
-
-// Init
 renderNav(currentRole);
 renderUser(currentRole);
-
 buildBarChart(
   'rev-chart',
   ['Jan','Feb','Mar','Apr','May','Jun'],
@@ -150,7 +133,6 @@ buildBarChart(
   'orange',
   true
 );
-
 buildBarChart(
   'signup-chart',
   ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],

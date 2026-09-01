@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Find My Vibe — Student Accommodation</title>
+  <title>Find My Vibe · Home Page</title>
   <meta name="description" content="Find verified student accommodation near your campus. Browse real listings, compare prices, and contact landlords directly.">
   <link rel="icon" type="image" href="/front-end/Images/logo-removebg-preview.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,31 +11,41 @@
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/front-end/styles_login/styles.css">
 </head>
-<body>
-
-  <!-- Nav -->
+<body><!--
   <nav>
     <div class="logo"><img src="/front-end/Images/logo_removed2.png" alt="">Find<span>My</span>Vibe</div>
-    <!--<ul class="nav-links">
+    <ul class="nav-links">
       <li><a href="/front-end/home%20page/index.html">Home</a></li>
       <li><a href="/front-end/listings/listings.html">Listings</a></li>
       <li><a href="/front-end/dashboards/student%20dashboard/saved_listings.html">Favourites</a></li>
-    </ul>-->
+    </ul>
     <div class="nav-cta">
       <button class="btn-solid" onclick="window.location.href='/front-end/login/Login.html'">Sign In</button>
     </div>
-  </nav>
+  </nav>-->
+    <nav>
+        <div class="logo"><img src="/front-end/Images/logo_removed2.png" alt="">Find<span>My</span>Vibe</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <!--<li><a href="listings_map.html">Map View</a></li>-->
+        </ul>
+        <div class="nav-cta">
+          <button class="btn-ghost" onclick='window.location.href="/front-end/login/check.html"'>Sign Up</button>
+          <button class="btn-solid" onclick="window.location.href='/front-end/login/Login.html'">Sign In</button>
+        </div>
+    </nav>
 
   <!-- Hero -->
   <section class="hero-strip">
     <div class="hero-copy">
       <p class="eyebrow">Student accommodation made simple</p>
       <h1>Find accommodation that matches your vibe.</h1>
-      <p class="hero-text">Verified listings near your campus. Browse photos, compare prices, and contact landlords directly — no agents, no guesswork.</p>
+      <p class="hero-text">Verified listings near your campus. Browse photos, compare prices, and contact landlords directly — no agents, no guesswork.</p><!--
       <form class="search-bar" id="hero-search-form">
         <input type="text" id="hero-search-input" placeholder="Search by campus, suburb or budget…">
         <button class="search-btn" type="submit">Search</button>
-      </form>
+      </form>-->
       <div class="result"></div>
       <div class="hero-stats" id="hero-stats">
         <span class="stat-pill"><span class="dot"></span> <p>Loading live listings…</p></span>

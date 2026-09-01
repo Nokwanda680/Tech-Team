@@ -25,11 +25,33 @@ body{
 header{padding:18px 24px}
 header img{vertical-align:middle;border-radius:12px}
 
+nav.nav-bar{display:flex;flex-direction:row;align-items:center;gap:12px;padding:20px;text-align:center}
+nav.nav-bar img{max-width:180px;height:auto}
+.p1{font-size:1.4rem;color:var(--muted);margin:0}
+.p2{font-size:1.8rem;font-weight:700;color:var(--text);margin:0}
+.p2 span{color:var(--orange)}
+
 main{padding:28px}
 
 /* Layout containers used by signup pages */
-.div, main.div{display:flex;justify-content:center;padding:20px}
-.container, .div1, .div2{width:100%;max-width:1100px}
+.div, main.div{display:flex;flex-direction:row;justify-content:center;padding:20px}
+.container, .div1, .div2{width:100%;max-width:800px}
+.div1{
+  width: 100%;
+  height: 100%;
+}
+.div-outer{
+  display:flex;
+  flex-direction:row;
+  gap:24px;
+  margin-bottom:12px;
+}
+.div-outer .div,
+.div-outer .div1{
+    flex:1;
+    padding:0;
+    margin:0;
+}
 
 .div1{
     display:block;
@@ -40,12 +62,12 @@ main{padding:28px}
 
 }
 .div1 p img{
-    display: flex;
-    width: 100%;
-    height: auto;
-    align-items: center;
-    border-radius: 50%;
-    
+    display: block;
+    max-width:280px;
+    height:280px;
+    object-fit:cover;
+    border-radius:50%;
+    margin:0 auto;
 }
 .div2{background:transparent;padding:0;border-radius:0;border:none}
 
@@ -66,13 +88,20 @@ main{padding:28px}
 h2{font-family:'Syne',sans-serif;margin:10px 0 14px;color:#fff}
 
 form{display:block;margin-bottom:18px}
-label{display:block;font-size:0.9rem;color:var(--muted);margin-bottom:6px}
+label{display:block;font-size:0.9rem;color:var(--muted);margin-bottom:6px;font-weight:500}
 input[type='text'],input[type='email'],input[type='tel'],input[type='number'],input[type='date'],
 input[type='password'],select,textarea{
-  width:100%;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);color:var(--text);margin-bottom:12px;font-size:0.95rem
+  width:100%;padding:12px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);color:var(--text);margin-bottom:12px;font-size:0.95rem;transition:all 0.2s ease
 }
-textarea{min-height:96px}
+input[type='text']:focus,input[type='email']:focus,input[type='tel']:focus,input[type='number']:focus,input[type='date']:focus,
+input[type='password']:focus,select:focus,textarea:focus{
+  background:rgba(255,255,255,0.06);
+  border-color:rgba(243,146,0,0.3);
+  outline:none
+}
+textarea{min-height:96px;resize:vertical}
 input[type='file']{margin-bottom:12px}
+small{display:block;font-size:0.8rem;color:var(--muted);margin-top:-10px;margin-bottom:12px}
 
 /* Ensure dropdown option text appears black for readability */
 select, .signup-section select, select option, .signup-section option {
@@ -88,40 +117,33 @@ select, .signup-section select, select option, .signup-section option {
 /* small table button fallback */
 table button{padding:10px 14px;border-radius:8px;border:none;background:var(--orange);color:var(--bg);cursor:pointer}
 .button{
-    display: flex;
-    height: 100%;
-    max-height: 35px;
+    display:flex;
+    gap:12px;
+    margin-top:16px;
 }
 .button .buttondiv1{
-    width: 100%;
-    max-width: 450px;
-    display: flex;
-    align-items: start;
-    align-items: center;
+    flex:1;
 }
 .button .buttondiv2{
-    width: 100%;
-    max-width: 450px;
-    display: flex;
-    margin-left: 50vh;
-    align-items: center;
-
+    flex:1;
 }
-.button .buttondiv1 .previous{
-    width: 100%;
-    max-width: 18vh;
-    height: 100%;
-    max-height: 6vh;
-    border-radius: 1rem;
-    background-color: var(--orange);
-}
+.button .buttondiv1 .previous,
 .button .buttondiv2 .next{
-    width: 100%;
-    max-width: 23vh;
-    height: 100%;
-    max-height: 30vh;
-    border-radius: 1rem;
-    background-color: var(--orange);
+    width:100%;
+    padding:12px 24px;
+    height:45px;
+    border:none;
+    border-radius:8px;
+    background-color:var(--orange);
+    color:var(--bg);
+    font-weight:700;
+    font-size:1rem;
+    cursor:pointer;
+    transition:background-color 0.3s ease;
+}
+.button .buttondiv1 .previous:hover,
+.button .buttondiv2 .next:hover{
+    background-color:#d77c00;
 }
 footer{padding:18px;text-align:center;color:var(--muted)}
 
@@ -178,17 +200,23 @@ footer{padding:18px;text-align:center;color:var(--muted)}
     padding: 14px;
   }
   
+  .div-outer{
+    flex-direction:column;
+    gap:0;
+  }
+  
+  .button{
+    flex-direction:column;
+  }
+  
   .button .buttondiv1,
   .button .buttondiv2 {
     width: 100%;
-    margin-left: 0;
   }
   
   .button .buttondiv1 .previous,
   .button .buttondiv2 .next {
     width: 100%;
-    height: 100%;
-    max-height: 45px;
   }
 }
 
@@ -207,8 +235,8 @@ footer{padding:18px;text-align:center;color:var(--muted)}
   }
   
   .div1 p img {
-    max-height: 300px;
-    width: auto;
+    max-width:200px;
+    height:200px;
   }
   
   .div2 {
